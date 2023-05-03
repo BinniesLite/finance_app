@@ -15,10 +15,10 @@ Welcome to our personal finance app! Our app is designed to help you manage your
 ## Installation
 Run
 ```bash
-git clone 
+git clone https://github.com/BinniesLite/finance_app.git
 ```
 
-To start the project from the root of the project using Docker Compose, run the command `docker-compose up` in your terminal.
+To start the project from the root of the project using Docker Compose, run the command `docker compose up` in your terminal.
 
 Make sure you have Docker and docker compose installed on your machine. 
 
