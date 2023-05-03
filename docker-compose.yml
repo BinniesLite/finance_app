@@ -1,0 +1,28 @@
+services:
+  client:
+    container_name: frontend
+    build:
+      dockerfile: ./client/Dockerfile
+    volumes: 
+      - ./client/src:/usr/src/app/src
+    ports:
+      - 80:80
+    networks:
+      finance:
+        aliases:
+          - frontend
+  server:
+    container_name: backend
+    build:
+      dockerfile: ./server/Dockerfile
+    volumes: 
+      - ./server:/usr/src/app/server
+    ports:
+      - 5000:5000
+    networks:
+      finance:
+        aliases:
+          - backend
+networks:
+  finance:
+    driver: bridge
