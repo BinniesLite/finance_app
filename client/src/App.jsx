@@ -1,26 +1,14 @@
 import { useState } from 'react'
-
+import SignUpPage  from './components/pages/SignUpPage'
 import './App.css'
+// import "node_modules/react-icons";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-       
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-        </button> 
-
-        <p>
-          Hello World
-        </p>
-      </div>
-      <p className="read-the-docs">
-      </p>
+    <div> 
+      <SignUpPage/>
+    </div>
     </>
   )
 }
