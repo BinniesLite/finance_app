@@ -97,3 +97,7 @@ button[type = "submit"] {
     background: #FFD600;
     border-radius: 30px;
 }
+
+.signup-link>p[type ="button"]{
+    color: #322A95;
+}

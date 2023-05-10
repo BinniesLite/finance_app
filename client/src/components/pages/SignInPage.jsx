@@ -1,6 +1,7 @@
 import { React, useState } from "react"
 import { FaEye, FaEyeSlash } from "../react-icons/fa"
 import "../../styles/SignIn.css"
+import SignUpPage from "./SignUpPage";
 
 const SignInPage = () => {
     const [username, setUsername] = useState("");
@@ -10,7 +11,10 @@ const SignInPage = () => {
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
+    }
 
+    function goToSignUp() {
+        window.location.assign("SignUpPage.jsx");
     }
     
     return (
@@ -35,6 +39,11 @@ const SignInPage = () => {
                     <i type="button" id = "fa-eye" onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash /> : <FaEye />}</i>
                 </div>
                 <button type="submit">Submit</button>
+
+                <div class = "signup-link">
+                    <p> Do not have an account?</p>
+                    <p a href = "SignUpPage.jsx" type = "button" id = "signup">Sign up</p>
+                </div>
             </form>
         </body>
         </>
