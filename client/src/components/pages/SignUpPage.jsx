@@ -1,6 +1,5 @@
 import { React, useState } from "react"
-import { FaEye, FaEyeSlash } from "../react-icons/fa"
-// import "SignUp.css"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 
 const SignUpPage = () => {
@@ -12,7 +11,6 @@ const SignUpPage = () => {
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
-
     }
     
     return (

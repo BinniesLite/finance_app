@@ -1,5 +1,5 @@
 import { React, useState } from "react"
-import { FaEye, FaEyeSlash } from "../react-icons/fa"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
 import "../../styles/SignIn.css"
 import SignUpPage from "./SignUpPage";
 
@@ -32,7 +32,6 @@ const SignInPage = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 /><br/>
-
                 <label for="password">Password</label>
                 <div class = "password-container">
                     <input type={showPassword ? "text" : "password"} id="password" name="password" placeholder="Password" required=""/>
@@ -42,7 +41,7 @@ const SignInPage = () => {
 
                 <div class = "signup-link">
                     <p> Do not have an account?</p>
-                    <p a href = "SignUpPage.jsx" type = "button" id = "signup">Sign up</p>
+                    <p type = "button" id = "signup" onClick={goToSignUp}>Sign up</p>
                 </div>
             </form>
         </body>

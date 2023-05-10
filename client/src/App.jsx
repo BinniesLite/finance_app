@@ -8,7 +8,6 @@ function App() {
   return (
     <>
     <div> 
-      {/* <SignUpPage/> */}
       <SignInPage/>
     </div>
     </>
