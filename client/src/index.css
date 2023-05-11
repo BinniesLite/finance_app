@@ -3,10 +3,19 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  /* color-scheme: light dark; */
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  background: 
+            radial-gradient(at 18% 99%, #fff700 0px, transparent 50%) repeat scroll 0% 0%,
+            radial-gradient(at 30% 30%, #a38f3c 0px, transparent 50%) repeat scroll 0% 0%,
+            radial-gradient(at 79% 82%, #472678 0px, transparent 50%) repeat scroll 0% 0%,
+            radial-gradient(at 10% 10%, #b23a3a 0px, transparent 100%) repeat scroll 0% 0%, 
+            radial-gradient(at 97% 8%, #7b4371 0px, transparent 50%) repeat scroll 0% 0%, 
+            radial-gradient(at 20% 50%, #444ca7 0px, transparent 80%) repeat scroll 0% 0%,
+            radial-gradient(at 96% 10%, #d9991d 0px, transparent 50%) repeat scroll 0% 0%,    
+            radial-gradient(at 42% 20%, #8f6957 0px, transparent 50%) repeat scroll 0% 0%,
+            radial-gradient(at 20% 20%, #463990 0px, transparent 50%) repeat scroll 0% 0%,
+            radial-gradient(at 4% 49%, rgb(203, 88, 218) 0px, transparent 50%) repeat scroll 0% 0%, rgba(0, 0, 0, 0) radial-gradient(at 57% 33%, rgb(218, 83, 228) 0px, #a299ff 50%) repeat scroll 0% 0%;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
