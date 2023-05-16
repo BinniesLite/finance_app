@@ -2,7 +2,6 @@ import { React, useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import {useNavigate} from "react-router-dom"
 import "../../styles/SignIn.css"
-import SignUpPage from "./SignUpPage";
 
 const SignInPage = () => {
     const navigate = useNavigate();

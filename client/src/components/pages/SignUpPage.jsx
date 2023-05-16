@@ -1,5 +1,8 @@
 import { React, useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
+import { Link } from "react-router-dom"
+import "../../styles/SignUp.css"
+
 
 
 const SignUpPage = () => {
@@ -18,7 +21,7 @@ const SignUpPage = () => {
     <header>Sign up</header>
     <body>
         <form>
-            <label htmlFor="username">Username</label><br />
+            <label htmlFor="username">Username or Email</label>
             <input
                 type="text"
                 id="username"
@@ -27,24 +30,31 @@ const SignUpPage = () => {
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-            /><br/>
+            />
 
-            <label for="email">Email</label><br/>
-            <input type="email" id="email" name="email" placeholder="email" required/><br/>
-            <label for="fname">Full name</label><br/>
-            <input type="text" id="fname" name="fname" placeholder="Full name" required/><br/>
-            <label for="password">Password</label><br/>
-            <input type={showPassword ? "text" : "password"} id="password" name="password" placeholder="Password" required=""/><br/>
-            <i type="button" onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash /> : <FaEye />}</i><br/>
-            <button type="submit">Submit</button>
+            <label for="email">Email</label>
+            <input value={email} type="email" id="email" name="email" placeholder="Email" required/>
+
+            <label for="fname">Full name</label>
+            <input value={fullName} type="text" id="fname" name="fname" placeholder="Full name" required/>
+
+            <label for="password">Password</label>
+            <div class="password-container">
+                <input type={showPassword ? "text" : "password"} id="password" name="password" placeholder="Password" required="" />
+                <i type="button" id = "fa-eye" onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash /> : <FaEye />}</i>
+            </div>
+
+            <button type="submit">Sign Up</button>
+
+            <div class = "signin-link">
+                <p> Do not have an account?</p>
+                <Link to='/'> <i type = "button" id = "signup">Log in</i> </Link>
+            </div>
         </form>
     </body>
     </>
     );
 };
 
-const onClick = () => {
-    return null;
-}
 
 export default SignUpPage
