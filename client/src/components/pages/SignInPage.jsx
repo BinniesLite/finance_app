@@ -43,7 +43,7 @@ const SignInPage = () => {
 
                 <div class = "signup-link">
                     <p> Do not have an account?</p>
-                    <p type = "button" id = "signup" onClick={() => navigate("/signup")}>Sign up</p>
+                    <p type = "button" id = "signup" onClick={() => navigate("/transactions")}>Sign up</p>
                 </div>
             </form>
         </body>
