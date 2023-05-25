@@ -14,15 +14,11 @@ const SignInPage = () => {
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     }
-
-    function goToSignUp() {
-        window.location.assign("SignUpPage.jsx");
-    }
     
     return (
         <>
-        <header>Sign in</header>
-        <body>
+        <header className="signin">Sign in</header>
+        <body className="signin">
             <form>
                 <label htmlFor="username">Username or Email</label>
                 <input

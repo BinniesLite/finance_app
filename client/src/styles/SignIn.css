@@ -1,6 +1,6 @@
 input {
     /* Placeholder */
-
+    
 
     box-sizing: border-box;
 
@@ -34,7 +34,7 @@ input {
 label {
     /* Label */
 
-
+    
     /* Auto layout */
 
     display: flex;
@@ -100,4 +100,10 @@ button[type = "submit"] {
 
 .signup-link>p[type ="button"]{
     color: #322A95;
+}
+
+.signin {
+    place-items: center;
+    min-width: 320px;
+    text-align: center;
 }

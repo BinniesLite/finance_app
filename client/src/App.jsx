@@ -18,9 +18,6 @@ function App() {
         </Routes>
       </Router>
     </div>
-    {/* <div> 
-      <SignInPage/>
-    </div> */}
     </>
   )
 }
