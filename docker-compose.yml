@@ -23,6 +23,19 @@ services:
       finance:
         aliases:
           - backend
+  postgresql:
+    container_name: postgresql
+    build:
+      dockerfile: ./database/Dockerfile
+    volumes:
+      - ./database:/usr/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      finance:
+        aliases:
+          - postgresql
+      
 networks:
   finance:
     driver: bridge
