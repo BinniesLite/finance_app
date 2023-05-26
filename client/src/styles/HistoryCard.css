@@ -1,0 +1,39 @@
+.MuiCard-root {
+    padding: 5px;
+}
+
+.MuiCard-root #history-card-content {
+    text-align: left;
+    margin: auto;
+}
+
+.MuiCard-root .MuiCardActions-root .MuiButton-root {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding: 2px 8px;
+    gap: -10px;
+    text-align: left;
+    margin-left: 0px;
+    margin-right: -15px;
+    width: fit-content;
+    height: 24px;
+
+    border: none;
+
+
+    background: none;
+    color: black;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    text-transform: none;
+    font-weight: 400;
+    font-size: 10px;
+    font-family: 'Courier New', Courier, monospace;
+
+}
+

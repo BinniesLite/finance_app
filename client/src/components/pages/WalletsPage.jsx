@@ -1,32 +1,22 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Unstable_Grid2';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-  height: '100vh', width: '100vh'
-}));
+import React from 'react';
+import { Row, Col } from 'reactstrap';
+import Transaction from '../Layout/Transaction';
+import HistoryCard from '../Layout/HistoryCard';
+import WalletCard from '../Layout/WalletCard';
+import '../../styles/WalletsPage.css';
 
 const WalletsPage = () => {
   return (
-    <Box sx={{ height: '100vh', width: '100vh', display: 'flex' }}>
-      <Grid container spacing={2}>
-        <Grid xs={6} md={8} sm={6}>
-          <Item>xs=6 md=8</Item>
-        </Grid>
-        <Grid xs={6} md={4}>
-          <Item>xs=6 md=4</Item>
-        </Grid>
-        
-      </Grid>
-    </Box>
+    <Row>
+      <Col xs='3'>
+        <Transaction />
+        <HistoryCard />
+      </Col>
+      <Col xs='9'>
+        <WalletCard />
+      </Col>
+    </Row>
   );
-}
+};
 
-export default WalletsPage
+export default WalletsPage;

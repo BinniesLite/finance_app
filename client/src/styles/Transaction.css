@@ -1,9 +1,41 @@
 .MuiInputLabel-root {
-    text-align: left;
-
+  text-align: left;
 }
 
 .MuiOutlinedInput-root {
-    background-color: white;
-    text-align: left;
+  background-color: white;
+  text-align: left;
+}
+
+label {
+  margin-top: auto;
+}
+
+#title-transaction {
+  display: flex; /* Use flexbox to create an inline layout */
+  align-items: center;
+  justify-content: left;
+  margin-left: 15px;
+}
+
+#title-transaction .MuiTypography-root {
+  margin-right: 30px; /* Add some spacing between the components */
+  text-align: center;
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 50px;
+}
+
+button[type='submit'] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8px 16px;
+  gap: 5px;
+  margin: 50px auto;
+  width: 249px;
+  height: 48px;
+  background: #ffd600;
+  border-radius: 30px;
 }
