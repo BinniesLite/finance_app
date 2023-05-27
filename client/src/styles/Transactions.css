@@ -5,6 +5,10 @@
     border: 1.5px solid white;
     border-radius: 40px;
 }
+
+header {
+    text-align: center;
+}
 /* .small-gap{
     background-color: white;
     color: black;
