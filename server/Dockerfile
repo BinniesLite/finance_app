@@ -4,12 +4,12 @@ WORKDIR /usr/src/app/server
 
 COPY ./server . 
 
-ENV PATH = "/app/node_modules/.bin:${PATH}"
+# ENV PATH = "/app/node_modules/.bin:${PATH}"
 
 
 RUN yarn install
-RUN apk add --no-cache bash
-
+# Install nodemon globally
+RUN yarn global add nodemon
 CMD ["yarn", "run", "dev"]
 
 

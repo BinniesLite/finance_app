@@ -14,8 +14,6 @@ services:
         aliases:
           - frontend
   server:
-    env_file:
-      - ./server/.env
     container_name: backend
     build:
       dockerfile: ./server/Dockerfile
