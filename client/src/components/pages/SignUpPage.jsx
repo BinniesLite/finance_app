@@ -40,12 +40,11 @@ const SignUpPage = () => {
 
             <label for="password">Password</label>
             <div class="password-container">
-                <input type={showPassword ? "text" : "password"} id="password" name="password" placeholder="Password" required="" />
+                <input value={password} type={showPassword ? "text" : "password"} id="password" name="password" placeholder="Password" required="" />
                 <i type="button" id = "fa-eye" onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash /> : <FaEye />}</i>
             </div>
 
             <button type="submit">Sign Up</button>
-
             <div class = "signin-link">
                 <p> Do not have an account?</p>
                 <Link to='/'> <i type = "button" id = "signup">Log in</i> </Link>

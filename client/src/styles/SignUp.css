@@ -1,3 +1,8 @@
+header, body {
+    text-align: center;
+    height: 100%;
+}
+
 input {
     /* Placeholder */
 
@@ -61,6 +66,7 @@ header {
     color: #FFFFFF;
     font-weight: bold;
     font-size: xx-large;
+    margin-bottom: -40px;
 }
 .password-container{
     width: 400px;
@@ -97,6 +103,10 @@ button[type = "submit"] {
 
     background: #FFD600;
     border-radius: 30px;
+}
+
+.signin-link {
+    margin-top: -50px;
 }
 
 .signin-link>p[type ="button"]{
