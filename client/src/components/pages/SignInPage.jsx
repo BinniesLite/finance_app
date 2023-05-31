@@ -21,41 +21,43 @@ const SignInPage = () => {
 
   return (
     <>
-      <header id='sign-in-header'>Sign in</header>
-      <form>
-        <label htmlFor='username'>Username or Email</label>
-        <input
-          type='text'
-          id='usernameEmail'
-          name='usernameEmail'
-          placeholder='bunnylove or example@test.com'
-          required
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <br />
-        <label for='password'>Password</label>
-        <div class='password-container'>
+      <div className='signin-container'>
+        <header id='sign-in-header'>Sign in</header>
+        <form>
+          <label htmlFor='username'>Username or Email</label>
           <input
-            type={showPassword ? 'text' : 'password'}
-            id='password'
-            name='password'
-            placeholder='Password'
-            required=''
+            type='text'
+            id='usernameEmail'
+            name='usernameEmail'
+            placeholder='bunnylove or example@test.com'
+            required
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
-          <i type='button' id='fa-eye' onClick={togglePasswordVisibility}>
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </i>
-        </div>
-        <button type='submit'>Submit</button>
+          <br />
+          <label for='password'>Password</label>
+          <div class='password-container'>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              id='password'
+              name='password'
+              placeholder='Password'
+              required=''
+            />
+            <i type='button' id='fa-eye' onClick={togglePasswordVisibility}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </i>
+          </div>
+          <button type='submit'>Submit</button>
 
-        <div class='signup-link'>
-          <p> Do not have an account?</p>
-          <p type='button' id='signup' onClick={() => navigate('/signup')}>
-            Sign up
-          </p>
-        </div>
-      </form>
+          <div class='signup-link'>
+            <p> Do not have an account?</p>
+            <p type='button' id='signup' onClick={() => navigate('/signup')}>
+              Sign up
+            </p>
+          </div>
+        </form>
+      </div>
     </>
   );
 };

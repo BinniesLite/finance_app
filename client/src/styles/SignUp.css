@@ -1,19 +1,20 @@
 #sign-up-header, form {
   text-align: center;
-  height: 100%;
 }
 
 #sign-up-header {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+
+}
+
+.signup-container {
+  padding-top: 50px;
+  text-align: center;
+  height: 100vh;
 }
 
 input {
-  /* Placeholder */
-
   box-sizing: border-box;
-
-  /* Auto layout */
-
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -21,11 +22,7 @@ input {
   gap: 5px;
 
   width: 545px;
-  height: 44px;
-
-  /* White */
-
-  background: #ffffff;
+  height: 44px;background: #ffffff;
   /* Main Colors/Gray/2 */
 
   border: 1.5px solid #646464;
@@ -40,10 +37,6 @@ input {
 }
 
 label {
-  /* Label */
-
-  /* Auto layout */
-
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -70,6 +63,7 @@ header {
   font-size: xx-large;
   margin-bottom: -40px;
 }
+
 .password-container {
   width: 400px;
   position: relative;
@@ -84,14 +78,10 @@ header {
 }
 
 button[type='submit'] {
-  /* Buttons */
-
-  /* Auto layout */
-
-  /* display: flex; */
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  text-align: center;
   padding: 8px 16px;
   gap: 5px;
   margin: 50px;
@@ -107,7 +97,7 @@ button[type='submit'] {
 }
 
 .signin-link {
-  margin-top: -40px;
+  margin-top: 0;
 }
 
 .signin-link > p[type='button'] {

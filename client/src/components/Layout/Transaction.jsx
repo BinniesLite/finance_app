@@ -54,12 +54,12 @@ const Transaction = () => {
   };
 
   return (
-    <div>
+    <div className='transaction-card-container'>
       <div id='title-transaction'>
         <Typography>Transaction</Typography>
-        <ReceiptIcon sx={{ width: '40px', height: '40px' }}></ReceiptIcon>
+        <ReceiptIcon sx={{ width: '30px', height: '40px' }}></ReceiptIcon>
       </div>
-      <FormControl fullWidth sx={{ m: 1 }}>
+      <FormControl fullWidth sx={{  height: '40px', width: '100%', marginBottom: '20px' }}>
         <InputLabel id='amountPlaceholder' htmlFor='outlined-adornment-amount'>
           Amount
         </InputLabel>
@@ -70,7 +70,7 @@ const Transaction = () => {
           label='Amount'
         />
       </FormControl>
-      <FormControl fullWidth sx={{ m: 1 }}>
+      <FormControl fullWidth sx={{  height: '40px', width: '100%' }}>
         <Select
           displayEmpty
           value={walletName}
@@ -104,16 +104,16 @@ const Transaction = () => {
           ))}
         </Select>
       </FormControl>
-      <FormGroup style={{ marginLeft: '8px' }}>
-        <Label for='exampleFile'>Upload your recipt</Label>
+      <FormGroup>
+        <Label for='exampleFile' style={{ marginBottom: '-10px' }}>Upload your receipt</Label>
         <Input
           id='exampleFile'
           name='file'
           type='file'
-          // style={{ width: '555px', height: '56px' }}
+          style={{ height: '40px', width: '100%'}}
         />
       </FormGroup>
-      <button type='submit'>Save</button>
+      <button type='submit' style={{ height: '40px', width: '50%'}} >Save</button>
     </div>
   );
 };

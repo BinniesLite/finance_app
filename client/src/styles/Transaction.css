@@ -1,8 +1,13 @@
+.transaction-card-container {
+  height: auto;
+}
+
 .MuiInputLabel-root {
   text-align: left;
 }
 
 .MuiOutlinedInput-root {
+  height: 40px;
   background-color: white;
   text-align: left;
 }
@@ -15,15 +20,14 @@ label {
   display: flex; /* Use flexbox to create an inline layout */
   align-items: center;
   justify-content: left;
-  margin-left: 15px;
 }
 
 #title-transaction .MuiTypography-root {
-  margin-right: 30px; /* Add some spacing between the components */
+  margin-right: 10px; /* Add some spacing between the components */
   text-align: center;
   color: white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 50px;
+  font-size: 30px;
 }
 
 button[type='submit'] {
@@ -33,7 +37,7 @@ button[type='submit'] {
   text-align: center;
   padding: 8px 16px;
   gap: 5px;
-  margin: 50px auto;
+  margin: 20px auto;
   width: 249px;
   height: 48px;
   background: #ffd600;

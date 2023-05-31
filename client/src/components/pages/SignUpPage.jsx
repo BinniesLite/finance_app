@@ -16,7 +16,8 @@ const SignUpPage = () => {
 
   return (
     <>
-      <header id="sign-up-header">Sign up</header>
+      <div className='signup-container'>
+        <header id='sign-up-header'>Sign up</header>
         <form>
           <label htmlFor='username'>Username or Email</label>
           <input
@@ -68,13 +69,13 @@ const SignUpPage = () => {
           <div class='signin-link'>
             <p> Do not have an account?</p>
             <Link to='/'>
-              {' '}
               <i type='button' id='signup'>
                 Log in
-              </i>{' '}
+              </i>
             </Link>
           </div>
         </form>
+      </div>
     </>
   );
 };

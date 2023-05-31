@@ -1,46 +1,7 @@
 #wallet-card-div {
-    display: flex; /* Use flexbox to create an inline layout */
-    align-items: center; 
-    justify-content: center;
-    margin: auto;
-}
-
-#wallet-card-div .MuiTypography-root {
-    margin: auto;
-    text-align: center;
-}
-
-.MuiCardActions-root .MuiButton-root {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: inline-flex;
     align-items: center;
-    padding: 4px 8px;
-    gap: 5px;
-    margin-left: 5px;
-
-    width: fit-content;
-    height: 24px;
-
-    /* Main Colors/Green/0.5 */
-
-    background: #F6FFF6;
-    /* Main Colors/Green/6 */
-    color: #158212;
-
-    border: 1px solid #83E281;
-    border-radius: 12px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    text-transform: none;
-    font-weight: 400;
-    font-size: 14px;
-    font-family: 'Courier New', Courier, monospace;
-
+    justify-content: flex-start;
+    text-align: left;
+    gap: 60px;
 }

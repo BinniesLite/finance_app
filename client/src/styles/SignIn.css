@@ -1,3 +1,7 @@
+body {
+  background: inherit;
+}
+
 #sign-in-header,
 form {
   text-align: center;
@@ -7,8 +11,14 @@ form {
   width: 60vw;
   max-width: 500px;
   min-width: 300px;
-  margin: 0 auto;
+  margin: auto;
   padding-bottom: 2em;
+}
+
+.signin-container {
+  padding-top: 50px;
+  text-align: center;
+  height: 100vh;
 }
 
 #sign-in-header {
@@ -80,8 +90,6 @@ button[type='submit'] {
   padding: 8px 16px;
   gap: 5px;
   margin: 50px;
-
-  /* position: absolute; */
   width: 249px;
   height: 48px;
   left: 739px;
