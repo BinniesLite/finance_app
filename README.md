@@ -23,7 +23,7 @@ To start the project from the root of the project using Docker Compose, run the 
 
 Make sure you have Docker and docker compose installed on your machine. 
 
-For front-end navigate to **localhost:80** and for back-end navigate to **localhost:5000**
+For front-end navigate to **localhost:80** and for back-end navigate to **localhost:3000**
 
 After adding packages or changing dockerfile, run `docker compose up --build -d` to rebuild the images in detached mode.
 

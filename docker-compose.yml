@@ -14,21 +14,17 @@ services:
         aliases:
           - frontend
   server:
-    env_file:
-      - ./server/.env
     container_name: backend
     build:
       dockerfile: ./server/Dockerfile
     volumes: 
-      - ./server:/usr/src/app/server
+      - ./server/src:/usr/src/app/src
     ports:
-      - 5000:5000
+      - 3000:3000
     networks:
       finance:
         aliases:
           - backend
-    depends_on:
-      - postgresql
   postgresql:
     container_name: postgres
     build:
