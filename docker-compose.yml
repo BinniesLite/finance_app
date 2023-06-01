@@ -1,3 +1,5 @@
+version: "1.5"
+
 services:
   client:
     container_name: frontend
@@ -16,13 +18,30 @@ services:
     build:
       dockerfile: ./server/Dockerfile
     volumes: 
-      - ./server:/usr/src/app/server
+      - ./server/src:/usr/src/app/src
     ports:
-      - 5000:5000
+      - 3000:3000
     networks:
       finance:
         aliases:
           - backend
+  postgresql:
+    container_name: postgres
+    build:
+      dockerfile: ./database/Dockerfile
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=finance
+    volumes:
+      - ./database/data:/usr/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      finance:
+        aliases:
+          - postgresql
+          - db
 networks:
   finance:
     driver: bridge
