@@ -1,9 +1,11 @@
 import { React, useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
+import { useNavigate } from "react-router-dom"
 import "../../styles/SignIn.css"
-import SignUpPage from "./SignUpPage";
 
 const SignInPage = () => {
+    const navigate = useNavigate();
+
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -41,7 +43,7 @@ const SignInPage = () => {
 
                 <div class = "signup-link">
                     <p> Do not have an account?</p>
-                    <p type = "button" id = "signup" onClick={goToSignUp}>Sign up</p>
+                    <p type = "button" id = "signup" onClick={() => navigate("/signup")}>Sign up</p>
                 </div>
             </form>
         </body>
