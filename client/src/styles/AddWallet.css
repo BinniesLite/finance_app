@@ -1,0 +1,24 @@
+.inline {
+  display: inline-flex; /* Use flexbox to create an inline layout */
+  align-items: left;
+  justify-content: space-around;
+}
+
+.label-left {
+  text-align: left;
+}
+
+.label-right {
+  text-align: right;
+  margin-left: -810px;
+}
+
+.add-w-input {
+  margin-top: -15px;
+  margin-bottom: 10px;
+}
+
+.date-range-picker-container {
+  max-height: 100px; /* Adjust the height as needed */
+  overflow: hidden;
+}
