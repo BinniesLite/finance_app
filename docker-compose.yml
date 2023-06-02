@@ -19,6 +19,7 @@ services:
       dockerfile: ./server/Dockerfile
     volumes: 
       - ./server/src:/usr/src/app/src
+      - ./server/prisma:/usr/src/app/prisma
     ports:
       - 3000:3000
     networks:
