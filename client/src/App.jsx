@@ -11,6 +11,8 @@ import './App.css';
 function App() {
   return (
     <>
+
+    {/* TODO these routes are just for testing purpose, delete the routes after done. */}
       <Router>
         <Routes>
           <Route path='/' element={<SignInPage />} />

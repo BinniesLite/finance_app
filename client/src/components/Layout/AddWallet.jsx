@@ -7,6 +7,7 @@ import { SingleInputDateRangeField } from '@mui/x-date-pickers-pro/SingleInputDa
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import '../../styles/AddWallet.css';
 
+//This layout is in progress, I still struggle with the date range input 
 const AddWallet = () => {
   const addWalletStyle = {
     width: '310px',
