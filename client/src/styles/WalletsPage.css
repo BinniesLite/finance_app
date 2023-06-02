@@ -1,0 +1,48 @@
+body {
+  background: inherit;
+  width: 100vw;
+}
+
+.history-section-container {
+  margin-top: 30px;
+}
+
+#col-9-div-container {
+  display: inline-flex; /* Use flexbox to create an inline layout */
+  align-items: center;
+  justify-content: left;
+  text-align: center;
+  margin-left: 395px;
+  margin-top: 20px;
+  margin-bottom: -20px;
+}
+
+#wallet-page-header {
+  margin-right: 20px; /* Add some spacing between the components */
+  text-align: center;
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#add-wallet-icon {
+  margin-right: 500px;
+}
+
+.history-section-container {
+  display: inline-flex; /* Use flexbox to create an inline layout */
+  align-items: center;
+  justify-content: left;
+  text-align: center;
+}
+
+.history-section-container .MuiTypography-root {
+  margin-right: 112px;
+}
+
+#wallets-view-more-button {
+  background-color: #FFD600;
+  color: black;
+  border-radius: 50px;
+  font-size: 10px;
+  font-weight: bold;
+}

@@ -23,14 +23,22 @@ To start the project from the root of the project using Docker Compose, run the 
 
 Make sure you have Docker and docker compose installed on your machine. 
 
-For front-end navigate to **localhost:80** and for back-end navigate to **localhost:5000**
+For front-end navigate to **localhost:80** and for back-end navigate to **localhost:3000**
 
-When adding a new package to the project, delete all images and dockerfile and run `docker compose up --build` to rebuild the images.
+After adding packages or changing dockerfile, run `docker compose up --build -d` to rebuild the images in detached mode.
+
+
+##### Note for backend
+To make changes to database, you will need to first open the integrated terminal inside the container to make changes to the database. Check Prisma documentation for more instructions on how to interact with the database.
+
+Run `docker exec -it backend bash` to open the integrated terminal inside the container. 
+
 
 
 ##  Backend
 
 This is the backend of the project. It is a RESTful API built with Node.js and Express.js. It is connected to a PostgreSQL database using Docker.
+
 
 ### API Documentation
 
@@ -59,7 +67,6 @@ PUT /api/transactions/${id}
 ```http
 DELETE /api/transactions/${id}
 ```
-
 
 
 
