@@ -1,17 +1,13 @@
 import { React, useState } from "react";
 import "../../styles/Transactions.css";
+import TransactionComponent from "../Layout/Transaction";
 import TransactionCard from "../Layout/TransactionComponents";
 import Item from "@mui/material/ListItem";
 import { Grid, Button } from "@mui/material";
 
 const TransactionPage = () => {
-//   function generateRandomDate() {
-//     return new Date(+new Date() - Math.floor(Math.random() * 10000000000));
-//   }
   const generateFakeData = (numberOfData) => {
     const fakeData = [];
-    // newDate = generateRandomDate().toString();
-    // console.log(newDate);
     const type = ["credit card", "cash"];
     for (let i = 1; i <= numberOfData; i++) {
       fakeData.push({
@@ -37,10 +33,13 @@ const TransactionPage = () => {
             spacing={2}
             style={{
               paddingTop: 50,
+              maxWidth: 1280
             }}
           >
-            <Grid item xs={2}>
-              <Button>Transaction component will go here.</Button>
+            <Grid item xs={2} style = {{
+                backgroundColor: "pink"
+            }}>
+              <TransactionComponent/>
             </Grid>
             <Grid
               item

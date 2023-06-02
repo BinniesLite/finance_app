@@ -45,7 +45,7 @@ function getStyles(name, walletName, theme) {
   };
 }
 
-const Transaction = () => {
+const TransactionComponent = () => {
   const theme = useTheme();
   const [walletName, setwalletName] = React.useState('');
 
@@ -125,4 +125,4 @@ const Transaction = () => {
   );
 };
 
-export default Transaction;
+export default TransactionComponent;
