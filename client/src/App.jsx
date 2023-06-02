@@ -5,6 +5,7 @@ import WalletsPage from './components/pages/WalletsPage';
 import Transaction from './components/Layout/Transaction';
 import WalletCard from './components/Layout/WalletCard';
 import HistoryCard from './components/Layout/HistoryCard';
+import AddWallet from './components/Layout/AddWallet';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path='/card' element={<WalletCard />} />
           <Route path='/history' element={<HistoryCard />} />
           <Route path='/wallets' element={<WalletsPage />} />
+          <Route path='/add' element={<AddWallet />} />
         </Routes>
       </Router>
     </>
