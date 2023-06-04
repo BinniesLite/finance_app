@@ -1,17 +1,18 @@
 const express = require('express');
+const TransactionRouter = require("./router/transaction");
 
 const app = express();
-
 const PORT = 3000;
 
+// Initialize database with Prisma
+
+
 app.get('/', (req, res) => {
-    res.send('Hi there Is it me you are looking for this is me and who I meant to be this is me look out ');
-    console.log(request); 
+    res.send('Hello World!');
 });
 
-
-
-
+app.use(express.json());
+app.use("/api/transaction", TransactionRouter)
 
 
 app.listen(PORT, () => {
