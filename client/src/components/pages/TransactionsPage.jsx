@@ -25,29 +25,36 @@ const TransactionPage = () => {
   return (
     <>
       <header>Wallets</header>
-      <body>
-        <div className="transaction-container">
+      <div className="transaction-container">
+        <Grid
+          container
+          justify="space-around"
+          spacing={2}
+          style={{
+            paddingTop: 50,
+          }}
+        >
           <Grid
-            container
-            justify="space-around"
-            spacing={2}
+            item
+            xs={2}
+            md={2}
             style={{
-              paddingTop: 50,
-              maxWidth: 1280
+              background: "rgba(255,255,255, 0.3)",
+              border: 1,
+              borderRadius: 30,
+            }}
+          ><TransactionComponent />
+          </Grid>
+          <Grid
+            item
+            xs={10}
+            style={{
+              background: "rgba(255,255,255, 0.3)",
+              border: 1,
+              borderRadius: 30,
             }}
           >
-            <Grid item xs={2} style = {{
-                backgroundColor: "pink"
-            }}>
-              <TransactionComponent/>
-            </Grid>
-            <Grid
-              item
-              xs={10}
-              style={{
-                backgroundColor: "grey",
-              }}
-            >
+            <Item>
               <Grid
                 container
                 spacing={{ xs: 2, md: 3 }}
@@ -73,10 +80,10 @@ const TransactionPage = () => {
                   </Grid>
                 ))}
               </Grid>
-            </Grid>
+            </Item>
           </Grid>
-        </div>
-      </body>
+        </Grid>
+      </div>
     </>
   );
 };

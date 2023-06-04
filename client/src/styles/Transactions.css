@@ -4,6 +4,7 @@ header {
     color: black;
 }
 
-#transaction-container {
-    color: blue;
+body {
+    background: inherit;
+    width: 100vw;
 }
