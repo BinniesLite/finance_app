@@ -43,7 +43,8 @@ const TransactionPage = () => {
               border: 1,
               borderRadius: 30,
             }}
-          ><TransactionComponent />
+          >
+            <TransactionComponent />
           </Grid>
           <Grid
             item
