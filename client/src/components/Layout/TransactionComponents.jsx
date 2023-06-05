@@ -30,7 +30,7 @@ const TransactionCard = ({ id, name, amount, date, type }) => {
           height: 150,
           boxShadow: "none",
           borderRadius: 40,
-          backgroundColor: "transparent"
+          backgroundColor: "transparent",
         }}
       >
         <CardMedia
@@ -51,9 +51,14 @@ const TransactionCard = ({ id, name, amount, date, type }) => {
       <Card
         style={{
           height: 100,
-          width: 320,
+          width: 275,
           border: 0,
-          borderRadius: 20,
+          borderRadius: 30,
+          display: "flex",
+          position: "absolute",
+          left: "45%",
+          top: "80%",
+          transform: "translate(-50%, -50%)",
         }}
       >
         <CardActionArea>

@@ -3,7 +3,8 @@ import "../../styles/Transactions.css";
 import TransactionComponent from "../Layout/Transaction";
 import TransactionCard from "../Layout/TransactionComponents";
 import Item from "@mui/material/ListItem";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Typography, Avatar } from "@mui/material";
+import { Row, Col } from "reactstrap";
 
 const TransactionPage = () => {
   const generateFakeData = (numberOfData) => {
@@ -24,66 +25,90 @@ const TransactionPage = () => {
   const transactions = generateFakeData(10);
   return (
     <>
-      <header>Wallets</header>
+      <header>
+        <div>
+          <Row style={{ height: "fit-content" }}>
+            <Col xs={3} style={{ paddingTop: 35 }}>
+              Transactions
+            </Col>
+            <Col xs={9} style={{ paddingLeft: 600 }}>
+              <Avatar
+                src="./../../../assets/avatar-icon.png"
+                sx={{ width: 50, height: 50 }}
+                style={{
+                  display: "flex",
+                  color: "rgba(9, 48, 255)",
+                  mixBlendMode: "overlay",
+                }}
+              />
+            </Col>
+          </Row>
+        </div>
+      </header>
       <div className="transaction-container">
-        <Grid
-          container
-          justify="space-around"
-          spacing={2}
-          style={{
-            paddingTop: 50,
-          }}
-        >
-          <Grid
-            item
-            xs={2}
-            md={2}
+        <Row style={{ height: "fit-content", padding: "30px" }}>
+          <Col xs={3} style={{ paddingTop: 35 }}>
+            <Grid
+              item
+              xs={2}
+              md={2}
+              style={{
+                background: "rgba(255,255,255, 0.3)",
+                border: 1,
+                borderRadius: 30,
+                padding: 20,
+              }}
+            >
+              <TransactionComponent />
+            </Grid>
+          </Col>
+          <Col
+            xs={9}
             style={{
-              background: "rgba(255,255,255, 0.3)",
-              border: 1,
-              borderRadius: 30,
+              paddingTop: 50,
             }}
           >
-            <TransactionComponent />
-          </Grid>
-          <Grid
-            item
-            xs={10}
-            style={{
-              background: "rgba(255,255,255, 0.3)",
-              border: 1,
-              borderRadius: 30,
-            }}
-          >
-            <Item>
+            <Grid container justify="space-around" spacing={2}>
               <Grid
-                container
-                spacing={{ xs: 2, md: 3 }}
-                columns={{ xs: 4, sm: 8, md: 12 }}
+                item
+                xs={10}
+                style={{
+                  background: "rgba(255,255,255, 0.3)",
+                  border: 1,
+                  borderRadius: 30,
+                }}
               >
-                {transactions.map((transaction) => (
+                <Item>
                   <Grid
-                    item
-                    xs={2}
-                    sm={4}
-                    md={4}
-                    key={transaction.id}
-                    paddingBottom={3}
+                    container
+                    spacing={{ xs: 2, md: 3 }}
+                    columns={{ xs: 4, sm: 8, md: 12 }}
                   >
-                    <Item>
-                      <TransactionCard
-                        name={transaction.name}
-                        amount={transaction.amount}
-                        date={transaction.date}
-                        type={transaction.type}
-                      />
-                    </Item>
+                    {transactions.map((transaction) => (
+                      <Grid
+                        item
+                        xs={2}
+                        sm={4}
+                        md={4}
+                        key={transaction.id}
+                        paddingBottom={3}
+                      >
+                        <Item>
+                          <TransactionCard
+                            name={transaction.name}
+                            amount={transaction.amount}
+                            date={transaction.date}
+                            type={transaction.type}
+                          />
+                        </Item>
+                      </Grid>
+                    ))}
                   </Grid>
-                ))}
+                </Item>
               </Grid>
-            </Item>
-          </Grid>
-        </Grid>
+            </Grid>
+          </Col>
+        </Row>
       </div>
     </>
   );
