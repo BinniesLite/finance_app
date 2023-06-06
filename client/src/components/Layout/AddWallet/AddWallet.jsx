@@ -5,7 +5,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 import { SingleInputDateRangeField } from '@mui/x-date-pickers-pro/SingleInputDateRangeField';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import '../../styles/AddWallet.css';
+import './AddWallet.css';
 
 //This layout is in progress, I still struggle with the date range input 
 const AddWallet = () => {

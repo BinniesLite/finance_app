@@ -2,10 +2,10 @@ import React from 'react';
 import { Row, Col, Button } from 'reactstrap';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import { Typography, Avatar } from '@mui/material';
-import TransactionComponent from '../Layout/Transaction';
-import HistoryCard from '../Layout/HistoryCard';
-import WalletCard from '../Layout/WalletCard';
-import '../../styles/WalletsPage.css';
+import TransactionComponent from '../../Layout/AddTransactionComponent/Transaction';
+import HistoryCard from '../../Layout/HistoryCard/HistoryCard';
+import WalletCard from '../../Layout/WalletCard/WalletCard';
+import './WalletsPage.css';
 
 const WalletsPage = () => {
   const generateFakeData = (numberOfData) => {

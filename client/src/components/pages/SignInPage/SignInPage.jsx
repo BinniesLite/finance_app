@@ -1,12 +1,13 @@
 import { React, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import '../../styles/SignUp.css';
+import { useNavigate } from 'react-router-dom';
+import './SignIn.css';
 
-const SignUpPage = () => {
+const SignInPage = () => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [fullName, setFullName] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
@@ -14,46 +15,29 @@ const SignUpPage = () => {
     setShowPassword(!showPassword);
   };
 
+  function goToSignUp() {
+    window.location.assign('SignUpPage.jsx');
+  }
+
   return (
     <>
-      <div className='signup-container'>
-        <header id='sign-up-header'>Sign up</header>
+      <div className='signin-container'>
+        <header id='sign-in-header'>Sign in</header>
         <form>
           <label htmlFor='username'>Username or Email</label>
           <input
             type='text'
-            id='username'
-            name='username'
-            placeholder='bunnylover'
+            id='usernameEmail'
+            name='usernameEmail'
+            placeholder='bunnylove or example@test.com'
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-
-          <label for='email'>Email</label>
-          <input
-            value={email}
-            type='email'
-            id='email'
-            name='email'
-            placeholder='Email'
-            required
-          />
-
-          <label for='fname'>Full name</label>
-          <input
-            value={fullName}
-            type='text'
-            id='fname'
-            name='fname'
-            placeholder='Full name'
-            required
-          />
-
+          <br />
           <label for='password'>Password</label>
           <div class='password-container'>
             <input
-              value={password}
               type={showPassword ? 'text' : 'password'}
               id='password'
               name='password'
@@ -64,15 +48,13 @@ const SignUpPage = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </i>
           </div>
+          <button type='submit'>Submit</button>
 
-          <button type='submit'>Sign Up</button>
-          <div class='signin-link'>
+          <div class='signup-link'>
             <p> Do not have an account?</p>
-            <Link to='/'>
-              <i type='button' id='signup'>
-                Log in
-              </i>
-            </Link>
+            <p type='button' id='signup' onClick={() => navigate('/signup')}>
+              Sign up
+            </p>
           </div>
         </form>
       </div>
@@ -80,4 +62,8 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+const onClick = () => {
+  return null;
+};
+
+export default SignInPage;

@@ -11,7 +11,7 @@ import {
   Container,
   Grid,
 } from "@mui/material";
-import '../../styles/TransactionCard.css';
+import './TransactionCard.css';
 
 const TransactionCard = ({ id, name, amount, date, type }) => {
   return (
