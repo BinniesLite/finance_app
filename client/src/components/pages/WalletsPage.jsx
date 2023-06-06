@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Button } from 'reactstrap';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import { Typography, Avatar } from '@mui/material';
-import Transaction from '../Layout/Transaction';
+import TransactionComponent from '../Layout/Transaction';
 import HistoryCard from '../Layout/HistoryCard';
 import WalletCard from '../Layout/WalletCard';
 import '../../styles/WalletsPage.css';
@@ -51,7 +51,7 @@ const WalletsPage = () => {
           }}
         >
           <div id='left-panel-content' style={{ marginTop: '15px' }}>
-            <Transaction />
+            <TransactionComponent />
             <div className='history-section-container'>
               <Typography
                 variant='h5'

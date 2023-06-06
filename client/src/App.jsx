@@ -3,6 +3,7 @@ import SignUpPage from './components/pages/SignUpPage';
 import SignInPage from './components/pages/SignInPage';
 import WalletsPage from './components/pages/WalletsPage';
 import Transaction from './components/Layout/Transaction';
+import TransactionPage from './components/pages/TransactionsPage';
 import WalletCard from './components/Layout/WalletCard';
 import HistoryCard from './components/Layout/HistoryCard';
 import AddWallet from './components/Layout/AddWallet';
@@ -18,6 +19,7 @@ function App() {
           <Route path='/' element={<SignInPage />} />
           <Route path='/signup' element={<SignUpPage />} />
           <Route path='/trans' element={<Transaction />} />
+          <Route path='/transaction' element={<TransactionPage />} />
           <Route path='/card' element={<WalletCard />} />
           <Route path='/history' element={<HistoryCard />} />
           <Route path='/wallets' element={<WalletsPage />} />
