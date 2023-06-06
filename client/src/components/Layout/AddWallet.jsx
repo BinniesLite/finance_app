@@ -1,19 +1,36 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Input, Label, FormGroup, FormText, Button } from 'reactstrap';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
-import { SingleInputDateRangeField } from '@mui/x-date-pickers-pro/SingleInputDateRangeField';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+// import { LocalizationProvider } from '@mui/x-date-pickers';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+// import { SingleInputDateRangeField } from '@mui/x-date-pickers-pro/SingleInputDateRangeField';
+// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import moment from 'moment';
+import DateRangePicker from 'react-bootstrap-daterangepicker';
+import 'bootstrap-daterangepicker/daterangepicker.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import '../../styles/AddWallet.css';
 
-//This layout is in progress, I still struggle with the date range input 
+//This layout is in progress, I still struggle with the date range input
 const AddWallet = () => {
   const addWalletStyle = {
     width: '310px',
     height: 'fit-content',
     padding: '15px',
     background: 'white',
+  };
+
+  const [dates, setDatesState] = useState({
+    startDate: '',
+    endDate: '',
+  });
+
+  const setDates = (e, { startDate, endDate }) => {
+    setDatesState({
+      startDate: startDate.format('YYYY-MM-DD'),
+      endDate: endDate.format('YYYY-MM-DD'),
+    });
   };
 
   return (
@@ -93,7 +110,18 @@ const AddWallet = () => {
         </Label>
       </div>
       <div className='date-range-picker-container'>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DateRangePicker
+          onApply={setDates}
+          initialSettings={{ startDate: '08/20/2022', endDate: '08/28/2022' }}
+        >
+          <input
+            type='text'
+            value={dates.startDate + '-' + dates.endDate}
+            className='form-control'
+          />
+        </DateRangePicker>
+
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={['SingleInputDateRangeField']}>
             <DateRangePicker
               className='add-w-input'
@@ -101,7 +129,7 @@ const AddWallet = () => {
               slots={{ field: SingleInputDateRangeField }}
             />
           </DemoContainer>
-        </LocalizationProvider>
+        </LocalizationProvider> */}
       </div>
       {/* </div> */}
       <Button>Save Wallet</Button>

@@ -26,31 +26,39 @@ const WalletsPage = () => {
 
   return (
     <>
-      <div id='col-9-div-container'>
-        <Typography id='wallet-page-header' variant='h2'>
-          Wallets
-        </Typography>
-        <AddCardIcon
-          id='add-wallet-icon'
-          sx={{ width: '50px', height: '50px', color: 'yellow' }}
-        ></AddCardIcon>
-        <Avatar
-          src='./../../../assets/avatar-icon.png'
-          sx={{ width: '50px', height: '50px' }}
-        />
-      </div>
-      <Row style={{ width: '100vw', height: 'fit-content', padding: '30px' }}>
+      <Row>
+        <Col lg='3' className='d-none d-md-block'></Col>
+        <Col xs='12' md='6' lg='9'>
+          <div className='d-flex justify-content-between w-header'>
+            <div className='d-flex align-items-center'>
+              <Typography className='me-3' variant='h2'>
+                Wallets
+              </Typography>
+              <AddCardIcon
+                sx={{ width: '50px', height: '50px', color: 'yellow' }}
+              ></AddCardIcon>
+            </div>
+            <Avatar
+              src='./../../../assets/avatar-icon.png'
+              sx={{ width: '50px', height: '50px' }}
+            />
+          </div>
+        </Col>
+      </Row>
+      <Row style={{ height: 'fit-content', padding: '30px' }}>
         <Col
-          xs='3'
-          className={'pl-1 pl-sm-2 pl-md-3 pl-lg-4 pl-xl-5'}
+          xs='12'
+          md='6'
+          lg='3'
           style={{
             background: 'rgba(255,255,255, 0.3)',
             borderRadius: '30px',
             height: 'fit-content',
-            padding: '12px',
+            padding: '20px',
           }}
         >
           <div id='left-panel-content' style={{ marginTop: '15px' }}>
+            {/* <h1 className='d-none d-lg-block'>jdsds</h1> */}
             <Transaction />
             <div className='history-section-container'>
               <Typography
@@ -59,8 +67,7 @@ const WalletsPage = () => {
                   color: 'white',
                   fontFamily:
                     'Franklin Gothic Medium, Arial Narrow, Arial, sans-serif',
-                  fontSize: '30px'
-
+                  fontSize: '30px',
                 }}
               >
                 History
@@ -74,15 +81,21 @@ const WalletsPage = () => {
             ))}
           </div>
         </Col>
-        <Col xs='9' className={'pl-1 pl-sm-2 pl-md-3 pl-lg-4 pl-xl-5'}>
+        <Col
+          xs='12'
+          md='6'
+          lg='9'
+        >
           <div
             style={{
               display: 'flex',
+              justifyContent: 'flex-start',
               gap: '40px',
               flexWrap: 'wrap',
               borderRadius: '30px',
               marginLeft: '50px',
               padding: '10px',
+              textAlign: 'left',
               background: 'rgba(255,255,255, 0.3)',
             }}
           >
@@ -90,7 +103,9 @@ const WalletsPage = () => {
               <div
                 style={{
                   marginTop: '15px',
-                  marginLeft: '35px',
+                  marginBottom: '15px',
+                  marginLeft: '25px',
+                  marginRight: '20px',
                   textAlign: 'center',
                 }}
                 key={wallet.id}

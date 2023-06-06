@@ -1,31 +1,18 @@
 body {
   background: inherit;
-  width: 100vw;
+  max-width: 100vw;
 }
 
-.history-section-container {
-  margin-top: 30px;
-}
-
-#col-9-div-container {
-  display: inline-flex; /* Use flexbox to create an inline layout */
-  align-items: center;
-  justify-content: left;
-  text-align: center;
-  margin-left: 395px;
-  margin-top: 20px;
-  margin-bottom: -20px;
-}
-
-#wallet-page-header {
-  margin-right: 20px; /* Add some spacing between the components */
-  text-align: center;
+.w-header {
+  padding-top: 20px;
+  padding-left: 60px;
+  padding-right: 50px;
   color: white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-#add-wallet-icon {
-  margin-right: 500px;
+.history-section-container {
+  margin-top: 30px;
 }
 
 .history-section-container {
@@ -36,7 +23,7 @@ body {
 }
 
 .history-section-container .MuiTypography-root {
-  margin-right: 112px;
+  margin-right: 90px;
 }
 
 #wallets-view-more-button {
