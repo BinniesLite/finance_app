@@ -48,17 +48,7 @@ const TransactionPage = () => {
       <div className="transaction-container">
         <Row style={{ height: "fit-content", padding: "30px" }}>
           <Col xs={3} style={{ paddingTop: 35 }}>
-            <Grid
-              item
-              xs={2}
-              md={2}
-              style={{
-                background: "rgba(255,255,255, 0.3)",
-                border: 1,
-                borderRadius: 30,
-                padding: 20,
-              }}
-            >
+            <Grid item xs={2} md={2} className="blur-background">
               <TransactionComponent />
             </Grid>
           </Col>
@@ -69,15 +59,7 @@ const TransactionPage = () => {
             }}
           >
             <Grid container justify="space-around" spacing={2}>
-              <Grid
-                item
-                xs={10}
-                style={{
-                  background: "rgba(255,255,255, 0.3)",
-                  border: 1,
-                  borderRadius: 30,
-                }}
-              >
+              <Grid item xs={10} className="blur-background">
                 <Item>
                   <Grid
                     container
