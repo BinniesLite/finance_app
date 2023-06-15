@@ -1,15 +1,24 @@
+// ORM - Object Relational Mapping
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const express = require('express');
-
 const router = express.Router();
 
+// M-V-C
+// Model - View - Controller
 
 // get all transactions
+
+// fetch request
+// async/await 
+// promise
+
+
 router.get('/', async (req, res) => {
     try {
         const transactions = await prisma.transaction.findMany();
+        
         res.json(transactions);
     }
     catch (error) {
@@ -38,8 +47,6 @@ router.post("/create", async (req, res) => {
         }});
     
     res.status(201).json(result)
-   
-
 });
 
 router.post("/update", async (req, res) => {
@@ -55,8 +62,6 @@ router.post("/update", async (req, res) => {
     });
     res.json(result);
 });
-
-
 
 
 module.exports = router;
