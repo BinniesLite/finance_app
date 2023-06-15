@@ -1,26 +1,56 @@
-import * as React from 'react';
-import { Input, Label, FormGroup, FormText, Button } from 'reactstrap';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
-import { SingleInputDateRangeField } from '@mui/x-date-pickers-pro/SingleInputDateRangeField';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import React, { useState } from 'react';
+import { Input, Label, FormGroup, Button, Form } from 'reactstrap';
 import './AddWallet.css';
 
-//This layout is in progress, I still struggle with the date range input 
 const AddWallet = () => {
   const addWalletStyle = {
     width: '310px',
     height: 'fit-content',
     padding: '15px',
     background: 'white',
+    justifyContent: 'center',
+    margin: 'auto', 
+  };
+
+  const [walletName, setWalletName] = useState('');
+  const [walletAmount, setWalletAmount] = useState(0);
+  const [walletFriends, setWalletFriends] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const handleDateChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  };
+
+  const formatRange = () => {
+    if (startDate && endDate) {
+      const formattedStartDate = startDate.format('MM/DD/YYYY');
+      const formattedEndDate = endDate.format('MM/DD/YYYY');
+      return `${formattedStartDate} - ${formattedEndDate}`;
+    }
+    return '';
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const newWallet = {
+      name: walletName,
+      amount: walletAmount,
+      friends: walletFriends,
+      dateRange: formatRange(),
+    };
+
+    console.log(newWallet);
   };
 
   return (
-    <div style={addWalletStyle}>
+    <Form style={addWalletStyle}>
       <p>Add wallet</p>
       <FormGroup>
-        <div className='inline'>
+        <div className='d-flex align-items-center justify-content-flex-start'>
           <Label
             className='label-left'
             style={{ color: 'black' }}
@@ -37,6 +67,10 @@ const AddWallet = () => {
           type='name'
           name='name'
           placeholder='Name of the wallet'
+          value={walletName}
+          onChange={(e) => setWalletName(e.target.value)}
+          onSubmit={onSubmit}
+          required
         />
       </FormGroup>
       <FormGroup>
@@ -57,6 +91,10 @@ const AddWallet = () => {
           type='amount'
           name='amount'
           placeholder='$XX.XX'
+          value={walletAmount}
+          onChange={(e) => setWalletAmount(e.target.value)}
+          onSubmit={onSubmit}
+          required
         />
       </FormGroup>
       <FormGroup>
@@ -64,7 +102,7 @@ const AddWallet = () => {
           <Label
             className='label-left'
             style={{ color: 'black' }}
-            for='walletName'
+            for='friends'
           >
             Friends
           </Label>
@@ -77,9 +115,10 @@ const AddWallet = () => {
           type='name'
           name='name'
           placeholder='@username'
+          value={walletFriends}
+          onChange={(e) => setWalletFriends(e.target.value)}
         />
       </FormGroup>
-      {/* <div id='date-range-container'> */}
       <div className='inline'>
         <Label
           className='label-left'
@@ -93,19 +132,20 @@ const AddWallet = () => {
         </Label>
       </div>
       <div className='date-range-picker-container'>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer components={['SingleInputDateRangeField']}>
-            <DateRangePicker
-              className='add-w-input'
-              scrollable={false}
-              slots={{ field: SingleInputDateRangeField }}
-            />
-          </DemoContainer>
-        </LocalizationProvider>
+        <Input
+          type='date'
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+        />
+        <span style={{ fontSize: '14px'}}> to </span>
+        <Input
+          type='date'
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+        />
       </div>
-      {/* </div> */}
-      <Button>Save Wallet</Button>
-    </div>
+      <Button type='button' id='add-w-save-b' onSubmit={onSubmit}>Save Wallet</Button>
+    </Form>
   );
 };
 

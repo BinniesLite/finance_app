@@ -1,28 +1,45 @@
-import { React, useState } from "react";
-import "./Transactions.css";
-import TransactionComponent from "../../Layout/AddTransactionComponent/Transaction";
-import TransactionCard from "../../Layout/TransactionCard/TransactionCard";
+import { React, useState, useEffect } from "react";
+// import axios from "../../../../actions/Transaction.js";
+import axios from "axios";
 import Item from "@mui/material/ListItem";
 import { Grid, Button, Typography, Avatar } from "@mui/material";
 import { Row, Col } from "reactstrap";
+import TransactionComponent from "../../Layout/AddTransactionComponent/Transaction";
+import TransactionCard from "../../Layout/TransactionCard/TransactionCard";
+import "./Transactions.css";
 
 const TransactionPage = () => {
-  const generateFakeData = (numberOfData) => {
-    const fakeData = [];
-    const type = ["credit card", "cash"];
-    for (let i = 1; i <= numberOfData; i++) {
-      fakeData.push({
-        id: i,
-        name: `Wallet ${i}`,
-        amount: Math.floor(Math.random() * 1000) + 1,
-        date: "02/06/23",
-        type: "hello",
-      });
-    }
+  // const generateFakeData = (numberOfData) => {
+  //   const fakeData = [];
+  //   const type = ["credit card", "cash"];
+  //   for (let i = 1; i <= numberOfData; i++) {
+  //     fakeData.push({
+  //       id: i,
+  //       name: `Wallet ${i}`,
+  //       amount: Math.floor(Math.random() * 1000) + 1,
+  //       date: "02/06/23",
+  //       type: "hello",
+  //     });
+  //   }
 
-    return fakeData;
-  };
-  const transactions = generateFakeData(10);
+  //   return fakeData;
+  // };
+  // const transactions = generateFakeData(10);
+
+  const BASE_URL = "http://localhost:3000";
+
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/api/transaction`)
+      .then((response) => {
+        setTransactions(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching transactions:", error);
+      });
+  }, []);
+
   return (
     <>
       <header>

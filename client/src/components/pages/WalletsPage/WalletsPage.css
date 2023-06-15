@@ -27,9 +27,27 @@ body {
 }
 
 #wallets-view-more-button {
-  background-color: #FFD600;
+  background-color: #ffd600;
   color: black;
   border-radius: 50px;
   font-size: 10px;
   font-weight: bold;
+}
+
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.popup-content {
+  width: fit-content;
 }

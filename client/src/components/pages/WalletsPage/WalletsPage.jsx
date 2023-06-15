@@ -1,13 +1,25 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { Row, Col, Button } from 'reactstrap';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import { Typography, Avatar } from '@mui/material';
+import Popup from 'reactjs-popup';
 import TransactionComponent from '../../Layout/AddTransactionComponent/Transaction';
 import HistoryCard from '../../Layout/HistoryCard/HistoryCard';
+import AddWallet from '../../Layout/AddWallet/AddWallet';
 import WalletCard from '../../Layout/WalletCard/WalletCard';
+import 'reactjs-popup/dist/index.css';
 import './WalletsPage.css';
+import { Link } from 'react-router-dom';
 
 const WalletsPage = () => {
+  const [open, setOpen] = useState(false);
+  const closeModal = () => {
+    setOpen(false);
+    <Button>
+      <i className='fa fa-check'></i>
+    </Button>;
+  };
+
   const generateFakeData = (numberOfData) => {
     const fakeData = [];
     for (let i = 1; i <= numberOfData; i++) {
@@ -36,11 +48,22 @@ const WalletsPage = () => {
               </Typography>
               <AddCardIcon
                 sx={{ width: '50px', height: '50px', color: 'yellow' }}
+                cursor='pointer'
+                onClick={() => setOpen((o) => !o)}
               ></AddCardIcon>
+              <Popup
+                position={'top center'}
+                open={open}
+                onClose={closeModal}
+                closeOnDocumentClick
+                id='add-wallet-popup'
+              >
+                <AddWallet />
+              </Popup>
             </div>
             <Avatar
               src='./../../../assets/avatar-icon.png'
-              sx={{ width: '50px', height: '50px' }}
+              sx={{ width: '60px', height: '60px' }}
             />
           </div>
         </Col>
@@ -59,7 +82,7 @@ const WalletsPage = () => {
         >
           <div id='left-panel-content' style={{ marginTop: '15px' }}>
             <TransactionComponent />
-            <div className='history-section-container'>
+            <div className='d-flex justify-content-between history-section-container'>
               <Typography
                 variant='h5'
                 sx={{
@@ -71,7 +94,7 @@ const WalletsPage = () => {
               >
                 History
               </Typography>
-              <Button id='wallets-view-more-button'>View More</Button>
+              <Link to='/transactions'><Button id='wallets-view-more-button'>View More</Button></Link>
             </div>
             {historyData.map((wallet) => (
               <div style={{ marginTop: '20px' }} key={wallet.id}>
@@ -80,11 +103,7 @@ const WalletsPage = () => {
             ))}
           </div>
         </Col>
-        <Col
-          xs='12'
-          md='6'
-          lg='9'
-        >
+        <Col xs='12' md='6' lg='9'>
           <div
             style={{
               display: 'flex',

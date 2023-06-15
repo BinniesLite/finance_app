@@ -1,7 +1,7 @@
 .inline {
-  display: inline-flex; /* Use flexbox to create an inline layout */
-  align-items: left;
-  justify-content: space-around;
+  display: flex; /* Use flexbox to create an inline layout */
+  align-items: center;
+  justify-content: space-between;
 }
 
 .label-left {
@@ -9,8 +9,7 @@
 }
 
 .label-right {
-  text-align: right;
-  margin-left: -810px;
+  justify-content: right;
 }
 
 .add-w-input {
@@ -19,6 +18,12 @@
 }
 
 .date-range-picker-container {
-  max-height: 100px; /* Adjust the height as needed */
-  overflow: hidden;
+  margin-top: -15px;
+  margin-bottom: 20px;
+}
+
+#add-w-save-b {
+  color: inherit;
+  background: #E0A4ED;
+  width: 100%;
 }
