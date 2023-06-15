@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState }, { useEffect } from 'react';
 import { Row, Col, Button } from 'reactstrap';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import { Typography, Avatar } from '@mui/material';
@@ -10,6 +10,10 @@ import WalletCard from '../../Layout/WalletCard/WalletCard';
 import 'reactjs-popup/dist/index.css';
 import './WalletsPage.css';
 import { Link } from 'react-router-dom';
+
+
+// api 
+import { getTransactions } from '../../utils/http-request';
 
 const WalletsPage = () => {
   const [open, setOpen] = useState(false);
@@ -30,8 +34,24 @@ const WalletsPage = () => {
       });
     }
 
+
+
     return fakeData;
   };
+
+
+  // CORS
+  
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      const transactions = await getTransactions();
+      console.log(transactions);
+    } 
+
+    fetchTransactions();
+  }, []);
+
+
 
   const walletData = generateFakeData(20);
   const historyData = generateFakeData(3);
