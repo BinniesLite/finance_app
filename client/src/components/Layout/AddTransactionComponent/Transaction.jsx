@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import { Input, Label, FormGroup, FormText } from 'reactstrap';
-import '../../styles/Transaction.css';
+import './TransactionComponent.css';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -45,7 +45,7 @@ function getStyles(name, walletName, theme) {
   };
 }
 
-const Transaction = () => {
+const TransactionComponent = () => {
   const theme = useTheme();
   const [walletName, setwalletName] = React.useState('');
 
@@ -59,7 +59,10 @@ const Transaction = () => {
         <Typography>Transaction</Typography>
         <ReceiptIcon sx={{ width: '30px', height: '40px' }}></ReceiptIcon>
       </div>
-      <FormControl fullWidth sx={{  height: '40px', width: '100%', marginBottom: '20px' }}>
+      <FormControl
+        fullWidth
+        sx={{ height: '40px', width: '100%', marginBottom: '20px' }}
+      >
         <InputLabel id='amountPlaceholder' htmlFor='outlined-adornment-amount'>
           Amount
         </InputLabel>
@@ -70,7 +73,7 @@ const Transaction = () => {
           label='Amount'
         />
       </FormControl>
-      <FormControl fullWidth sx={{  height: '40px', width: '100%' }}>
+      <FormControl fullWidth sx={{ height: '40px', width: '100%' }}>
         <Select
           displayEmpty
           value={walletName}
@@ -105,17 +108,21 @@ const Transaction = () => {
         </Select>
       </FormControl>
       <FormGroup>
-        <Label for='exampleFile' style={{ marginBottom: '-10px' }}>Upload your receipt</Label>
+        <Label for='exampleFile' style={{ marginBottom: '-10px' }}>
+          Upload your receipt
+        </Label>
         <Input
           id='exampleFile'
           name='file'
           type='file'
-          style={{ height: '40px', width: '100%'}}
+          style={{ height: '40px', width: '100%' }}
         />
       </FormGroup>
-      <button type='submit' style={{ height: '40px', width: '50%'}} >Save</button>
+      <button type='submit' id='transaction-submit-button'style={{ height: '40px', width: '50%' }}>
+        Save
+      </button>
     </div>
   );
 };
 
-export default Transaction;
+export default TransactionComponent;

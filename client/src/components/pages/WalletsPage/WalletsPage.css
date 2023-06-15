@@ -17,7 +17,7 @@ body {
   margin-bottom: -20px;
 }
 
-#col-9-div-container #wallet-page-header {
+#wallet-page-header {
   margin-right: 20px; /* Add some spacing between the components */
   text-align: center;
   color: white;

@@ -1,0 +1,38 @@
+.card-content {
+  height: 100px;
+  width: 275px;
+  border: 0px;
+  border-radius: 30px;
+  display: flex;
+  position: absolute;
+  left: 45%;
+  top: 80%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+}
+
+.card-media {
+  width: 240px;
+  height: 150px;
+  display: flex;
+  position: absolute;
+  left: 45%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+}
+
+.full-card {
+  align-content: center;
+  box-shadow: none;
+  background-color: transparent;
+  height: 150px;
+}
+
+.card-group {
+  text-align: center;
+  border: 0px;
+  border-radius: 30px;
+  background-color: transparent;
+  box-shadow: none;
+}

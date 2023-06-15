@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import '../../styles/WalletCard.css';
+import './WalletCard.css';
 
 const WalletCard = ({ name, amount, id }) => {
   const [walletName, setWalletName] = useState('');

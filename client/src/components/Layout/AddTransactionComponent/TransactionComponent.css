@@ -30,7 +30,7 @@ label {
   font-size: 30px;
 }
 
-button[type='submit'] {
+#transaction-submit-button {
   display: flex;
   justify-content: center;
   align-items: center;
