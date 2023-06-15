@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import { Input, Label, FormGroup, FormText } from 'reactstrap';
-import '../../styles/Transaction.css';
+import './TransactionComponent.css';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -45,7 +45,7 @@ function getStyles(name, walletName, theme) {
   };
 }
 
-const Transaction = () => {
+const TransactionComponent = () => {
   const theme = useTheme();
   const [walletName, setwalletName] = React.useState('');
 
@@ -125,4 +125,4 @@ const Transaction = () => {
   );
 };
 
-export default Transaction;
+export default TransactionComponent;
