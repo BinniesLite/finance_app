@@ -1,7 +1,8 @@
-import { React, useState }, { useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import { Row, Col, Button } from 'reactstrap';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import { Typography, Avatar } from '@mui/material';
+import { Link } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import TransactionComponent from '../../Layout/AddTransactionComponent/Transaction';
 import HistoryCard from '../../Layout/HistoryCard/HistoryCard';
@@ -9,14 +10,13 @@ import AddWallet from '../../Layout/AddWallet/AddWallet';
 import WalletCard from '../../Layout/WalletCard/WalletCard';
 import 'reactjs-popup/dist/index.css';
 import './WalletsPage.css';
-import { Link } from 'react-router-dom';
 
-
-// api 
-import { getTransactions } from '../../utils/http-request';
+// api
+import { getTransactions } from '../../../utils/http-request';
 
 const WalletsPage = () => {
   const [open, setOpen] = useState(false);
+  const [walletData, setWalletData] = useState([]);
   const closeModal = () => {
     setOpen(false);
     <Button>
@@ -24,37 +24,17 @@ const WalletsPage = () => {
     </Button>;
   };
 
-  const generateFakeData = (numberOfData) => {
-    const fakeData = [];
-    for (let i = 1; i <= numberOfData; i++) {
-      fakeData.push({
-        id: i,
-        name: `Wallet ${i}`,
-        amount: Math.floor(Math.random() * 1000) + 1,
-      });
-    }
-
-
-
-    return fakeData;
-  };
-
-
   // CORS
-  
+
   useEffect(() => {
     const fetchTransactions = async () => {
       const transactions = await getTransactions();
-      console.log(transactions);
-    } 
+      setWalletData(transactions);
+      // console.log(transactions);
+    };
 
     fetchTransactions();
   }, []);
-
-
-
-  const walletData = generateFakeData(20);
-  const historyData = generateFakeData(3);
 
   return (
     <>
@@ -114,9 +94,11 @@ const WalletsPage = () => {
               >
                 History
               </Typography>
-              <Link to='/transactions'><Button id='wallets-view-more-button'>View More</Button></Link>
+              <Link to='/transactions'>
+                <Button id='wallets-view-more-button'>View More</Button>
+              </Link>
             </div>
-            {historyData.map((wallet) => (
+            {walletData.map((wallet) => (
               <div style={{ marginTop: '20px' }} key={wallet.id}>
                 <HistoryCard name={wallet.name} amount={wallet.amount} />
               </div>

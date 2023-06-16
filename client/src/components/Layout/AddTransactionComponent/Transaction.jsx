@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 import { Typography } from '@mui/material';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import FormControl from '@mui/material/FormControl';
@@ -9,7 +10,7 @@ import { useTheme } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
-import { Input, Label, FormGroup, FormText } from 'reactstrap';
+import { Input, Label, FormGroup, Button } from 'reactstrap';
 import './TransactionComponent.css';
 
 const ITEM_HEIGHT = 48;
@@ -28,12 +29,6 @@ const walletNames = [
   'Van Henry',
   'April Tucker',
   'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
 ];
 
 function getStyles(name, walletName, theme) {
@@ -45,16 +40,38 @@ function getStyles(name, walletName, theme) {
   };
 }
 
-const TransactionComponent = () => {
+const TransactionComponent = ({ onCreateTransaction }) => {
   const theme = useTheme();
-  const [walletName, setwalletName] = React.useState('');
+  const [amount, setAmount] = React.useState('');
+  const [walletName, setWalletName] = React.useState('');
+  const [file, setFile] = React.useState('');
 
-  const handleChange = (event) => {
-    setwalletName(event.target.value);
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (!amount || !walletName || !file) {
+      alert('Please fill out all the fields');
+      return;
+    }
+
+    try {
+      const transactionData = {
+        amount: parseFloat(amount),
+        walletName,
+        file,
+      };
+
+      onCreateTransaction(transactionData);
+
+      setAmount('');
+      setWalletName('');
+      setFile('');
+    } catch (error) {
+      console.error('Error creating transaction:', error);
+    }
   };
 
   return (
-    <div className='transaction-card-container'>
+    <FormGroup onSubmit={onSubmit} className='transaction-card-container'>
       <div id='title-transaction'>
         <Typography>Transaction</Typography>
         <ReceiptIcon sx={{ width: '30px', height: '40px' }}></ReceiptIcon>
@@ -71,13 +88,15 @@ const TransactionComponent = () => {
           id='outlined-adornment-amount'
           startAdornment={<InputAdornment position='start'>$</InputAdornment>}
           label='Amount'
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
         />
       </FormControl>
       <FormControl fullWidth sx={{ height: '40px', width: '100%' }}>
         <Select
           displayEmpty
           value={walletName}
-          onChange={handleChange}
+          onChange={(e) => setWalletName(e.target.value)}
           input={<OutlinedInput />}
           renderValue={(selected) => {
             if (selected.length === 0) {
@@ -115,14 +134,25 @@ const TransactionComponent = () => {
           id='exampleFile'
           name='file'
           type='file'
+          value={file}
+          onChange={(e) => setFile(e.target.value)}
           style={{ height: '40px', width: '100%' }}
         />
       </FormGroup>
-      <button type='submit' id='transaction-submit-button'style={{ height: '40px', width: '50%' }}>
+      <Button
+        type='submit'
+        id='transaction-submit-button'
+        style={{ height: '40px', width: '50%' }}
+        onClick={onSubmit}
+      >
         Save
-      </button>
-    </div>
+      </Button>
+    </FormGroup>
   );
+};
+
+TransactionComponent.propTypes = {
+  onCreateTransaction: PropTypes.func.isRequired,
 };
 
 export default TransactionComponent;

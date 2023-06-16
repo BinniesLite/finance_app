@@ -18,7 +18,7 @@ form {
 .signin-container {
   padding-top: 50px;
   text-align: center;
-  height: 100vh;
+  height: fit-content;
 }
 
 #sign-in-header {

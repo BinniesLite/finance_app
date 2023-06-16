@@ -1,72 +1,55 @@
-import { React, useState, useEffect } from "react";
-// import axios from "../../../../actions/Transaction.js";
-import axios from "axios";
-import Item from "@mui/material/ListItem";
-import { Grid, Button, Typography, Avatar } from "@mui/material";
-import { Row, Col } from "reactstrap";
-import TransactionComponent from "../../Layout/AddTransactionComponent/Transaction";
-import TransactionCard from "../../Layout/TransactionCard/TransactionCard";
-import "./Transactions.css";
+import { React, useState, useEffect } from 'react';
+import axios from 'axios';
+import Item from '@mui/material/ListItem';
+import { Grid, Button, Typography, Avatar } from '@mui/material';
+import { Row, Col } from 'reactstrap';
+import TransactionComponent from '../../Layout/AddTransactionComponent/Transaction';
+import TransactionCard from '../../Layout/TransactionCard/TransactionCard';
+import './Transactions.css';
+
+// api
+import { createTransaction } from '../../../utils/http-request';
 
 const TransactionPage = () => {
-  // const generateFakeData = (numberOfData) => {
-  //   const fakeData = [];
-  //   const type = ["credit card", "cash"];
-  //   for (let i = 1; i <= numberOfData; i++) {
-  //     fakeData.push({
-  //       id: i,
-  //       name: `Wallet ${i}`,
-  //       amount: Math.floor(Math.random() * 1000) + 1,
-  //       date: "02/06/23",
-  //       type: "hello",
-  //     });
-  //   }
-
-  //   return fakeData;
-  // };
-  // const transactions = generateFakeData(10);
-
-  const BASE_URL = "http://localhost:3000";
-
   const [transactions, setTransactions] = useState([]);
 
-  useEffect(() => {
-    axios.get(`${BASE_URL}/api/transaction`)
-      .then((response) => {
-        setTransactions(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching transactions:", error);
-      });
-  }, []);
-
+  const handleCreateTransaction = async (transactionData) => {
+    try {
+      const newTransaction = await createTransaction(transactionData);
+      setTransactions([...transactions, newTransaction]);
+    } catch (error) {
+      console.error('Error creating transaction:', error);
+    }
+  };
   return (
     <>
       <header>
         <div>
-          <Row style={{ height: "fit-content" }}>
+          <Row style={{ height: 'fit-content' }}>
             <Col xs={3} style={{ paddingTop: 35 }}>
               Transactions
             </Col>
             <Col xs={9} style={{ paddingLeft: 600 }}>
               <Avatar
-                src="./../../../assets/avatar-icon.png"
+                src='./../../../assets/avatar-icon.png'
                 sx={{ width: 50, height: 50 }}
                 style={{
-                  display: "flex",
-                  color: "rgba(9, 48, 255)",
-                  mixBlendMode: "overlay",
+                  display: 'flex',
+                  color: 'rgba(9, 48, 255)',
+                  mixBlendMode: 'overlay',
                 }}
               />
             </Col>
           </Row>
         </div>
       </header>
-      <div className="transaction-container">
-        <Row style={{ height: "fit-content", padding: "30px" }}>
+      <div className='transaction-container'>
+        <Row style={{ height: 'fit-content', padding: '30px' }}>
           <Col xs={3} style={{ paddingTop: 35 }}>
-            <Grid item xs={2} md={2} className="blur-background">
-              <TransactionComponent />
+            <Grid item xs={2} md={2} className='blur-background'>
+              <TransactionComponent
+                onCreateTransaction={handleCreateTransaction}
+              />
             </Grid>
           </Col>
           <Col
@@ -75,8 +58,8 @@ const TransactionPage = () => {
               paddingTop: 50,
             }}
           >
-            <Grid container justify="space-around" spacing={2}>
-              <Grid item xs={10} className="blur-background">
+            <Grid container justify='space-around' spacing={2}>
+              <Grid item xs={10} className='blur-background'>
                 <Item>
                   <Grid
                     container
