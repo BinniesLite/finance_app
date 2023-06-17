@@ -13,6 +13,7 @@ import './WalletsPage.css';
 
 // api
 import { getTransactions } from '../../../utils/http-request';
+import { createTransaction } from '../../../utils/http-request';
 
 const WalletsPage = () => {
   const [open, setOpen] = useState(false);
@@ -30,11 +31,19 @@ const WalletsPage = () => {
     const fetchTransactions = async () => {
       const transactions = await getTransactions();
       setWalletData(transactions);
-      // console.log(transactions);
     };
 
     fetchTransactions();
   }, []);
+
+  const handleCreateTransaction = async (transactionData) => { 
+    try {
+      const newTransaction = await createTransaction(transactionData);
+      setWalletData([...walletData, newTransaction]);
+    } catch (error) {
+      console.error('Error creating transaction:', error);
+    }
+  };
 
   return (
     <>
@@ -81,7 +90,7 @@ const WalletsPage = () => {
           }}
         >
           <div id='left-panel-content' style={{ marginTop: '15px' }}>
-            <TransactionComponent />
+            <TransactionComponent onCreateTransaction={handleCreateTransaction} />
             <div className='d-flex justify-content-between history-section-container'>
               <Typography
                 variant='h5'

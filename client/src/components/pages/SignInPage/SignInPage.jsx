@@ -35,8 +35,8 @@ const SignInPage = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <br />
-          <label for='password'>Password</label>
-          <div class='password-container'>
+          <label htmlFor='password'>Password</label>
+          <div className='password-container'>
             <input
               type={showPassword ? 'text' : 'password'}
               id='password'
@@ -50,7 +50,7 @@ const SignInPage = () => {
           </div>
           <button type='submit'>Submit</button>
 
-          <div class='signup-link'>
+          <div className='signup-link'>
             <p> Do not have an account?</p>
             <p type='button' id='signup' onClick={() => navigate('/signup')}>
               Sign up

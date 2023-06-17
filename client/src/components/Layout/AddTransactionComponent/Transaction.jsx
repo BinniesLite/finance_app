@@ -1,5 +1,4 @@
 import * as React from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Typography } from '@mui/material';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -11,7 +10,13 @@ import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import { Input, Label, FormGroup, Button } from 'reactstrap';
+import { ref, uploadBytes } from 'firebase/storage';
+import { v4 } from 'uuid';
+import { storage } from '../../../config/firebaseConfig';
 import './TransactionComponent.css';
+
+// api
+import { getWallets } from '../../../utils/http-request';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -24,19 +29,12 @@ const MenuProps = {
   },
 };
 
-const walletNames = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-];
-
-function getStyles(name, walletName, theme) {
+function getStyles(name, selectedName, theme) {
   return {
     fontWeight:
-      walletName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
+      name === selectedName
+        ? theme.typography.fontWeightMedium
+        : theme.typography.fontWeightRegular,
   };
 }
 
@@ -44,14 +42,32 @@ const TransactionComponent = ({ onCreateTransaction }) => {
   const theme = useTheme();
   const [amount, setAmount] = React.useState('');
   const [walletName, setWalletName] = React.useState('');
-  const [file, setFile] = React.useState('');
+  const [file, setFile] = React.useState(null);
+  const fileInputRef = React.useRef(null); // Create a ref for the file input element
+  const [wallets, setWallets] = React.useState([]);
+
+  // hardcoded wallets
+  React.useEffect(() => {
+    const fetchWallets = async () => {
+      const wallets = await getWallets();
+      setWallets(wallets);
+    };
+
+    fetchWallets();
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!amount || !walletName || !file) {
+    if (!amount || !walletName || file == null) {
       alert('Please fill out all the fields');
       return;
     }
+
+    // Upload the file and metadata to Firebase Storage
+    const fileRef = ref(storage, `receipts/${file.name + v4()}`);
+    await uploadBytes(fileRef, file).then(() => {
+      alert('Uploaded successfully!');
+    });
 
     try {
       const transactionData = {
@@ -64,7 +80,10 @@ const TransactionComponent = ({ onCreateTransaction }) => {
 
       setAmount('');
       setWalletName('');
-      setFile('');
+      setFile(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null;
+      }
     } catch (error) {
       console.error('Error creating transaction:', error);
     }
@@ -99,7 +118,7 @@ const TransactionComponent = ({ onCreateTransaction }) => {
           onChange={(e) => setWalletName(e.target.value)}
           input={<OutlinedInput />}
           renderValue={(selected) => {
-            if (selected.length === 0) {
+            if (selected === '') {
               return (
                 <em id='chooseWalletPlaceholder' style={{ color: 'gray' }}>
                   Wallet
@@ -115,27 +134,28 @@ const TransactionComponent = ({ onCreateTransaction }) => {
           <MenuItem disabled value=''>
             <em>choose your wallet</em>
           </MenuItem>
-          {walletNames.map((name) => (
+          {wallets.map((name) => (
             <MenuItem
               key={name}
               value={name}
               style={getStyles(name, walletName, theme)}
+              component='div'
             >
-              {name}
+              <Typography variant='inherit'>{name}</Typography>
             </MenuItem>
           ))}
         </Select>
       </FormControl>
       <FormGroup>
-        <Label for='exampleFile' style={{ marginBottom: '-10px' }}>
+        <Label htmlFor='exampleFile' style={{ marginBottom: '-10px' }}>
           Upload your receipt
         </Label>
         <Input
           id='exampleFile'
           name='file'
           type='file'
-          value={file}
-          onChange={(e) => setFile(e.target.value)}
+          ref={fileInputRef}
+          onChange={(e) => setFile(e.target.files[0])}
           style={{ height: '40px', width: '100%' }}
         />
       </FormGroup>

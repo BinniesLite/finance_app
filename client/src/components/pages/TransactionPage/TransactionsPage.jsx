@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react';
-import axios from 'axios';
 import Item from '@mui/material/ListItem';
 import { Grid, Button, Typography, Avatar } from '@mui/material';
 import { Row, Col } from 'reactstrap';
@@ -9,6 +8,7 @@ import './Transactions.css';
 
 // api
 import { createTransaction } from '../../../utils/http-request';
+import { getTransactions } from '../../../utils/http-request';
 
 const TransactionPage = () => {
   const [transactions, setTransactions] = useState([]);

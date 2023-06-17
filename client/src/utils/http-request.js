@@ -12,5 +12,11 @@ export const createTransaction = async (transaction) => {
     return response.data;
 }
 
+// hard coded for now
+export const getWallets = async () => {
+    const response = await axios.get(baseUrl + '/wallet');
+    return response.data;
+}
+
 
 
