@@ -49,8 +49,8 @@ const TransactionComponent = ({ onCreateTransaction }) => {
   // hardcoded wallets
   React.useEffect(() => {
     const fetchWallets = async () => {
-      const wallets = await getWallets();
-      setWallets(wallets);
+      const wallet = await getWallets();
+      setWallets(...wallets, wallet);
     };
 
     fetchWallets();
