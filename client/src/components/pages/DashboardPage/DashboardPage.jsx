@@ -27,23 +27,25 @@ const DashboardPage = () => {
   return (
     <>
       <header>
-        <div>
-          <Col className = "intro-bar">
-            <Row style={{ height: "fit-content" }}>
+        <div class="intro-bar">
+          <Grid>
+            <Row>
               <Avatar
                 src="./../../../assets/avatar-icon.png"
-                sx={{ width: 50, height: 50 }}
                 style={{
-                  display: "flex",
+                  height: 90,
+                  width: 90,
                   color: "rgba(9, 48, 255)",
                   mixBlendMode: "overlay",
                 }}
               />
             </Row>
             <Row>
-              <Typography>Jane doe</Typography>
+              <Typography variant="title" component="div">
+                Jane doe
+              </Typography>
             </Row>
-          </Col>
+          </Grid>
         </div>
       </header>
       <div className="dashboard-container">
