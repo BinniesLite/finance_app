@@ -1,0 +1,16 @@
+.title{
+    color: white;
+    font-size: xx-large;
+}
+
+.outlined-adornment-amount {
+    color: black;
+}
+
+.outlined-required {
+    width: 250px
+}
+
+.input-field {
+    text-align: center;
+}
