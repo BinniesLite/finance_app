@@ -42,7 +42,7 @@ router.get('/:id', async (req, res) => {
 
 router.post("/create", async (req, res) => {
     const { amount, description, } = req.body;
-    const transactionID = {id: uuidv4()};
+    const transactionID = {id: uuidv4()}; // create ID for transaction
     const result = await prisma.transaction.create({
         data: {
             id: transactionID,
@@ -66,6 +66,5 @@ router.post("/update", async (req, res) => {
     });
     res.json(result);
 });
-
 
 module.exports = router;
