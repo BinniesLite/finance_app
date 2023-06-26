@@ -8,6 +8,8 @@ RUN apk add --no-cache postgresql-client
 COPY ./server . 
 COPY ./server/package.json .
 
+
+
 RUN yarn install
 
 CMD ["yarn", "run", "dev"]

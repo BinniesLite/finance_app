@@ -50,17 +50,7 @@ router.post("/create", async (req, res) => {
 });
 
 router.post("/update", async (req, res) => {
-    const { id, amount, description } = req.body;
-    const result = await prisma.transaction.update({
-        where: {
-            id: id
-        },
-        data: {
-            amount: amount,
-            description: description,
-        }
-    });
-    res.json(result);
+N
 });
 
 
