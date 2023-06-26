@@ -26,6 +26,8 @@ services:
       finance:
         aliases:
           - backend
+    depends_on:
+      - postgresql
   postgresql:
     container_name: postgres
     build:

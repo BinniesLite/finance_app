@@ -2,6 +2,7 @@ const express = require('express');
 const TransactionRouter = require("./router/transaction");
 const cors = require('cors');
 const app = express();
+
 const PORT = 3000;
 
 // Initialize database with Prisma

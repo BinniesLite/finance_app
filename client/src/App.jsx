@@ -2,11 +2,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUpPage from './components/pages/SignUpPage/SignUpPage';
 import SignInPage from './components/pages/SignInPage/SignInPage';
 import WalletsPage from './components/pages/WalletsPage/WalletsPage';
+
 import Transaction from './components/Layout/AddTransactionComponent/Transaction';
 import TransactionPage from './components/pages/TransactionPage/TransactionsPage';
 import WalletCard from './components/Layout/WalletCard/WalletCard';
 import HistoryCard from './components/Layout/HistoryCard/HistoryCard';
 import AddWallet from './components/Layout/AddWallet/AddWallet';
+
 import './App.css';
 
 function App() {
