@@ -9,7 +9,7 @@ import './WalletsPage.css';
 
 
 // api 
-import { getTransactions } from '../../utils/http-request';
+import { getTransactions } from "../../../utils/http-request";
 
 const WalletsPage = () => {
   const generateFakeData = (numberOfData) => {
