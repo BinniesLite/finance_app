@@ -2,8 +2,12 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+// Express router setup
 const express = require('express');
 const router = express.Router();
+
+// create ID
+const { v4: uuidv4 } = require('uuid');
 
 // M-V-C
 // Model - View - Controller
@@ -14,11 +18,10 @@ const router = express.Router();
 // async/await 
 // promise
 
-
+// get all transactions
 router.get('/', async (req, res) => {
     try {
         const transactions = await prisma.transaction.findMany();
-        
         res.json(transactions);
     }
     catch (error) {
@@ -38,10 +41,11 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post("/create", async (req, res) => {
-    
     const { amount, description, } = req.body;
+    const transactionID = {id: uuidv4()};
     const result = await prisma.transaction.create({
         data: {
+            id: transactionID,
             amount: amount,
             description: description,
         }});
