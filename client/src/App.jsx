@@ -9,6 +9,7 @@ import HistoryCard from './components/Layout/HistoryCard/HistoryCard';
 import AddWallet from './components/Layout/AddWallet/AddWallet';
 import './App.css';
 import EditWalletCard from './components/Layout/EditWalletCard/EditWalletCard';
+import EnhancedTable from './components/Layout/TableData/TableData';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/transactions' element={<TransactionPage />} />
           <Route path='/wallets' element={<WalletsPage />} />
           <Route path='/edit' element={<EditWalletCard />} />
+          <Route path='/table' element={<EnhancedTable />} />
         </Routes>
       </Router>
     </>
