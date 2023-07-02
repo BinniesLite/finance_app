@@ -41,12 +41,11 @@ const TransactionPage = () => {
     setShowUI(!showUI);
   };
   const getTextDisplay = () => {
-    if (showUI){
+    if (showUI) {
       return "List View";
-    }
-    else {
+    } else {
       return "Grid View";
-    };
+    }
   };
   const transactions = generateFakeData(10);
   return (
@@ -125,37 +124,39 @@ const TransactionPage = () => {
                     </Grid>
                   </Item>
                 )}
-                <TableContainer component={Paper}>
-                  <Table /*sx={{ minWidth: 650 }}*/ aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Wallet Name</TableCell>
-                        <TableCell align="right">Date</TableCell>
-                        <TableCell align="right">Amount&nbsp;($)</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {transactions.map((transaction) => (
-                        <TableRow
-                          key={transaction.name}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell component="th" scope="row">
-                            {transaction.name}
-                          </TableCell>
-                          <TableCell align="right">
-                            {transaction.date}
-                          </TableCell>
-                          <TableCell align="right">
-                            {transaction.amount}
-                          </TableCell>
+                {!showUI && (
+                  <TableContainer component={Paper}>
+                    <Table /*sx={{ minWidth: 650 }}*/ aria-label="simple table">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Wallet Name</TableCell>
+                          <TableCell align="right">Date</TableCell>
+                          <TableCell align="right">Amount&nbsp;($)</TableCell>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                      </TableHead>
+                      <TableBody>
+                        {transactions.map((transaction) => (
+                          <TableRow
+                            key={transaction.name}
+                            sx={{
+                              "&:last-child td, &:last-child th": { border: 0 },
+                            }}
+                          >
+                            <TableCell component="th" scope="row">
+                              {transaction.name}
+                            </TableCell>
+                            <TableCell align="right">
+                              {transaction.date}
+                            </TableCell>
+                            <TableCell align="right">
+                              {transaction.amount}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                )}
               </Grid>
             </Grid>
           </Col>
