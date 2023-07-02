@@ -40,21 +40,62 @@ router.get('/:id', async (req, res) => {
     res.json(transaction);
 });
 
+
+
 router.post("/create", async (req, res) => {
-    const { amount, description, } = req.body;
-    const transactionID = {id: uuidv4()}; // create ID for transaction
+    const { amount, description, wallId } = req.body;
+    const transactionID = {id: uuidv4()};
     const result = await prisma.transaction.create({
         data: {
             id: transactionID,
             amount: amount,
             description: description,
-        }});
+            wallet: {
+                connect: {
+                    id: wallId
+                }
+            }
+        }
+    });
     
     res.status(201).json(result)
 });
 
-router.post("/update", async (req, res) => {
-N
+router.patch("/:id", async (req, res) => {
+    const { id } = req.params;
+    const { amount, description } = req.body;
+    try {
+        const transaction = await prisma.transaction.update({
+            where: {
+                id: id
+            },
+            data: {
+                amount: amount,
+                description: description
+            }
+        });
+        res.status(200).json(transaction);
+    }
+    catch (error) {
+        res.status(400).json(error);
+    }
 });
+
+
+router.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const transaction = await prisma.transaction.delete({
+            where: {
+                id: id
+            }
+        });
+        res.status(200).json(transaction);
+    }
+    catch (error) {
+        res.status(400).json(error);
+    }
+});
+    
 
 module.exports = router;
