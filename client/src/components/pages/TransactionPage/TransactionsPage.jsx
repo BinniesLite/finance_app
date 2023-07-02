@@ -27,34 +27,23 @@ const TransactionPage = () => {
     <>
       <header>
         <div>
-          <NavBar/>
+          <Row style={{ paddingBottom: 40 }}>
+            <NavBar />
+          </Row>
           <Row style={{ height: "fit-content" }}>
-            <Col xs={3} style={{ paddingTop: 35 }}>
-              Transactions
-            </Col>
-            <Col xs={9} style={{ paddingLeft: 600 }}>
-              <Avatar
-                src="./../../../assets/avatar-icon.png"
-                sx={{ width: 50, height: 50 }}
-                style={{
-                  display: "flex",
-                  color: "rgba(9, 48, 255)",
-                  mixBlendMode: "overlay",
-                }}
-              />
-            </Col>
+            <Col style={{ paddingTop: 35 }}>Transactions</Col>
           </Row>
         </div>
       </header>
       <div className="transaction-container">
-        <Row style={{ height: "fit-content", padding: "30px" }}>
-          <Col xs={3} style={{ paddingTop: 35 }}>
-            <Grid item xs={2} md={2} className="blur-background">
+        <Row style={{ width: "100vw", height: "fit-content", padding: "30px" }}>
+          <Col xs={2} style={{ paddingTop: 35 }}>
+            <Grid className="blur-background">
               <TransactionComponent />
             </Grid>
           </Col>
           <Col
-            xs={9}
+            xs={10}
             style={{
               paddingTop: 50,
             }}

@@ -5,34 +5,40 @@ import { Grid, Button, Typography, Avatar } from "@mui/material";
 import { Row, Col } from "reactstrap";
 import WalletComponent from "../../Layout/WalletComponent/WalletComponent";
 import { generateFakeUser } from "../../../utils/helper";
+import NavBar from "../../Layout/NavBar/NavBar";
 const DashboardPage = () => {
   const user = generateFakeUser();
   return (
     <>
       <div class="intro-bar">
-        <Grid
-          style={{
-            alignItems: "center",
-            textAlign: "center",
-            alignContent: "center",
-          }}
-        >
-          <Avatar
-            src="./../../../assets/avatar-icon.png"
+        <Row>
+          <NavBar />
+        </Row>
+        <Row style={{ paddingTop: 60 }}>
+          <Grid
             style={{
-              height: 90,
-              width: 90,
-              color: "rgba(9, 48, 255)",
-              mixBlendMode: "overlay",
+              alignItems: "center",
+              textAlign: "center",
+              alignContent: "center",
             }}
-          />
-          <Typography variant="title" component="div">
-            {user.name}
-          </Typography>
-        </Grid>
+          >
+            <Avatar
+              src="./../../../assets/avatar-icon.png"
+              style={{
+                height: 90,
+                width: 90,
+                color: "rgba(9, 48, 255)",
+                mixBlendMode: "overlay",
+              }}
+            />
+            <Typography variant="title" component="div">
+              {user.name}
+            </Typography>
+          </Grid>
+        </Row>
       </div>
       <div className="dashboard-container">
-        <Row style={{ height: "fit-content", padding: "30px" }}>
+        <Row style={{ width: "100vw", height: "fit-content", padding: "30px" }}>
           <Col xs={3}>
             <Grid item xs={2} md={2} className="blur-background">
               <WalletComponent />
@@ -40,9 +46,15 @@ const DashboardPage = () => {
           </Col>
           <Col className="info-component">
             <Row>
-              <Grid item xs={2} md={2} className="blur-background" style = {{
-                marginBottom: 30,
-              }}>
+              <Grid
+                item
+                xs={2}
+                md={2}
+                className="blur-background"
+                style={{
+                  marginBottom: 30,
+                }}
+              >
                 <Row>
                   <Col>
                     <Typography variant="h6">
@@ -57,10 +69,16 @@ const DashboardPage = () => {
               </Grid>
             </Row>
             <Row>
-              <Grid item xs={2} md={2} className="blur-background" style = {{
-                height: 480,
-                display: "flex",
-              }}>
+              <Grid
+                item
+                xs={2}
+                md={2}
+                className="blur-background"
+                style={{
+                  height: 480,
+                  display: "flex",
+                }}
+              >
                 <Row>
                   <Typography variant="h3">Reports</Typography>
                 </Row>

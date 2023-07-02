@@ -4,21 +4,29 @@ import {
   AppBar,
   Container,
   Toolbar,
-//   AdbIcon,
+  //   AdbIcon,
   Box,
+  Button,
   IconButton,
   Menu,
   MenuItem,
   Tooltip,
   Avatar,
 } from "@mui/material";
+
+import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-const pages = ["Products", "Pricing", "Blog"];
+import DashboardPage from "../../pages/DashboardPage/DashboardPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import TransactionPage from "../../pages/TransactionPage/TransactionsPage";
+import WalletsPage from "../../pages/WalletsPage/WalletsPage";
+
+const pages = ["Dashboard", "Transactions", "Wallets"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const NavBar = () => {
-//   const [anchorElNav, setAnchorElNav] = React.useState(null);
-//   const [anchorElUser, setAnchorElUser] = React.useState(null);
-    
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -35,15 +43,20 @@ const NavBar = () => {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar
+      style={{
+        width: "100%",
+        backgroundcolor: "black",
+      }}
+    >
+      <Container>
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/dashboard"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -118,6 +131,8 @@ const NavBar = () => {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
+                component={Link} // Use Link as the component prop
+                to={`/${page.toLowerCase()}`}
               >
                 {page}
               </Button>
