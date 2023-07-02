@@ -3,5 +3,8 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.3"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2"
   }
 }

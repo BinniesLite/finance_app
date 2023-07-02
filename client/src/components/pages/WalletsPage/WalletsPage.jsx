@@ -6,29 +6,9 @@ import TransactionComponent from '../../Layout/AddTransactionComponent/Transacti
 import HistoryCard from '../../Layout/HistoryCard/HistoryCard';
 import WalletCard from '../../Layout/WalletCard/WalletCard';
 import './WalletsPage.css';
-
-
-// api 
-import { getTransactions } from "../../../utils/http-request";
+import { generateFakeTransactionData } from '../../../utils/helper';
 
 const WalletsPage = () => {
-  const generateFakeData = (numberOfData) => {
-    const fakeData = [];
-    for (let i = 1; i <= numberOfData; i++) {
-      fakeData.push({
-        id: i,
-        name: `Wallet ${i}`,
-        amount: Math.floor(Math.random() * 1000) + 1,
-      });
-    }
-
-
-
-    return fakeData;
-  };
-
-
-  // CORS
   
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -39,10 +19,8 @@ const WalletsPage = () => {
     fetchTransactions();
   }, []);
 
-
-
-  const walletData = generateFakeData(20);
-  const historyData = generateFakeData(3);
+  const walletData = generateFakeTransactionData(20);
+  const historyData = generateFakeTransactionData(3);
 
   return (
     <>
