@@ -5,7 +5,7 @@ import TransactionCard from "../../Layout/TransactionCard/TransactionCard";
 import Item from "@mui/material/ListItem";
 import { Grid, Button, Typography, Avatar } from "@mui/material";
 import { Row, Col } from "reactstrap";
-
+import NavBar from "../../Layout/NavBar/NavBar";
 const TransactionPage = () => {
   const generateFakeData = (numberOfData) => {
     const fakeData = [];
@@ -27,6 +27,7 @@ const TransactionPage = () => {
     <>
       <header>
         <div>
+          <NavBar/>
           <Row style={{ height: "fit-content" }}>
             <Col xs={3} style={{ paddingTop: 35 }}>
               Transactions
