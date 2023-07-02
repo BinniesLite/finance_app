@@ -17,3 +17,7 @@ body {
     border-radius: 30px;
     padding: 20px;
 }
+
+.filter-button {
+  background-color: #FFD600;
+}

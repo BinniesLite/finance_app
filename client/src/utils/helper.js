@@ -7,6 +7,7 @@ export const generateFakeTransactionData = (numberOfData) => {
       id: i,
       name: `Wallet ${i}`,
       amount: Math.floor(Math.random() * 1000) + 1,
+      date: faker.date.anytime(),
     });
   }
 
