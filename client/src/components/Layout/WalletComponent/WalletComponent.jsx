@@ -1,10 +1,5 @@
 import {
-  TextField,
   Typography,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
   Button,
 } from "@mui/material";
 import { Row, Col } from "reactstrap";
@@ -13,21 +8,11 @@ import * as React from "react";
 import "./WalletComponent.css";
 import HistoryCard from "../HistoryCard/HistoryCard";
 import { Link } from "react-router-dom";
+import { generateFakeTransactionData } from "../../../utils/helper";
 
 const WalletComponent = () => {
-  const generateFakeData = (numberOfData) => {
-    const fakeData = [];
-    for (let i = 1; i <= numberOfData; i++) {
-      fakeData.push({
-        id: i,
-        name: `Wallet ${i}`,
-        amount: Math.floor(Math.random() * 1000) + 1,
-      });
-    }
-
-    return fakeData;
-  };
-  const wallets = generateFakeData(10);
+  const wallets = generateFakeTransactionData(10);
+  console.log(wallets);
   return (
     <div class="input-field">
       <Row>

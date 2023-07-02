@@ -1,20 +1,20 @@
-.title{
-    color: white;
-    font-size: xx-large;
+.title {
+  color: white;
+  font-size: xx-large;
 }
 
 .outlined-adornment-amount {
-    color: black;
+  color: black;
 }
 
 .outlined-required {
-    width: 250px
+  width: 250px;
 }
 
 .input-field {
-    text-align: center;
+  text-align: center;
 }
 
 .his-card {
-    margin-top: 20px;
+  margin-top: 20px;
 }
