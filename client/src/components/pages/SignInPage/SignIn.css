@@ -1,6 +1,4 @@
-body {
-  background: inherit;
-}
+
 
 #sign-in-header,
 form {
@@ -13,12 +11,17 @@ form {
   min-width: 300px;
   margin: auto;
   padding-bottom: 2em;
+  
 }
 
 .signin-container {
   padding-top: 50px;
-  text-align: center;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center   ;
+
 }
 
 #sign-in-header {
@@ -43,9 +46,6 @@ input {
   flex-grow: 0;
 }
 
-input {
-  text-align: cente;
-}
 
 label {
   display: flex;

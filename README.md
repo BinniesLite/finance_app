@@ -1,11 +1,19 @@
 # Finance Tracker  Platform
 
-- [Finance Tool Platform](#finance-tracker-platformplatform)
+- [Finance Tracker  Platform](#finance-tracker--platform)
   - [About](#about)
-  - [Installation/Usage](#installation)
-  - [Architecture](#architecture)
+  - [Installation](#installation)
+        - [Note for backend](#note-for-backend)
   - [Backend](#backend)
     - [API Documentation](#api-documentation)
+      - [Transactions](#transactions)
+        - [Get all transactions](#get-all-transactions)
+        - [Get transaction by id](#get-transaction-by-id)
+        - [Create transaction](#create-transaction)
+        - [Update transaction](#update-transaction)
+        - [Delete transaction](#delete-transaction)
+    - [Schema](#schema)
+  - [Issues](#issues)
 
 
   
@@ -55,7 +63,7 @@ GET /api/transactions/${id}
 
 ##### Create transaction
 ```http
-POST /api/transactions
+POST /api/transactions/create
 ```
 
 ##### Update transaction
@@ -65,32 +73,41 @@ PUT /api/transactions/${id}
 
 ##### Delete transaction
 ```http
-DELETE /api/transactions/${id}
+DELETE /api/transactions/delete/${id}
 ```
-
-
 
 
 ### Schema
 ```mermaid
 erDiagram
-  wallet ||--o{ transactions: has
+  WALLET ||--o{ TRANSACTION : has
   
-  wallet { 
-    int ID PK
-    string name 
-    float balance 
+  USER ||--O{ TRANSACTION : make 
+  USER ||--O{ WALLET : has
+
+  WALLET { 
+    string ID PK
+    string name  
     date created_at 
-    string payment_type
-    
+    string description 
   }
   
-  transactions {
-    int ID PK
-    int wallet_id FK
+  TRANSACTION {
+    string ID PK
     string name 
+    int wallet_id FK
     float amount 
     date created_at 
+  }
+
+  USER {
+    string ID PK
+    string username
+    string password
+    string email
+    date created_at
+    url user_image
+
   }
 
 ```

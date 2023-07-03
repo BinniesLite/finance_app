@@ -5,16 +5,6 @@ const prisma = new PrismaClient();
 const express = require('express');
 const router = express.Router();
 
-// M-V-C
-// Model - View - Controller
-
-// get all transactions
-
-// fetch request
-// async/await 
-// promise
-
-
 router.get('/', async (req, res) => {
     try {
         const transactions = await prisma.transaction.findMany();
