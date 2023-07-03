@@ -22,26 +22,31 @@ const { v4: uuidv4 } = require('uuid');
 router.get('/', async (req, res) => {
     try {
         const transactions = await prisma.transaction.findMany();
-        res.json(transactions);
+        res.status(200).json(transactions);
     }
     catch (error) {
-        res.json(error);    
+        res.status(400).json(error);    
     }
 });
 
 // get transaction by id
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
-    const transaction = await prisma.transaction.findUnique({
-        where: {
-            id: id
-        }
-    });
-    res.json(transaction);
+    try {
+        const transaction = await prisma.transaction.findUnique({
+            where: {
+                id: id
+            }
+        });
+        res.status(200).json(transaction);
+    }
+    catch (error) {
+        res.status(400).json(error);
+    }
 });
 
 
-
+// create transaction
 router.post("/create", async (req, res) => {
     const { amount, description, wallId } = req.body;
     const transactionID = {id: uuidv4()};
