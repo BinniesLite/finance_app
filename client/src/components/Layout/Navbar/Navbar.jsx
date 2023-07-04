@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
-
+import TransactionAdd from "../../general/TransactionAdd";
 
 
 // icons
@@ -60,7 +60,7 @@ const Navbar = () => {
           </Box>{" "}
           {" + "}
         </Button>
-        {/* <TransactionAdd open={open} handleClose={handleClose} /> */}
+        <TransactionAdd open={open} handleClose={handleClose} />
         <NavButton
           title="Notifications"
           icon={<IoIosNotifications size="1.2rem" />}

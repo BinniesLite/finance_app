@@ -29,11 +29,11 @@ router.get('/:id', async (req, res) => {
 
 router.post("/create", async (req, res) => {
     
-    const { amount, description, } = req.body;
+    const { amount, description, type, wallet } = req.body;
     const result = await prisma.transaction.create({
         data: {
             amount: amount,
-            description: description,
+            type: type
         }});
     
     res.status(201).json(result)

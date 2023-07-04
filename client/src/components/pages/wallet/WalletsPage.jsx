@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react';
 // component
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
 import CustomTabs from '../../general/CustomTabs';
-import Typography from '@mui/material/Typography';
 import CustomTable from '../../general/table/CustomTable';
-
-
-
+// css
 import './WalletsPage.css';
-// Layout
+// layout
 import Section from '../../Layout/Section/Section';
 // api 
 import { getTransactions } from "../../../utils/http-request";
@@ -53,10 +49,8 @@ const WalletsPage = () => {
   return (
     <Section title={"Wallets"}>
         <Stack direction={{xs: "column", md: "row", width: "100%"}} columnGap={3}>
-          
           <Stack flexDirection="column" width="100%" ml={2}>
             <CustomTabs handleChange={handleChangeView} />
-            
           </Stack>
         </Stack>
     </Section>

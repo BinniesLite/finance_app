@@ -13,6 +13,9 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
+    success: {
+      main: '#4caf50',
+    }, 
     subtitle: {
       main: '#948B93',
     },
