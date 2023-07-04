@@ -95,7 +95,7 @@ const AddWallet = () => {
         </Label>
       </div>
       <div className='date-range-picker-container'>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={['SingleInputDateRangeField']}>
             <DateRangePicker
               className='add-w-input'
@@ -103,7 +103,7 @@ const AddWallet = () => {
               slots={{ field: SingleInputDateRangeField }}
             />
           </DemoContainer>
-        </LocalizationProvider>
+        </LocalizationProvider> */}
       </div>
       {/* </div> */}
       <Button>Save Wallet</Button>
