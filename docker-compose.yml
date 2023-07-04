@@ -2,7 +2,7 @@ version: "1.5"
 
 services:
   client:
-    container_name: frontend
+    container_name: fe
     build:
       dockerfile: ./client/Dockerfile
     volumes: 
@@ -12,7 +12,7 @@ services:
     networks:
       finance:
         aliases:
-          - frontend
+          - fe 
   server:
     container_name: backend
     build:

@@ -10,9 +10,13 @@ datasource db {
   url      = "postgresql://postgres:password@postgresql:5432/finance"
 }
 
+
+
+
 model User {
   id        String      @id @default(uuid())
   email     String   @unique 
+  name String
 }
 
 model Wallet {
@@ -24,6 +28,11 @@ model Wallet {
   transactions Transaction[]
 }
 
+enum TransactionType {
+  expense
+  income
+}
+
 model Transaction {
   id String @id @default(uuid())
   walletId String?
@@ -31,4 +40,5 @@ model Transaction {
   amount Float 
   createdAt DateTime @default(now())
   description String? 
+  type TransactionType
 }

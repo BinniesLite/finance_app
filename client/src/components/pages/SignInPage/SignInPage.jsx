@@ -1,14 +1,15 @@
-import { React, useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import './SignIn.css';
+import { React, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import "./SignIn.css";
+import Typography from "@mui/material/Typography";
 
 const SignInPage = () => {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -16,54 +17,53 @@ const SignInPage = () => {
   };
 
   function goToSignUp() {
-    window.location.assign('SignUpPage.jsx');
+    window.location.assign("SignUpPage.jsx");
   }
 
   return (
-    <>
-      <div className='signin-container'>
-        <header id='sign-in-header'>Sign in</header>
+      <div className="signin-container">
+        <h1 className="orange-gradient">
+          Sign In
+        </h1>
         <form>
-          <label htmlFor='username'>Username or Email</label>
+          <Typography variant="h6">Username or Email</Typography>
           <input
-            type='text'
-            id='usernameEmail'
-            name='usernameEmail'
-            placeholder='bunnylove or example@test.com'
+            type="text"
+            id="usernameEmail"
+            name="usernameEmail"
+            placeholder="bunnylove or example@test.com"
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <br />
-          <label for='password'>Password</label>
-          <div class='password-container'>
+          <Typography variant="h6">Password</Typography>
+          <div class="password-container">
             <input
-              type={showPassword ? 'text' : 'password'}
-              id='password'
-              name='password'
-              placeholder='Password'
-              required=''
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              placeholder="Password"
+              required=""
             />
-            <i type='button' id='fa-eye' onClick={togglePasswordVisibility}>
+            <i type="button" id="fa-eye" onClick={togglePasswordVisibility}>
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </i>
           </div>
-          <button type='submit'>Submit</button>
+          <button type="submit">Submit</button>
 
-          <div class='signup-link'>
+          <div class="signup-link">
             <p> Do not have an account?</p>
-            <p type='button' id='signup' onClick={() => navigate('/signup')}>
+            <p type="button" id="signup" onClick={() => navigate("/signup")}>
               Sign up
             </p>
           </div>
         </form>
       </div>
-    </>
+    
   );
 };
 
-const onClick = () => {
-  return null;
-};
+
 
 export default SignInPage;

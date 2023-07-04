@@ -6,6 +6,8 @@ import Item from "@mui/material/ListItem";
 import { Grid, Button, Typography, Avatar } from "@mui/material";
 import { Row, Col } from "reactstrap";
 
+import Section from "../../Layout/Section/Section";
+
 const TransactionPage = () => {
   const generateFakeData = (numberOfData) => {
     const fakeData = [];
@@ -24,12 +26,14 @@ const TransactionPage = () => {
   };
   const transactions = generateFakeData(10);
   return (
-    <>
+    <Section>
       <header>
         <div>
           <Row style={{ height: "fit-content" }}>
             <Col xs={3} style={{ paddingTop: 35 }}>
-              Transactions
+              <Typography variant="h3" color="primary">
+                Transactions
+              </Typography>
             </Col>
             <Col xs={9} style={{ paddingLeft: 600 }}>
               <Avatar
@@ -92,7 +96,7 @@ const TransactionPage = () => {
           </Col>
         </Row>
       </div>
-    </>
+    </Section>
   );
 };
 
