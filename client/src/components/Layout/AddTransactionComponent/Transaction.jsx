@@ -15,7 +15,6 @@ import { v4 } from 'uuid';
 import { storage } from '../../../config/firebaseConfig';
 import './TransactionComponent.css';
 
-
 // api
 import { getWallets } from '../../../utils/http-request';
 
@@ -29,6 +28,10 @@ const MenuProps = {
     },
   },
 };
+
+// const walletNames = [
+//   'Wallet 1',
+// ];
 
 function getStyles(name, selectedName, theme) {
   return {
@@ -45,7 +48,9 @@ const TransactionComponent = ({ onCreateTransaction }) => {
   const [walletName, setWalletName] = React.useState('');
   const [file, setFile] = React.useState(null);
   const fileInputRef = React.useRef(null); // Create a ref for the file input element
-  const [wallets, setWallets] = React.useState([]);
+  const [wallets, setWallets] = React.useState([
+      'Wallet 1',
+  ]);
 
   // hardcoded wallets
   React.useEffect(() => {
@@ -80,7 +85,7 @@ const TransactionComponent = ({ onCreateTransaction }) => {
       onCreateTransaction(transactionData);
 
       setAmount('');
-      setWalletName('');
+      setWalletName([]);
       setFile(null);
       if (fileInputRef.current) {
         fileInputRef.current.value = null;
