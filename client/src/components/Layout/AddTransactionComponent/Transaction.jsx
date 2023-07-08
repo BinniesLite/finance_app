@@ -19,7 +19,9 @@ import './TransactionComponent.css';
 import { getWallets } from '../../../utils/http-request';
 
 const ITEM_HEIGHT = 48;
+
 const ITEM_PADDING_TOP = 8;
+
 const MenuProps = {
   PaperProps: {
     style: {
@@ -98,13 +100,14 @@ const TransactionComponent = ({ onCreateTransaction }) => {
   return (
     <FormGroup onSubmit={onSubmit} className='transaction-card-container'>
       <div id='title-transaction'>
-        <Typography>Transaction</Typography>
+        <Typography variant="h6">Transaction</Typography>
         <ReceiptIcon sx={{ width: '30px', height: '40px' }}></ReceiptIcon>
       </div>
       <FormControl
         fullWidth
         sx={{ height: '40px', width: '100%', marginBottom: '20px' }}
       >
+        
         <InputLabel id='amountPlaceholder' htmlFor='outlined-adornment-amount'>
           Amount
         </InputLabel>

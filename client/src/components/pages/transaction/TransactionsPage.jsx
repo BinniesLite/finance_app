@@ -10,6 +10,8 @@ import './Transactions.css';
 import { createTransaction } from '../../../utils/http-request';
 import { getTransactions } from '../../../utils/http-request';
 
+import Section from "../../Layout/Section/Section";
+
 const TransactionPage = () => {
   const [transactions, setTransactions] = useState([]);
 
@@ -22,12 +24,14 @@ const TransactionPage = () => {
     }
   };
   return (
-    <>
+    <Section>
       <header>
         <div>
           <Row style={{ height: 'fit-content' }}>
             <Col xs={3} style={{ paddingTop: 35 }}>
-              Transactions
+              <Typography variant="h3" color="primary">
+                Transactions
+              </Typography>
             </Col>
             <Col xs={9} style={{ paddingLeft: 600 }}>
               <Avatar
@@ -92,7 +96,7 @@ const TransactionPage = () => {
           </Col>
         </Row>
       </div>
-    </>
+    </Section>
   );
 };
 
