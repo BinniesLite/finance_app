@@ -79,19 +79,19 @@ GET /api/wallet
 GET /api/wallet/${id}
 ```
 
-##### Create transaction
+##### Create wallet
 
 ```http
 POST /api/wallet/create
 ```
 
-##### Update transaction
+##### Update wallet
 
 ```http
 PUT /api/wallet/${id}
 ```
 
-##### Delete transaction
+##### Delete wallet
 
 ```http
 DELETE /api/wallet/${id}
