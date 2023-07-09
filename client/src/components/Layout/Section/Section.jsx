@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 
 const Section = ({ children, title }) => {
   return (
-    <Box sx={{ mt: 8, width: "100%", pl: 29}}>
+    <Box sx={{ mt: 8, width: "100%", pl: 32}}>
       <Stack flexDirection="column" rowGap={3} >
       <Typography sx={{ml: 3, mt: 2}} className="" variant="h4">
         {title}      
