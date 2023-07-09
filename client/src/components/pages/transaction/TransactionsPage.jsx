@@ -7,7 +7,7 @@ import TransactionCard from '../../Layout/TransactionCard/TransactionCard';
 import './Transactions.css';
 
 // api
-import { createTransaction } from '../../../utils/http-request';
+import { postTransactions } from '../../../utils/http-request';
 import { getTransactions } from '../../../utils/http-request';
 
 import Section from "../../Layout/Section/Section";
@@ -17,7 +17,7 @@ const TransactionPage = () => {
 
   const handleCreateTransaction = async (transactionData) => {
     try {
-      const newTransaction = await createTransaction(transactionData);
+      const newTransaction = await postTransactions(transactionData);
       setTransactions([...transactions, newTransaction]);
     } catch (error) {
       console.error('Error creating transaction:', error);

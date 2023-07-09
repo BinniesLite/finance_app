@@ -16,7 +16,7 @@ import { storage } from '../../../config/firebaseConfig';
 import './TransactionComponent.css';
 
 // api
-import { getWallets } from '../../../utils/http-request';
+// import { getWallets } from '../../../utils/http-request';
 
 const ITEM_HEIGHT = 48;
 

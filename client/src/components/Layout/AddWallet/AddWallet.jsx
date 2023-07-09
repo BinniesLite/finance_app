@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Input, Label, FormGroup, Button, Form } from 'reactstrap';
 import './AddWallet.css';
 
-const AddWallet = () => {
+const AddWallet = ({ onCreateWallet }) => {
   const addWalletStyle = {
     width: '310px',
     height: 'fit-content',
     padding: '15px',
     background: 'white',
     justifyContent: 'center',
-    margin: 'auto', 
+    margin: 'auto',
   };
 
   const [walletName, setWalletName] = useState('');
@@ -36,18 +36,32 @@ const AddWallet = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const newWallet = {
-      name: walletName,
-      amount: walletAmount,
-      friends: walletFriends,
-      dateRange: formatRange(),
-    };
+    try {
+      const newWallet = {
+        name: walletName,
+        amount: walletAmount,
+        friends: walletFriends,
+        dateRange: formatRange(),
+      };
 
-    console.log(newWallet);
+      onCreateWallet(walletData);
+
+      setAmount('');
+      setWalletName([]);
+      setWalletFriends([]);
+      setStartDate(null);
+      setEndDate(null);
+
+      // if (fileInputRef.current) {
+      //   fileInputRef.current.value = null;
+      // }
+    } catch (error) {
+      console.error('Error creating wallet:', error);
+    }
   };
 
   return (
-    <Form style={addWalletStyle}>
+    <Form style={addWalletStyle} onSubmit={onSubmit}>
       <p>Add wallet</p>
       <FormGroup>
         <div className='d-flex align-items-center justify-content-flex-start'>
@@ -137,14 +151,16 @@ const AddWallet = () => {
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
         />
-        <span style={{ fontSize: '14px'}}> to </span>
+        <span style={{ fontSize: '14px' }}> to </span>
         <Input
           type='date'
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
         />
       </div>
-      <Button type='button' id='add-w-save-b' onSubmit={onSubmit}>Save Wallet</Button>
+      <Button type='button' id='add-w-save-b' onSubmit={onSubmit}>
+        Save Wallet
+      </Button>
     </Form>
   );
 };

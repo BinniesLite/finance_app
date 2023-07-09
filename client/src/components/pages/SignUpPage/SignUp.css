@@ -54,11 +54,11 @@ label {
   align-self: stretch;
   flex-grow: 0;
   font-weight: bold;
-  color: white;
+  color: black;
 }
 
 header {
-  color: #ffffff;
+  color: black;
   font-weight: bold;
   font-size: xx-large;
   margin-bottom: -40px;
