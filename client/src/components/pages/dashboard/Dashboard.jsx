@@ -4,7 +4,7 @@ import Section from '../../Layout/Section/Section'
 const Dashboard = () => {
   return (
     <Section title="Dashboard">
-        
+      
     </Section>
   )
 }

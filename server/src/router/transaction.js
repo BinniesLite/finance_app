@@ -33,6 +33,7 @@ router.post("/create", async (req, res) => {
     const result = await prisma.transaction.create({
         data: {
             amount: amount,
+            description: description,
             type: type
         }});
     
@@ -40,7 +41,7 @@ router.post("/create", async (req, res) => {
 });
 
 router.post("/update", async (req, res) => {
-N
+
 });
 
 
