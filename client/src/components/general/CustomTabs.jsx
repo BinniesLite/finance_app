@@ -8,10 +8,9 @@ function a11yProps(index) {
       'aria-controls': `simple-tabpanel-${index}`,
     };
   }
-  
 
 const CustomTabs = () => {
-    const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -20,10 +19,10 @@ const CustomTabs = () => {
     <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
     <Tabs value={value} onChange={handleChange} aria-label="tabs">
       <Tab label="grid" />
-      <Tab label="table"  />
+      <Tab label="table"/>
     </Tabs>
   </Box>
 )
 }
 
-export default CustomTabs
+export default CustomTabs;

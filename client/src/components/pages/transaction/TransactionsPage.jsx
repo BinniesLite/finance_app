@@ -1,14 +1,25 @@
-import { React, useState } from "react";
+import {React, useState} from "react";
 import "./Transactions.css";
 import TransactionComponent from "../../Layout/AddTransactionComponent/Transaction";
 import TransactionCard from "../../Layout/TransactionCard/TransactionCard";
 import Item from "@mui/material/ListItem";
-import { Grid, Button, Typography, Avatar } from "@mui/material";
+import { Grid, Button, Typography, Avatar, Stack } from "@mui/material";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
+import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import CustomTabs from "../../general/CustomTabs";
 import { Row, Col } from "reactstrap";
 
 import Section from "../../Layout/Section/Section";
 
+import { getTransactions } from "../../../utils/http-request";
 const TransactionPage = () => {
+  const fetchTransactions = async () => {
+    const transactions = await getTransactions();
+    return transactions;
+  }; 
   const generateFakeData = (numberOfData) => {
     const fakeData = [];
     const type = ["credit card", "cash"];
@@ -25,78 +36,65 @@ const TransactionPage = () => {
     return fakeData;
   };
   const transactions = generateFakeData(10);
+  const test = fetchTransactions();
+  console.log(test);
   return (
-    <Section>
-      <header>
-        <div>
-          <Row style={{ height: "fit-content" }}>
-            <Col xs={3} style={{ paddingTop: 35 }}>
-              <Typography variant="h3" color="primary">
-                Transactions
-              </Typography>
-            </Col>
-            <Col xs={9} style={{ paddingLeft: 600 }}>
-              <Avatar
-                src="./../../../assets/avatar-icon.png"
-                sx={{ width: 50, height: 50 }}
-                style={{
-                  display: "flex",
-                  color: "rgba(9, 48, 255)",
-                  mixBlendMode: "overlay",
-                }}
-              />
-            </Col>
-          </Row>
-        </div>
-      </header>
-      <div className="transaction-container">
-        <Row style={{ height: "fit-content", padding: "30px" }}>
-          <Col xs={3} style={{ paddingTop: 35 }}>
-            <Grid item xs={2} md={2} className="blur-background">
-              <TransactionComponent />
-            </Grid>
-          </Col>
-          <Col
-            xs={9}
-            style={{
-              paddingTop: 50,
-            }}
-          >
+    <div>
+      <Section title={"Transaction"}>
+        <Stack
+          direction={{ xs: "column", md: "row", width: "100%" }}
+          columnGap={3}
+        >
+          <Stack flexDirection="column" width="100%" ml={2}>
+            <CustomTabs />
+          </Stack>
+        </Stack>
+      </Section>
+      <Section>
+        {true && (
+          <div className="transaction-container">
             <Grid container justify="space-around" spacing={2}>
-              <Grid item xs={10} className="blur-background">
-                <Item>
-                  <Grid
-                    container
-                    spacing={{ xs: 2, md: 3 }}
-                    columns={{ xs: 4, sm: 8, md: 12 }}
-                  >
-                    {transactions.map((transaction) => (
-                      <Grid
-                        item
-                        xs={2}
-                        sm={4}
-                        md={4}
-                        key={transaction.id}
-                        paddingBottom={3}
-                      >
-                        <Item>
-                          <TransactionCard
-                            name={transaction.name}
-                            amount={transaction.amount}
-                            date={transaction.date}
-                            type={transaction.type}
-                          />
-                        </Item>
-                      </Grid>
-                    ))}
-                  </Grid>
-                </Item>
-              </Grid>
+              <Item>
+                <Grid
+                  container
+                  spacing={{ xs: 2, md: 8 }}
+                  columns={{ xs: 3, sm: 8, md: 12 }}
+                >
+                  {transactions.map((transaction) => (
+                    <Grid
+                      item
+                      xs={2}
+                      sm={3}
+                      md={4}
+                      key={transaction.id}
+                      paddingBottom={3}
+                    >
+                      <Item>
+                        <TransactionCard
+                          name={transaction.name}
+                          amount={transaction.amount}
+                          date={transaction.date}
+                          type={transaction.type}
+                        />
+                      </Item>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Item>
             </Grid>
-          </Col>
-        </Row>
-      </div>
-    </Section>
+          </div>
+        )}
+        {
+          false && (
+            <div>
+              <Typography>
+              hello
+            </Typography>
+            </div>
+          )
+        }
+      </Section>
+    </div>
   );
 };
 

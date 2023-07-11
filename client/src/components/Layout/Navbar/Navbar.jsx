@@ -12,6 +12,8 @@ import { IoIosNotifications } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 // logo
 
+import "./Navbar.css"
+
 const NavButton = ({ title, icon }) => {
   return (
     <Tooltip title={title}>
@@ -34,19 +36,17 @@ const Navbar = () => {
 
   return (
     <Stack
+      className="nav-bar"
       mt={2}
       pr={{ xs: 1, md: 3 }}
       position="absolute"
       top={0}
+      height={40}
       width="100%"
       direction="row"
       justifyContent="space-between"
     >
       <Stack px={4} pl={32} flexDirection="row" columnGap={2}>
-        {/* <Breadcrumbs>
-          <Link>Wallets</Link>
-          <Link>Portfolio</Link>
-        </Breadcrumbs> */}
       </Stack>
       <Stack
         flexDirection="row"
