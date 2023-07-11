@@ -9,6 +9,7 @@ import './WalletsPage.css';
 import Section from '../../Layout/Section/Section';
 // api 
 import { getTransactions } from "../../../utils/http-request";
+import { Typography } from '@mui/material';
 
 const WalletsPage = () => {
   const [view, setView] = useState("grid");
@@ -48,11 +49,16 @@ const WalletsPage = () => {
 
   return (
     <Section title={"Wallets"}>
-        <Stack direction={{xs: "column", md: "row", width: "100%"}} columnGap={3}>
-          <Stack flexDirection="column" width="100%" ml={2}>
-            <CustomTabs handleChange={handleChangeView} />
-          </Stack>
+      <Stack
+        direction={{ xs: "column", md: "row", width: "100%" }}
+        columnGap={3}
+      >
+        <Stack flexDirection="column" width="100%" ml={2}>
+          <CustomTabs handleChange={handleChangeView} />
+          {view == "grid" && <Typography>Grid</Typography>}
+          {view == "table" && <Typography>Table</Typography>}
         </Stack>
+      </Stack>
     </Section>
   );
 };

@@ -32,6 +32,8 @@ body {
   /* display: flex; */
   padding: 0;
   color: black;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 a {
