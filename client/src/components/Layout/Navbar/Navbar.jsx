@@ -6,13 +6,10 @@ import Box from "@mui/material/Box";
 import { IconButton, Tooltip } from "@mui/material";
 import TransactionAdd from "../../general/TransactionAdd";
 
-
 // icons
 import { IoIosNotifications } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 // logo
-
-import "./Navbar.css"
 
 const NavButton = ({ title, icon }) => {
   return (
