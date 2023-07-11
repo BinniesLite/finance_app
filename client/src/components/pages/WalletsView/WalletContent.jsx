@@ -1,10 +1,4 @@
 import { React, useState, useEffect } from 'react';
-import { Row, Col, Button } from 'reactstrap';
-import AddCardIcon from '@mui/icons-material/AddCard';
-import { Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
-import Popup from 'reactjs-popup';
-import AddWallet from '../../Layout/AddWallet/AddWallet';
 import WalletCard from '../../Layout/WalletCard/WalletCard';
 import 'reactjs-popup/dist/index.css';
 import './WalletContent.css';

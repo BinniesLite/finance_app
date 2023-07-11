@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
+
 // components
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import { IconButton, Tooltip } from '@mui/material';
 import TransactionAdd from '../../general/TransactionAdd';
 import AddWallet from '../AddWallet/AddWallet';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { Link } from 'react-router-dom';
 
 // icons
+import { IconButton, Tooltip } from '@mui/material';
 import { IoIosNotifications } from 'react-icons/io';
 import { CgProfile } from 'react-icons/cg';
-import AddCardIcon from '@mui/icons-material/AddCard';
 
 // logo
 
