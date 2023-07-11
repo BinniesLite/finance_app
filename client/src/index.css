@@ -58,13 +58,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-} */
-
-.orange-gradient {
-  background: linear-gradient(to right, #ffb700, #fb923c, #f59e0b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  padding: 10px;
 }

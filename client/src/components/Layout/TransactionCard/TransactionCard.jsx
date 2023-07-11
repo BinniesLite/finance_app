@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Button,
   Card,
@@ -10,47 +10,40 @@ import {
   Typography,
   Container,
   Grid,
-} from "@mui/material";
+} from '@mui/material';
+import axios from 'axios';
 import './TransactionCard.css';
 
 const TransactionCard = ({ id, name, amount, date, type }) => {
   return (
-    <Card
-        className="card-group"
-    >
-      <Card
-        className="full-card"
-      >
+    <Card className='card-group'>
+      <Card className='full-card'>
         <CardMedia
-            className="card-media"
-            sx={{ borderRadius: 10 }}
-            image={"src/assets/wallet-card-image.jpg"}
+          className='card-media'
+          sx={{ borderRadius: 10 }}
+          image={'src/assets/wallet-card-image.jpg'}
         />
       </Card>
 
-      <Card
-        className="card-content"
-        sx={{borderRadius: 10}}
-      >
+      <Card className='card-content' sx={{ borderRadius: 10 }}>
         <CardActionArea>
-          <CardContent
-          >
-            <Typography variant="h3" color="text.secondary">
+          <CardContent>
+            <Typography variant='h3' color='text.secondary'>
               ${amount}
             </Typography>
             <Grid container columns={{ xs: 3, md: 5 }}>
               <Grid item xs={1.5}>
-                <Typography gutterBottom variant="body2" component="div">
+                <Typography gutterBottom variant='body2' component='div'>
                   {name}
                 </Typography>
               </Grid>
               <Grid item xs={1.75}>
-                <Typography gutterBottom variant="body2" component="div">
+                <Typography gutterBottom variant='body2' component='div'>
                   {date}
                 </Typography>
               </Grid>
               <Grid item xs={1}>
-                <Typography gutterBottom variant="body2" component="div">
+                <Typography gutterBottom variant='body2' component='div'>
                   {type}
                 </Typography>
               </Grid>
