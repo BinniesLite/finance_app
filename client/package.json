@@ -33,6 +33,7 @@
     "react-router-dom": "^6.11.1",
     "reactjs-popup": "^2.0.5",
     "reactstrap": "^9.1.10",
+    "recharts": "^2.7.2",
     "styled-components": "^6.0.0-rc.1",
     "uuid": "^9.0.0",
     "zod": "^3.21.4"
