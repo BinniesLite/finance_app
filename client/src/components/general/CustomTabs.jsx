@@ -1,28 +1,24 @@
-import React, {useState} from 'react'
-import { Tab, Tabs, Box } from '@mui/material';
-
+import React from 'react';
+import { Tabs, Tab } from '@mui/material';
 
 function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
-    };
-  }
-
-const CustomTabs = () => {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
-  return (
-    <Box sx={{ borderBottom: 2, borderColor: 'divider' }}>
-    <Tabs value={value} onChange={handleChange} aria-label="tabs">
-      <Tab label="grid" />
-      <Tab label="table"/>
-    </Tabs>
-  </Box>
-)
 }
+
+const CustomTabs = ({ value, handleChange }) => {
+  const handleChangeTab = (event, newValue) => {
+    handleChange(event, newValue);
+  };
+
+  return (
+    <Tabs value={value} onChange={handleChangeTab} aria-label='tabs'>
+      <Tab label='grid' value='grid' />
+      <Tab label='table' value='table' />
+    </Tabs>
+  );
+};
 
 export default CustomTabs;

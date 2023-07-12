@@ -32,8 +32,6 @@ const TransactionPage = () => {
         type: "hello",
       });
     }
-
-    return fakeData;
   };
   const transactions = generateFakeData(10);
   const test = fetchTransactions();
