@@ -21,7 +21,7 @@ const WalletsPage = () => {
     };
 
     fetchTransactions();
-  }, []);
+  });
 
   const handlepostTransactions = async (transactionData) => {
     try {
