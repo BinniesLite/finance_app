@@ -23,7 +23,6 @@ function getKeyList(data) {
   if (data == null || data.length === 0) {
     return [];
   }
-  console.log("in key funct: ", data);
   var listKeys = Object.keys(data[0]);
   listKeys.shift();
   return listKeys;
@@ -40,11 +39,8 @@ function getValueList(data, start, end) {
   return valueList;
 }
 const CustomTable = ({ data }) => {
-  console.log("in table: ", data);
   const listAttributes = getKeyList(data);
-  console.log("list keys: ", listAttributes);
   const listValues = getValueList(data, 0, 1);
-  console.log("List values:", listValues);
   return (
     <TableContainer
       component={Card}

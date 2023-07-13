@@ -28,8 +28,6 @@ const TransactionPage = () => {
     const fetchTransactions = async () => {
       try {
         const transactions = await getTransactions();
-        console.log("in transaction: ", transactions);
-        //  return transactions;
         setTransactionData(transactions);
       } catch (error) {
         console.log(error);
@@ -39,26 +37,6 @@ const TransactionPage = () => {
     fetchTransactions();
   }, []);
 
-  //  console.log(transactionData);
-
-  //  const generateFakeData = (numberOfData) => {
-  //    const fakeData = [];
-  //    const type = ["credit card", "cash"];
-  //    for (let i = 1; i <= numberOfData; i++) {
-  //      fakeData.push({
-  //        id: i,
-  //        name: `Wallet ${i}`,
-  //        amount: Math.floor(Math.random() * 1000) + 1,
-  //        date: "02/06/23",
-  //        type: "hello",
-  //      });
-  //    }
-  //  };
-  //  const transactions = generateFakeData(10);
-  //  const test = fetchTransactions();
-  //  console.log(transactions);
-  // console.log("test data ",test.PromiseResult);
-  console.log("trans data: ", transactionData);
   const tabs = [
     {
       id: "list",
