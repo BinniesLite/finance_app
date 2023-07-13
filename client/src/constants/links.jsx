@@ -3,6 +3,7 @@ import {FaWallet} from "react-icons/fa"
 
 import {AiFillDollarCircle} from "react-icons/ai"
 import {HiSquares2X2} from "react-icons/hi2"
+import {TbReportAnalytics} from "react-icons/tb"
 export const links = [
     {
         name: 'dashboard',
@@ -23,5 +24,10 @@ export const links = [
         name: 'budgets',
         path: '/budgets',
         icon: <AiFillDollarCircle style={{color: "#948B93"}} />
-    }
+    },
+    {
+        name: 'reports',
+        path: '/reports',
+        icon: <TbReportAnalytics style={{color: "#948B93"}} />
+    },
 ]
