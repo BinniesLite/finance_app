@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import { React, useState, useEffect } from "react";
 import "./Transactions.css";
 import TransactionComponent from "../../Layout/AddTransactionComponent/Transaction";
 import TransactionCard from "../../Layout/TransactionCard/TransactionCard";
@@ -11,31 +11,66 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import CustomTabs from "../../general/CustomTabs";
 import { Row, Col } from "reactstrap";
-
+import CustomTable from "../../general/table/CustomTable";
 import Section from "../../Layout/Section/Section";
-
+import TransactionGridView from "../../Layout/TransactionGridView/TransactionGridView";
 import { getTransactions } from "../../../utils/http-request";
+
 const TransactionPage = () => {
-  const fetchTransactions = async () => {
-    const transactions = await getTransactions();
-    return transactions;
-  }; 
-  const generateFakeData = (numberOfData) => {
-    const fakeData = [];
-    const type = ["credit card", "cash"];
-    for (let i = 1; i <= numberOfData; i++) {
-      fakeData.push({
-        id: i,
-        name: `Wallet ${i}`,
-        amount: Math.floor(Math.random() * 1000) + 1,
-        date: "02/06/23",
-        type: "hello",
-      });
-    }
+  var [activeTab, setView] = useState(0);
+
+  const changeView = (event, newView) => {
+    setView(newView);
   };
-  const transactions = generateFakeData(10);
-  const test = fetchTransactions();
-  console.log(test);
+  const [transactionData, setTransactionData] = useState([]);
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const transactions = await getTransactions();
+        console.log("in transaction: ", transactions);
+        //  return transactions;
+        setTransactionData(transactions);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchTransactions();
+  }, []);
+
+  //  console.log(transactionData);
+
+  //  const generateFakeData = (numberOfData) => {
+  //    const fakeData = [];
+  //    const type = ["credit card", "cash"];
+  //    for (let i = 1; i <= numberOfData; i++) {
+  //      fakeData.push({
+  //        id: i,
+  //        name: `Wallet ${i}`,
+  //        amount: Math.floor(Math.random() * 1000) + 1,
+  //        date: "02/06/23",
+  //        type: "hello",
+  //      });
+  //    }
+  //  };
+  //  const transactions = generateFakeData(10);
+  //  const test = fetchTransactions();
+  //  console.log(transactions);
+  // console.log("test data ",test.PromiseResult);
+  console.log("trans data: ", transactionData);
+  const tabs = [
+    {
+      id: "list",
+      label: "List",
+      component: <CustomTable data={transactionData} />,
+    },
+    {
+      id: "grid",
+      label: "Grid",
+      component: <TransactionGridView transactions={transactionData}/>,
+    },
+  ];
   return (
     <div>
       <Section title={"Transaction"}>
@@ -44,53 +79,14 @@ const TransactionPage = () => {
           columnGap={3}
         >
           <Stack flexDirection="column" width="100%" ml={2}>
-            <CustomTabs />
+            <CustomTabs
+              tabs={tabs}
+              activeTab={activeTab}
+              handleChangeTab={changeView}
+            />
           </Stack>
         </Stack>
-      </Section>
-      <Section>
-        {true && (
-          <div className="transaction-container">
-            <Grid container justify="space-around" spacing={2}>
-              <Item>
-                <Grid
-                  container
-                  spacing={{ xs: 2, md: 8 }}
-                  columns={{ xs: 3, sm: 8, md: 12 }}
-                >
-                  {transactions.map((transaction) => (
-                    <Grid
-                      item
-                      xs={2}
-                      sm={3}
-                      md={4}
-                      key={transaction.id}
-                      paddingBottom={3}
-                    >
-                      <Item>
-                        <TransactionCard
-                          name={transaction.name}
-                          amount={transaction.amount}
-                          date={transaction.date}
-                          type={transaction.type}
-                        />
-                      </Item>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Item>
-            </Grid>
-          </div>
-        )}
-        {
-          false && (
-            <div>
-              <Typography>
-              hello
-            </Typography>
-            </div>
-          )
-        }
+        {tabs[activeTab].component}
       </Section>
     </div>
   );
