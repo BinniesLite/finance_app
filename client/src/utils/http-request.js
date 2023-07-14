@@ -56,3 +56,9 @@ export const postTransactions = async (transaction) => {
   );
   return response.data;
 };
+
+
+export const getTransactionsByWalletId = async (id) => {
+  const response = await axios.get(baseUrl + '/wallet/' + id + '/transactions');
+  return response.data;
+}

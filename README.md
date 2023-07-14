@@ -98,6 +98,7 @@ erDiagram
     int wallet_id FK
     float amount 
     date created_at 
+    string type 
   }
 
   USER {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from '@mui/material';
-import ReceiptIcon from '@mui/icons-material/Receipt';
+
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
@@ -101,7 +101,7 @@ const TransactionComponent = ({ onCreateTransaction }) => {
     <FormGroup onSubmit={onSubmit} className='transaction-card-container'>
       <div id='title-transaction'>
         <Typography variant="h6">Transaction</Typography>
-        <ReceiptIcon sx={{ width: '30px', height: '40px' }}></ReceiptIcon>
+        {/* <ReceiptIcon sx={{ width: '30px', height: '40px' }}></ReceiptIcon> */}
       </div>
       <FormControl
         fullWidth

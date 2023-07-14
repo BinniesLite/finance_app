@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "./Transactions.css";
-import TransactionComponent from "../../Layout/AddTransactionComponent/Transaction";
-import TransactionCard from "../../Layout/TransactionCard/TransactionCard";
+import TransactionComponent from "../../layout/AddTransactionComponent/Transaction";
+import TransactionCard from "../../layout/TransactionCard/TransactionCard";
 import Item from "@mui/material/ListItem";
 import { Grid, Button, Typography, Avatar, Stack } from "@mui/material";
 import ViewListIcon from "@mui/icons-material/ViewList";
