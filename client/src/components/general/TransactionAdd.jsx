@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 // components
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -28,6 +28,8 @@ const transactionSchema = z.object({
 const TransactionAdd = ({ open, handleClose }) => {
   
   const [wallets, setWallets] = React.useState([]);
+  
+  
   const {
     register,
     handleSubmit,
@@ -130,11 +132,11 @@ const TransactionAdd = ({ open, handleClose }) => {
                
                 label="Select Wallet"
               >
-                {/* {wallets?.map((wallet) => (
+                {wallets?.map((wallet) => (
                   <MenuItem key={wallet.id} value={wallet.id}>
                     {wallet.name}
                   </MenuItem>
-                ))} */}
+                ))}
               </Select>
             </FormControl>
             <TextField
