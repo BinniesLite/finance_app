@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 //components
 import Stack from '@mui/material/Stack';
 import CustomTabs from '../../general/CustomTabs';
-import TableData from '../../layout/TableData/TableData';
+import TableData from '../../Layout/TableData/TableData';
 import WalletContent from '../WalletsView/WalletContent';
-import Section from '../../layout/Section/Section';
+import Section from '../../Layout/Section/Section';
 
 //api
 import { getTransactions } from '../../../utils/http-request';

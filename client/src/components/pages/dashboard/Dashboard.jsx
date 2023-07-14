@@ -1,5 +1,5 @@
 import React from 'react';
-import Section from '../../layout/Section/Section';
+import Section from '../../Layout/Section/Section';
 import LineChart from './component/LineChart/LineChart';
 import PieCharts from './component/PieChart/PieCharts';
 import DBCard from './component/DBCard/DBCard';
