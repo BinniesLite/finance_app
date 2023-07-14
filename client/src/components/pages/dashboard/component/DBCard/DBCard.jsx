@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 
 const DBCard = ({ difference, positive = false, sx, value }) => {
-
+  
   return (
     <Card sx={sx}>
       <CardContent>

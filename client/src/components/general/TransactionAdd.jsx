@@ -26,7 +26,7 @@ const transactionSchema = z.object({
 });
 
 const TransactionAdd = ({ open, handleClose }) => {
-  
+
   const [wallets, setWallets] = React.useState([]);
   
   
@@ -44,18 +44,21 @@ const TransactionAdd = ({ open, handleClose }) => {
       setWallets(wallets);
     };
     fetchWallets();
-  }, [wallets]);
+  }, []);
 
   const onSubmit = async (data) => {
-    const { amount, type, wallet } = data;
+    const { amount, type, wallet, description } = data;
+    
     handleClose();
+    
     try {
-      const response = await postTransactions({
+      await postTransactions({
         amount: parseFloat(amount),
         type,
         wallet,
+        description
       });
-      console.log(response);
+      
     } catch (error) {
       console.log(error);
     }
