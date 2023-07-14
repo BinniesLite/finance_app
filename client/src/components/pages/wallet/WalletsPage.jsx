@@ -3,14 +3,12 @@ import { useEffect, useState } from 'react';
 //components
 import Stack from '@mui/material/Stack';
 import CustomTabs from '../../general/CustomTabs';
-import CustomTable from '../../general/table/CustomTable';
-import TableData from '../../Layout/TableData/TableData';
+import TableData from '../../layout/TableData/TableData';
 import WalletContent from '../WalletsView/WalletContent';
-import Section from '../../Layout/Section/Section';
+import Section from '../../layout/Section/Section';
 
 //api
 import { getTransactions } from '../../../utils/http-request';
-import { postTransactions } from '../../../utils/http-request';
 
 //css
 import './WalletsPage.css';
@@ -38,7 +36,7 @@ const WalletsPage = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       const transactions = await getTransactions();
-      console.log(transactions);
+      
     };
 
     fetchTransactions();

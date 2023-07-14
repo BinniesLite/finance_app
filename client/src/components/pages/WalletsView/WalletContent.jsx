@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import WalletCard from '../../Layout/WalletCard/WalletCard';
+import WalletCard from '../wallet/components/WalletCard/WalletCard';
 import 'reactjs-popup/dist/index.css';
 import './WalletContent.css';
 
@@ -15,22 +15,13 @@ const WalletsPage = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       const transactions = await getTransactions();
-      console.log('Received transactions:', transactions);
-      console.log('Type of transactions:', typeof transactions);
+      
       setWalletData(transactions);
     };
 
     fetchTransactions();
-  });
+  }, []);
 
-  const handlepostTransactions = async (transactionData) => {
-    try {
-      const newTransaction = await postTransactions(transactionData);
-      setWalletData([...walletData, newTransaction]);
-    } catch (error) {
-      console.error('Error creating transaction:', error);
-    }
-  };
 
   return (
     <>

@@ -18,8 +18,8 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
+// import DeleteIcon from '@mui/icons-material/Delete';
+// import FilterListIcon from '@mui/icons-material/FilterList';
 import { Button } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 
@@ -249,13 +249,13 @@ function EnhancedTableToolbar(props) {
       {numSelected > 0 ? (
         <Tooltip title='Delete'>
           <IconButton onClick={handleDelete}>
-            <DeleteIcon />
+            {/* <DeleteIcon /> */}
           </IconButton>
         </Tooltip>
       ) : (
         <Tooltip title='Filter list'>
           <IconButton>
-            <FilterListIcon />
+            {/* <FilterListIcon /> */}
           </IconButton>
         </Tooltip>
       )}

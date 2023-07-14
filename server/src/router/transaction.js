@@ -6,7 +6,9 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
+   
     try {
+        
         const transactions = await prisma.transaction.findMany();
         
         res.json(transactions);
@@ -15,6 +17,7 @@ router.get('/', async (req, res) => {
         res.json(error);    
     }
 });
+
 
 // get transaction by id
 router.get('/:id', async (req, res) => {
@@ -28,13 +31,13 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post("/create", async (req, res) => {
-    
-    const { amount, description, type, wallet } = req.body;
+    const { amount, description, type, walletId } = req.body;
     const result = await prisma.transaction.create({
         data: {
             amount: amount,
             description: description,
             type: type,
+            walletId: walletId
         }});
     
     res.status(201).json(result)
@@ -43,6 +46,8 @@ router.post("/create", async (req, res) => {
 router.post("/update", async (req, res) => {
 
 });
+
+// get transaction by wallet id
 
 
 module.exports = router;
