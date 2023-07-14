@@ -1,23 +1,15 @@
-import React from 'react';
-import { Tabs, Tab } from '@mui/material';
+import React from "react";
+import { Box, Tabs, Tab } from "@mui/material";
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
-const CustomTabs = ({ value, handleChange }) => {
-  const handleChangeTab = (event, newValue) => {
-    handleChange(event, newValue);
-  };
-
+const CustomTabs = ({ tabs, activeTab, handleChangeTab }) => {
   return (
-    <Tabs value={value} onChange={handleChangeTab} aria-label='tabs'>
-      <Tab label='grid' value='grid' />
-      <Tab label='table' value='table' />
-    </Tabs>
+    <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
+      <Tabs value={activeTab} onChange={handleChangeTab} aria-label="tabs">
+        {tabs?.map((tab, index) => {
+          return <Tab key={index} label={tab.label} />;
+        })}
+      </Tabs>
+    </Box>
   );
 };
 

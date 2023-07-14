@@ -34,7 +34,7 @@ router.post("/create", async (req, res) => {
         data: {
             amount: amount,
             description: description,
-            type: type
+            type: type,
         }});
     
     res.status(201).json(result)

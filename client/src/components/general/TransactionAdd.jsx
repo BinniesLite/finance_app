@@ -22,7 +22,8 @@ import { postTransactions } from "../../utils/http-request";
 const transactionSchema = z.object({
   amount: z.string(),
   type: z.enum(["income", "expense"]),
-  wallet: z.string()
+  wallet: z.string(),
+  description: z.string(),
 });
 
 const TransactionAdd = ({ open, handleClose }) => {
@@ -41,11 +42,12 @@ const TransactionAdd = ({ open, handleClose }) => {
   };
 
   const onSubmit = async (data) => {
-    const {amount, type, wallet} = data;
+    const {amount, type, wallet, description} = data;
     
     try {
-      const response = await postTransactions({amount: parseFloat(amount), type, wallet});
-      console.log(response);
+      const response = await postTransactions({amount: parseFloat(amount), type, wallet, description});
+      console.log("Response: ",response);
+      handleClose();
     }
     catch (error) {
       console.log(error);
@@ -79,15 +81,20 @@ const TransactionAdd = ({ open, handleClose }) => {
                 pattern: "\\d*",
               }}
             />
-              <p>{errors?.amount?.message}</p>
+            <p>{errors?.amount?.message}</p>
             <FormControl py={3} variant="standard" fullWidth>
               <Select {...register("type")}>
-                <MenuItem  value="income"><Typography sx={{color: "green"}}  color="primary.success">Income</Typography></MenuItem>
-                <MenuItem sx={{color: "red"}} value="expense">Expense</MenuItem>
+                <MenuItem value="income">
+                  <Typography sx={{ color: "green" }} color="primary.success">
+                    Income
+                  </Typography>
+                </MenuItem>
+                <MenuItem sx={{ color: "red" }} value="expense">
+                  Expense
+                </MenuItem>
               </Select>
               <p>{errors?.type?.message}</p>
             </FormControl>
-            
 
             <FormControl fullWidth variant="standard" sx={{ py: 3 }}>
               <InputLabel id="">Wallets</InputLabel>
@@ -104,6 +111,21 @@ const TransactionAdd = ({ open, handleClose }) => {
               </Select>
               <p>{errors?.wallet?.message}</p>
             </FormControl>
+            <TextField
+              {...register("description")}
+              type="text"
+              fullWidth
+              label="Description"
+              variant="standard"
+              sx={{ py: 3 }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start"></InputAdornment>
+                ),
+                step: "any",
+                pattern: "\\d*",
+              }}
+            />
             <Button onClick={handleClose}>Cancel</Button>
             <button type="submit">Add Transaction</button>
           </DialogContentText>
