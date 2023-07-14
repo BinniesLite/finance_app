@@ -14,11 +14,24 @@ import { getTransactions } from '../../../utils/http-request';
 import './WalletsPage.css';
 
 const WalletsPage = () => {
-  const [view, setView] = useState('grid');
+  var [activeTab, setView] = useState(0);
 
-  const handleChangeView = (event, newValue) => {
-    setView(newValue);
+  const changeView = (event, newView) => {
+    setView(newView);
   };
+
+  const tabs = [
+    {
+      id: "list",
+      label: "List",
+      component: <TableData />,
+    },
+    {
+      id: "grid",
+      label: "Grid",
+      component: <WalletContent />,
+    },
+  ];
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -30,13 +43,26 @@ const WalletsPage = () => {
   }, []);
 
   return (
-    <Section title={'Wallets'}>
-      <Stack direction={{ xs: 'column', md: 'row', width: '100%' }} columnGap={3}>
+    <Section title={"Wallets"}>
+      {/* <Stack direction={{ xs: 'column', md: 'row', width: '100%' }} columnGap={3}>
         <Stack flexDirection='column' width='100%' ml={2}>
           <CustomTabs value={view} handleChange={handleChangeView} />
           {view === 'grid' ? <WalletContent /> : <TableData />}
         </Stack>
+      </Stack> */}
+      <Stack
+        direction={{ xs: "column", md: "row", width: "100%" }}
+        columnGap={3}
+      >
+        <Stack flexDirection="column" width="100%" ml={2}>
+          <CustomTabs
+            tabs={tabs}
+            activeTab={activeTab}
+            handleChangeTab={changeView}
+          />
+        </Stack>
       </Stack>
+      {tabs[activeTab].component}
     </Section>
   );
 };

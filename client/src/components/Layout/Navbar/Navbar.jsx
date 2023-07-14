@@ -1,18 +1,18 @@
 import React, { useReducer } from 'react';
 
 // components
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import TransactionAdd from '../../general/TransactionAdd';
-import AddWallet from '../AddWallet/AddWallet';
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import TransactionAdd from "../../general/TransactionAdd";
+import AddWallet from "../AddWallet/AddWallet";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 // icons
-import { IconButton, Tooltip } from '@mui/material';
-import { IoIosNotifications } from 'react-icons/io';
-import { CgProfile } from 'react-icons/cg';
+import { IconButton, Tooltip } from "@mui/material";
+import { IoIosNotifications } from "react-icons/io";
+import { CgProfile } from "react-icons/cg";
 
 // logo
 
@@ -45,41 +45,46 @@ const reducer = (state, action) => {
 const Navbar = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   
+
   return (
     <Stack
       mt={2}
       pr={{ xs: 1, md: 3 }}
-      position='absolute'
+      position="absolute"
       top={0}
-      width='100%'
-      direction='row'
-      justifyContent='space-between'
+      width="100%"
+      direction="row"
+      justifyContent="space-between"
     >
       <Stack px={4} pl={32} flexDirection='row' columnGap={2}>
+
       </Stack>
       <Stack
-        flexDirection='row'
-        alignItems='center'
-        visibility={{ xs: 'block', md: 'block' }}
+        flexDirection="row"
+        alignItems="center"
+        visibility={{ xs: "block", md: "block" }}
         columnGap={1}
       >
         {/* Add Wallet button here */}
         <Box>
         <Button
+
           onClick={() => dispatch({ type: 'wallet' })}
           size='small'
           variant='outlined'
           sx={{ borderRadius: '10px' }}
         >
-          <Box sx={{ display: { xs: 'none', md: 'block' } }}>Add Wallet </Box>{' '}
-          {' + '}
+          <Box sx={{ display: { xs: "none", md: "block" } }}>Add Wallet </Box>{" "}
+          {" + "}
         </Button>
         <Popup
+
           position={'top center'}
           open={state.openWallet}
           onClose={() => dispatch({ type: 'wallet' })}
+
           closeOnDocumentClick
-          id='add-wallet-popup'
+          id="add-wallet-popup"
         >
           <AddWallet />
         </Popup>

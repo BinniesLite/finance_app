@@ -1,5 +1,5 @@
 import React from "react";
-import Section from "../../Layout/Section/Section";
+import Section from "../../layout/Section/Section";
 
 const Budget = () => {
   return (

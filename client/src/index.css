@@ -1,7 +1,30 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
- 
+  background: hsla(4, 48%, 94%, 1);
+
+  background: linear-gradient(
+    90deg,
+    hsla(4, 48%, 94%, 1) 0%,
+    hsla(66, 70%, 80%, 1) 50%,
+    hsla(226, 67%, 76%, 1) 100%
+  );
+
+  background: -moz-linear-gradient(
+    90deg,
+    hsla(4, 48%, 94%, 1) 0%,
+    hsla(66, 70%, 80%, 1) 50%,
+    hsla(226, 67%, 76%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    hsla(4, 48%, 94%, 1) 0%,
+    hsla(66, 70%, 80%, 1) 50%,
+    hsla(226, 67%, 76%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F7E9E8", endColorstr="#E9F0AA", GradientType=1 );
 }
 
 body {
@@ -9,6 +32,8 @@ body {
   /* display: flex; */
   padding: 0;
   color: black;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 a {
@@ -46,16 +71,12 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-/* 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+
+.orange-gradient {
+  background: linear-gradient(to right, #ffb700, #fb923c, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  padding: 10px;
 }

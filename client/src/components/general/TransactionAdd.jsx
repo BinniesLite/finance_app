@@ -22,6 +22,7 @@ const transactionSchema = z.object({
   amount: z.string(),
   type: z.enum(["income", "expense"]),
   wallet: z.string(),
+  description: z.string(),
 });
 
 const TransactionAdd = ({ open, handleClose }) => {
@@ -136,6 +137,21 @@ const TransactionAdd = ({ open, handleClose }) => {
                 ))} */}
               </Select>
             </FormControl>
+            <TextField
+              {...register("description")}
+              type="text"
+              fullWidth
+              label="Description"
+              variant="standard"
+              sx={{ py: 3 }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start"></InputAdornment>
+                ),
+                step: "any",
+                pattern: "\\d*",
+              }}
+            />
             <Button onClick={handleClose}>Cancel</Button>
             <button type="submit">Add Transaction</button>
           </DialogContentText>

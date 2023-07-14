@@ -4,6 +4,7 @@ import Sidebar from '../Sidebar/SidebarDesktop';
 import { useNavigate } from 'react-router-dom';
 import Chat from '../../chat/Chat';
 
+
 const LayoutWrapper = ({ children }) => {
   const [activePage, setActivePage] = React.useState('');
   const [isMinimized, setIsMinimized] = React.useState(false);
