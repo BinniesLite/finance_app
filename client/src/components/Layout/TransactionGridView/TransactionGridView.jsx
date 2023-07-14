@@ -17,7 +17,7 @@ const TransactionGridView = ({ transactions }) => {
               spacing={{ xs: 2, md: 8 }}
               columns={{ xs: 3, sm: 8, md: 12 }}
             >
-              {transactions.map((transaction) => (
+              {Object.values(transactions).map((transaction) => (
                 <Grid
                   item
                   xs={2}

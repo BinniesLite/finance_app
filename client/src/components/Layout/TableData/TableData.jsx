@@ -52,13 +52,13 @@ const rows = [
     'Grocery',
     'Scotiabank',
     null,
-    430,
+    4990,
     '',
     '2023-06-01'
   ),
-  createData('Donut', 1, 'Grocery', 'Scotiabank', null, 430, '', '2023-06-01'),
-  createData('Pie', 1, 'Grocery', 'Scotiabank', null, 430, '', '2023-06-01'),
-  createData('Pizza', 1, 'Grocery', 'Scotiabank', null, 430, '', '2023-06-01'),
+  createData('Donut', 2, 'Grocery', 'Scotiabank', null, 430, '', '2023-06-01'),
+  createData('Pie', 3, 'Grocery', 'Scotiabank', null, 900, '', '2023-06-01'),
+  createData('Pizza', 4, 'Grocery', 'Scotiabank', null, 20, '', '2023-06-01'),
 ];
 
 function descendingComparator(a, b, orderBy) {

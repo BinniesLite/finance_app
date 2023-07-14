@@ -36,8 +36,7 @@ const TransactionPage = () => {
 
     fetchTransactions();
   }, []);
-
-  const tabs = [
+const tabs = [
     {
       id: "list",
       label: "List",

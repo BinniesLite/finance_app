@@ -19,14 +19,16 @@ const rows = [
   createData("Cupcake", 305, 3.7, 67, 4.3),
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
+
 function getKeyList(data) {
-  if (data == null || data.length === 0) {
+  if (data == null || data.length === 0 || data[0] == null) {
     return [];
   }
   var listKeys = Object.keys(data[0]);
   listKeys.shift();
   return listKeys;
 }
+
 
 function getValueList(data, start, end) {
   var valueList = [];
@@ -61,7 +63,7 @@ const CustomTable = ({ data }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row, index) => (
+          {Object.values(data).map((row, index) => (
             <TableRow
               key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
