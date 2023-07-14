@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 
 // components
 import Button from '@mui/material/Button';
@@ -24,24 +24,27 @@ const NavButton = ({ title, icon }) => {
   );
 };
 
+// create a useReducer for handling the state of the popup
+// create a function that will handle the opening of the popup
+
+const initialState ={
+  openTransaction: false,
+  openWallet: false,
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'transaction':
+      return { ...state, openTransaction: !state.openTransaction };
+    case 'wallet':
+      return { ...state, openWallet: !state.openWallet };
+  }
+};
+
+
 const Navbar = () => {
-  const [openTransaction, setOpenTransaction] = useState(false);
-  const [openWallet, setOpenWallet] = useState(false);
-
-  const handleOpen = (component) => {
-    if (component === 'transaction') {
-      setOpenTransaction(true);
-    } else if (component === 'wallet') {
-      setOpenWallet(true);
-    }
-  };
-
-  const handleClose = (component) => {
-    component === 'transaction'
-      ? setOpenTransaction(false)
-      : setOpenWallet(false);
-  };
-
+  const [state, dispatch] = useReducer(reducer, initialState);
+  
   return (
     <Stack
       mt={2}
@@ -53,10 +56,6 @@ const Navbar = () => {
       justifyContent='space-between'
     >
       <Stack px={4} pl={32} flexDirection='row' columnGap={2}>
-        {/* <Breadcrumbs>
-          <Link>Wallets</Link>
-          <Link>Portfolio</Link>
-        </Breadcrumbs> */}
       </Stack>
       <Stack
         flexDirection='row'
@@ -64,23 +63,10 @@ const Navbar = () => {
         visibility={{ xs: 'block', md: 'block' }}
         columnGap={1}
       >
+        {/* Add Wallet button here */}
+        <Box>
         <Button
-          onClick={() => handleOpen('transaction')}
-          size='small'
-          variant='outlined'
-          sx={{ borderRadius: '10px' }}
-        >
-          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-            Add Transaction{' '}
-          </Box>{' '}
-          {' + '}
-        </Button>
-        <TransactionAdd
-          open={openTransaction}
-          handleClose={() => handleClose('transaction')}
-        />
-        <Button
-          onClick={() => handleOpen('wallet')}
+          onClick={() => dispatch({ type: 'wallet' })}
           size='small'
           variant='outlined'
           sx={{ borderRadius: '10px' }}
@@ -90,17 +76,33 @@ const Navbar = () => {
         </Button>
         <Popup
           position={'top center'}
-          open={openWallet}
-          onClose={() => handleClose('wallet')}
+          open={state.openWallet}
+          onClose={() => dispatch({ type: 'wallet' })}
           closeOnDocumentClick
           id='add-wallet-popup'
         >
           <AddWallet />
         </Popup>
-        <NavButton
-          title='Notifications'
-          icon={<IoIosNotifications size='1.2rem' />}
-        />
+        </Box>
+
+        <Box>
+          <Button
+            onClick={() => dispatch({ type: 'transaction' })}
+            size='small'
+            variant='outlined'
+            sx={{ borderRadius: '10px' }}
+          >
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              Add Transaction
+            </Box>
+            {' + '}
+          </Button>
+          <TransactionAdd
+            open={state.openTransaction}
+            handleClose={() => dispatch({ type: 'transaction' })}
+          />
+        </Box>
+        
         <NavButton title='Profile' icon={<CgProfile size='1.2rem' />} />
       </Stack>
     </Stack>

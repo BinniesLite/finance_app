@@ -2,15 +2,15 @@ import { React, useState, useEffect } from 'react';
 import Item from '@mui/material/ListItem';
 import { Grid, Button, Typography, Avatar } from '@mui/material';
 import { Row, Col } from 'reactstrap';
-import TransactionComponent from '../../Layout/AddTransactionComponent/Transaction';
-import TransactionCard from '../../Layout/TransactionCard/TransactionCard';
+import TransactionComponent from '../../layout/AddTransactionComponent/Transaction';
+import TransactionCard from '../../layout/TransactionCard/TransactionCard';
 import './Transactions.css';
 
 // api
 import { postTransactions } from '../../../utils/http-request';
 import { getTransactions } from '../../../utils/http-request';
 
-import Section from "../../Layout/Section/Section";
+import Section from "../../layout/Section/Section";
 
 const TransactionPage = () => {
   const [transactions, setTransactions] = useState([]);
@@ -34,7 +34,7 @@ const TransactionPage = () => {
               </Typography>
             </Col>
             <Col xs={9} style={{ paddingLeft: 600 }}>
-              <Avatar
+              {/* <Avatar
                 src='./../../../assets/avatar-icon.png'
                 sx={{ width: 50, height: 50 }}
                 style={{
@@ -42,7 +42,7 @@ const TransactionPage = () => {
                   color: 'rgba(9, 48, 255)',
                   mixBlendMode: 'overlay',
                 }}
-              />
+              /> */}
             </Col>
           </Row>
         </div>
@@ -70,7 +70,7 @@ const TransactionPage = () => {
                     spacing={{ xs: 2, md: 3 }}
                     columns={{ xs: 4, sm: 8, md: 12 }}
                   >
-                    {transactions.map((transaction) => (
+                    {/* {transactions.map((transaction) => (
                       <Grid
                         item
                         xs={2}
@@ -88,7 +88,7 @@ const TransactionPage = () => {
                           />
                         </Item>
                       </Grid>
-                    ))}
+                    ))} */}
                   </Grid>
                 </Item>
               </Grid>

@@ -1,5 +1,9 @@
 const express = require('express');
+// router
 const TransactionRouter = require("./router/transaction");
+const WalletRouter = require("./router/wallet");
+
+
 const cors = require('cors');
 const app = express();
 
@@ -21,6 +25,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/transaction", TransactionRouter)
+app.use("/api/wallet", WalletRouter)
 
 app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);

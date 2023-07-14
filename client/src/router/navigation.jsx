@@ -4,7 +4,7 @@ import SignInPage from "../components/pages/SignInPage/SignInPage";
 import SignUpPage from "../components/pages/SignUpPage/SignUpPage";
 
 import Dashboard from "../components/pages/dashboard/Dashboard";
-import LayoutWrapper from "../components/Layout/wrapper/LayoutWrapper";
+import LayoutWrapper from "../components/layout/wrapper/LayoutWrapper";
 import Budget from "../components/pages/budget/Budget";
 
 export const navigation = [

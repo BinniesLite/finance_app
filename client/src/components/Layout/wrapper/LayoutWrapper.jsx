@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/SidebarDesktop';
 import { useNavigate } from 'react-router-dom';
+import Chat from '../../chat/Chat';
 
 const LayoutWrapper = ({ children }) => {
   const [activePage, setActivePage] = React.useState('');
@@ -22,15 +23,16 @@ const LayoutWrapper = ({ children }) => {
         isMinimized={isMinimized}
         setIsMinimized={setIsMinimized}
       />
+      <Chat />
       <div
         style={{
           width: '100%',
-          maxWidth: '100%',
-          transition: 'margin-left 0.2s',
+         
           marginLeft: '0',
         }}
       >
-        <Navbar />
+        
+       <Navbar/>
         <div style={{ marginLeft: isMinimized ? '-185px' : 0 }}>{children}</div>
       </div>
     </div>
