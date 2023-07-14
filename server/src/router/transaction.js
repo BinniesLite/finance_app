@@ -6,7 +6,9 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
+   
     try {
+        
         const transactions = await prisma.transaction.findMany();
         
         res.json(transactions);
