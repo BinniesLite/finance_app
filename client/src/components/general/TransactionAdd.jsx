@@ -48,14 +48,14 @@ const TransactionAdd = ({ open, handleClose }) => {
 
   const onSubmit = async (data) => {
     const { amount, type, wallet, description } = data;
-    
+    console.log(wallet);
     handleClose();
     
     try {
       await postTransactions({
         amount: parseFloat(amount),
         type,
-        wallet,
+        walletId: wallet,
         description
       });
       

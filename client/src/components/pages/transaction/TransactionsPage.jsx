@@ -5,7 +5,7 @@ import CustomTabs from "../../general/CustomTabs";
 
 import CustomTable from "../../general/table/CustomTable";
 import Section from "../../layout/Section/Section";
-import TransactionGridView from "../../Layout/TransactionGridView/TransactionGridView";
+import TransactionGridView from "./components/TransactionGridView/TransactionGridView";
 import { getTransactions } from "../../../utils/http-request";
 
 const TransactionPage = () => {
