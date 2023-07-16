@@ -38,9 +38,8 @@ router.post("/create", async (req, res) => {
             amount: amount,
             description: description,
             type: type,
-            walletId: walletId
+            walletId: walletId,
         }});
-    
     res.status(201).json(result)
 });
 

@@ -6,6 +6,7 @@ import CustomTabs from "../../general/CustomTabs";
 import CustomTable from "../../general/table/CustomTable";
 import Section from "../../layout/Section/Section";
 import TransactionGridView from "./components/TransactionGridView/TransactionGridView";
+import { formatTransactionList } from "../../../utils/helper";
 import { getTransactions } from "../../../utils/http-request";
 
 const TransactionPage = () => {
@@ -20,7 +21,8 @@ const TransactionPage = () => {
     const fetchTransactions = async () => {
       try {
         const transactions = await getTransactions();
-        setTransactionData(transactions);
+        const formattedTransaction = await formatTransactionList(transactions);
+        setTransactionData(formattedTransaction);
       } catch (error) {
         console.log(error);
       }
