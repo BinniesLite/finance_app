@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import googleButton from '../../../assets/gg.png';
+import googleButton from '../../../../assets/gg.png';
 import './SignIn.css';
 
 // const googleProvider = new GoogleAuthProvider();

@@ -9,8 +9,8 @@ const cors = require('cors');
 const app = express();
 
 const PORT = 3000;
+ 
 
-// Initialize database with Prisma
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
