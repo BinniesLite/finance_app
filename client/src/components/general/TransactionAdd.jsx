@@ -21,7 +21,7 @@ import { postTransactions, getWallets } from "../../utils/http-request";
 const transactionSchema = z.object({
   amount: z.string(),
   type: z.enum(["income", "expense"]),
-  wallet: z.string(),
+  walletId: z.string(),
   description: z.string(),
 });
 
@@ -47,13 +47,14 @@ const TransactionAdd = ({ open, handleClose }) => {
   }, [wallets]);
 
   const onSubmit = async (data) => {
-    const { amount, type, wallet } = data;
+    const { amount, type, walletId, description } = data;
     handleClose();
     try {
       const response = await postTransactions({
         amount: parseFloat(amount),
         type,
-        wallet,
+        walletId,
+        description,
       });
       console.log(response);
     } catch (error) {
@@ -124,20 +125,15 @@ const TransactionAdd = ({ open, handleClose }) => {
               variant="standard"
               sx={{ py: 3, maxHeight: "7rem", overflowY: "auto" }}
             >
-              
-
               <InputLabel id="">Select Wallet</InputLabel>
-              <Select
-                {...register("wallet")}
-               
-                label="Select Wallet"
-              >
+              <Select {...register("walletId")} label="Select Wallet">
                 {wallets?.map((wallet) => (
                   <MenuItem key={wallet.id} value={wallet.id}>
                     {wallet.name}
                   </MenuItem>
                 ))}
               </Select>
+              <p>{errors?.wallet?.message}</p>
             </FormControl>
             <TextField
               {...register("description")}
