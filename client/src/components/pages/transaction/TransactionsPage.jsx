@@ -27,7 +27,8 @@ const TransactionPage = () => {
     const fetchTransactions = async () => {
       try {
         await appContext.getTransactions(); // Call the getWallets function from the appContext
-        setTransactionData(appContext.transactions);
+        const formattedTransaction = await formatTransactionList(transactions);
+        setTransactionData(appContext.formattedTransaction);
       } catch (error) {
         console.log(error);
       }

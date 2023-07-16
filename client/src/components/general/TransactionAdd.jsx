@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useMemo } from 'react';
 // components
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -21,8 +21,8 @@ import AppContext from '../../context/app/context';
 
 const transactionSchema = z.object({
   amount: z.string(),
-  type: z.enum(['income', 'expense']),
-  wallet: z.string(),
+  type: z.enum(["income", "expense"]),
+  walletId: z.string(),
   description: z.string(),
 });
 
@@ -58,17 +58,17 @@ const TransactionAdd = ({ open, handleClose }) => {
   }, []);
 
   const onSubmit = async (data) => {
-    const { amount, type, wallet, description } = data;
+    const { amount, type, walletId, description } = data;
     handleClose();
+    
     try {
       const response = await appContext.addTransaction({
         amount: parseFloat(amount),
         type,
-        wallet,
+        walletId,
         description,
       });
-
-      console.log(response);
+      
     } catch (error) {
       console.log(error);
     }
@@ -137,14 +137,15 @@ const TransactionAdd = ({ open, handleClose }) => {
               variant='standard'
               sx={{ py: 3, maxHeight: '7rem', overflowY: 'auto' }}
             >
-              <InputLabel id=''>Select Wallet</InputLabel>
-              <Select {...register('wallet')} label='Select Wallet'>
+              <InputLabel id="">Select Wallet</InputLabel>
+              <Select {...register("walletId")} label="Select Wallet">
                 {wallets?.map((wallet) => (
                   <MenuItem key={wallet.id} value={wallet.id}>
                     {wallet.name}
                   </MenuItem>
                 ))}
               </Select>
+              <p>{errors?.wallet?.message}</p>
             </FormControl>
             <TextField
               {...register('description')}

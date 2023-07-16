@@ -32,20 +32,18 @@ router.get('/:id', async (req, res) => {
 
 router.post("/create", async (req, res) => {
     const { amount, description, type, walletId } = req.body;
+   
     const result = await prisma.transaction.create({
         data: {
             amount: amount,
             description: description,
             type: type,
-            walletId: walletId
+            walletId: walletId,
         }});
-    
     res.status(201).json(result)
 });
 
-router.post("/update", async (req, res) => {
 
-});
 
 // get transaction by wallet id
 

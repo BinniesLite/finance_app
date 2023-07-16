@@ -1,11 +1,11 @@
 import { React, useState, useEffect } from 'react';
-import WalletCard from '../wallet/components/WalletCard/WalletCard';
+import WalletCard from '../WalletCard/WalletCard';
 import 'reactjs-popup/dist/index.css';
 import './WalletContent.css';
 
 // api
-import { getTransactions } from '../../../utils/http-request';
-import { postTransactions } from '../../../utils/http-request';
+import { getTransactions } from '../../../../../utils/http-request';
+import { postTransactions } from '../../../../../utils/http-request';
 
 const WalletsPage = ({ data }) => {
   const [walletData, setWalletData] = useState([]);

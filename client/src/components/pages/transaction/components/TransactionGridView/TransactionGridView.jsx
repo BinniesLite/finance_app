@@ -3,11 +3,10 @@ import { React } from "react";
 import { Grid } from "@mui/material";
 import Item from "@mui/material/ListItem";
 import TransactionCard from "../TransactionCard/TransactionCard";
-import Section from "../Section/Section";
+import Section from "../../../../layout/Section/Section";
 import "./TransactionGridView.css";
 
 const TransactionGridView = ({ transactions }) => {
-  console.log("In grid", transactions);
   return (
     <Section>
       <div className="transaction-container">
@@ -29,7 +28,7 @@ const TransactionGridView = ({ transactions }) => {
                 >
                   <Item>
                     <TransactionCard
-                      name={transaction.walletId}
+                      name={transaction.walletName}
                       amount={transaction.amount}
                       date={transaction.createdAt}
                       type={transaction.type}
