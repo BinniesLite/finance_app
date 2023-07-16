@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 
-const DBCard = ({ difference, positive = false, sx, value }) => {
+const DBCard = ({ name, difference, positive = false, sx, value, icon }) => {
 
   return (
     <Card sx={sx}>
@@ -25,7 +25,7 @@ const DBCard = ({ difference, positive = false, sx, value }) => {
         >
           <Stack spacing={1}>
             <Typography color='text.secondary' variant='overline'>
-              Budget
+              {name}
             </Typography>
             <Typography variant='h4'>${value}</Typography>
           </Stack>
@@ -37,7 +37,8 @@ const DBCard = ({ difference, positive = false, sx, value }) => {
             }}
           >
             <SvgIcon>
-              <HiCurrencyDollar />
+              {icon}
+              {/* <HiCurrencyDollar /> */}
             </SvgIcon>
           </Avatar>
         </Stack>
@@ -65,10 +66,12 @@ const DBCard = ({ difference, positive = false, sx, value }) => {
 };
 
 DBCard.prototypes = {
+  name: PropTypes.string.isRequired,
   difference: PropTypes.number,
   positive: PropTypes.bool,
   sx: PropTypes.object,
   value: PropTypes.string.isRequired,
+  icon: PropTypes.elementType.isRequired,
 };
 
 export default DBCard;

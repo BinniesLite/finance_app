@@ -7,21 +7,8 @@ import './WalletContent.css';
 import { getTransactions } from '../../../utils/http-request';
 import { postTransactions } from '../../../utils/http-request';
 
-const WalletsPage = () => {
+const WalletsPage = ({ data }) => {
   const [walletData, setWalletData] = useState([]);
-
-  // CORS
-
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      const transactions = await getTransactions();
-      
-      setWalletData(transactions);
-    };
-
-    fetchTransactions();
-  }, []);
-
 
   return (
     <>
@@ -38,7 +25,7 @@ const WalletsPage = () => {
           background: 'rgba(255,255,255, 0.3)',
         }}
       >
-        {Object.values(walletData).map((wallet) => (
+        {Object.values(data).map((wallet) => (
           <div
             style={{
               marginTop: '15px',
@@ -49,7 +36,7 @@ const WalletsPage = () => {
             }}
             key={wallet.id}
           >
-            <WalletCard name={wallet.name} amount={wallet.amount} />
+            <WalletCard name={wallet.name} amount={wallet.amount} description={wallet.description}/>
           </div>
         ))}
       </div>

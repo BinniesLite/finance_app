@@ -1,22 +1,21 @@
-import { React, useState, useEffect } from "react";
-import "./Transactions.css"; 
-import TransactionComponent from "../../layout/AddTransactionComponent/Transaction";
-import TransactionCard from "../../layout/TransactionCard/TransactionCard";
-import Item from "@mui/material/ListItem";
-import { Grid, Button, Typography, Avatar, Stack } from "@mui/material";
-import ViewListIcon from "@mui/icons-material/ViewList";
-import ViewModuleIcon from "@mui/icons-material/ViewModule";
-import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import CustomTabs from "../../general/CustomTabs";
-import { Row, Col } from "reactstrap";
-import CustomTable from "../../general/table/CustomTable";
-import Section from "../../layout/Section/Section";
-import TransactionGridView from "../../Layout/TransactionGridView/TransactionGridView";
-import { getTransactions } from "../../../utils/http-request";
+import { React, useState, useEffect, useContext } from 'react';
+
+import { Stack } from '@mui/material';
+
+//components
+import CustomTabs from '../../general/CustomTabs';
+import CustomTable from '../../general/table/CustomTable';
+import Section from '../../Layout/Section/Section';
+import TransactionGridView from '../../Layout/TransactionGridView/TransactionGridView';
+
+//api
+import AppContext from '../../../context/app/context';
+
+//styles
+import './Transactions.css';
 
 const TransactionPage = () => {
+  const appContext = useContext(AppContext);
   var [activeTab, setView] = useState(0);
 
   const changeView = (event, newView) => {
@@ -27,35 +26,35 @@ const TransactionPage = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const transactions = await getTransactions();
-        setTransactionData(transactions);
+        await appContext.getTransactions(); // Call the getWallets function from the appContext
+        setTransactionData(appContext.transactions);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchTransactions();
-  }, []);
-const tabs = [
+  }, [appContext]);
+  const tabs = [
     {
-      id: "list",
-      label: "List",
+      id: 'list',
+      label: 'List',
       component: <CustomTable data={transactionData} />,
     },
     {
-      id: "grid",
-      label: "Grid",
-      component: <TransactionGridView transactions={transactionData}/>,
+      id: 'grid',
+      label: 'Grid',
+      component: <TransactionGridView transactions={transactionData} />,
     },
   ];
   return (
     <div>
-      <Section title={"Transaction"}>
+      <Section title={'Transaction'}>
         <Stack
-          direction={{ xs: "column", md: "row", width: "100%" }}
+          direction={{ xs: 'column', md: 'row', width: '100%' }}
           columnGap={3}
         >
-          <Stack flexDirection="column" width="100%" ml={2}>
+          <Stack flexDirection='column' width='100%' ml={2}>
             <CustomTabs
               tabs={tabs}
               activeTab={activeTab}

@@ -1,7 +1,14 @@
 .inline {
-  display: flex; /* Use flexbox to create an inline layout */
+  display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.addw-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .label-left {
@@ -17,13 +24,22 @@
   margin-bottom: 10px;
 }
 
-.date-range-picker-container {
+/* .date-range-picker-container {
   margin-top: -15px;
   margin-bottom: 20px;
-}
+} */
 
 #add-w-save-b {
   color: inherit;
-  background: #E0A4ED;
+  background: #e0a4ed;
   width: 100%;
 }
+
+/* .add-wallet-form .MuiFormControl-root {
+  width: 100%;
+}
+
+.add-wallet-form .MuiButton-root {
+  width: 100%;
+  margin-top: 10px;
+} */

@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import './WalletCard.css';
 
-const WalletCard = ({ name, amount, id }) => {
+const WalletCard = ({ name, amount, id, description }) => {
   const [walletName, setWalletName] = useState('');
 
   const buttonStyle = {
@@ -52,30 +52,30 @@ const WalletCard = ({ name, amount, id }) => {
           {name}
         </Typography>
         <div id='wallet-card-div'>
-          <Typography
+          {/* <Typography
             style={dateAmountStyles}
             variant='body2'
             color='text.secondary'
           >
             ${amount}
-          </Typography>
+          </Typography> */}
           <Typography
             style={dateAmountStyles}
             variant='body2'
             color='text.secondary'
           >
-            MM-DD-YYYY
+            {description}
           </Typography>
         </div>
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         <Button style={buttonStyle} size='small'>
           Label
         </Button>
         <Button style={buttonStyle} size='small'>
           Label
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 };
