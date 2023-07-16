@@ -1,4 +1,4 @@
-
+const prisma = require('../prisma');
 
 const getIncome = async (req, res) => {
     try {

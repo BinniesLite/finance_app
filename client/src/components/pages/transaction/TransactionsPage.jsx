@@ -5,9 +5,9 @@ import CustomTabs from "../../general/CustomTabs";
 
 import CustomTable from "../../general/table/CustomTable";
 import Section from "../../layout/Section/Section";
-import TransactionGridView from "../../Layout/TransactionGridView/TransactionGridView";
-import { getTransactions} from "../../../utils/http-request";
+import TransactionGridView from "./components/TransactionGridView/TransactionGridView";
 import { formatTransactionList } from "../../../utils/helper";
+import { getTransactions } from "../../../utils/http-request";
 
 const TransactionPage = () => {
   var [activeTab, setView] = useState(0);

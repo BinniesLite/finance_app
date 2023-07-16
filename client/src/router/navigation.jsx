@@ -1,7 +1,7 @@
 import WalletsPage from "../components/pages/wallet/WalletsPage";
 import TransactionPage from "../components/pages/transaction/TransactionsPage";
-import SignInPage from "../components/pages/SignInPage/SignInPage";
-import SignUpPage from "../components/pages/SignUpPage/SignUpPage";
+import SignInPage from "../components/pages/auth/SignInPage/SignInPage";
+import SignUpPage from "../components/pages/auth/SignUpPage/SignUpPage";
 
 import Dashboard from "../components/pages/dashboard/Dashboard";
 import LayoutWrapper from "../components/layout/wrapper/LayoutWrapper";

@@ -2,7 +2,7 @@ import { React } from "react";
 import { Grid } from "@mui/material";
 import Item from "@mui/material/ListItem";
 import TransactionCard from "../TransactionCard/TransactionCard";
-import Section from "../Section/Section";
+import Section from "../../../../layout/Section/Section";
 import "./TransactionGridView.css";
 
 const TransactionGridView = ({ transactions }) => {

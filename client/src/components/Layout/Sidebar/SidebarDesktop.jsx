@@ -44,7 +44,7 @@ const Sidebar = ({ activePage, handleActivePage, isMinimized, setIsMinimized }) 
       sx={{
         position: 'fixed',
         width: '15rem',
-        height: '100vh',
+        height: '200vh',
         top: '0',
         color: 'gray ',
         zIndex: '10',
