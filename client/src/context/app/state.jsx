@@ -138,7 +138,6 @@ const AppState = (props) => {
   // Get Transactions
   const getTransactions = async () => {
     setLoading();
-
     try {
       const res = await axios.get(baseUrl + '/transaction');
       dispatch({

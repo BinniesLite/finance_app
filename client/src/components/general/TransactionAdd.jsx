@@ -55,7 +55,7 @@ const TransactionAdd = ({ open, handleClose }) => {
       setTransaction(...transaction, transactions);
     };
     fetchTransactions();
-  }, []);
+  }, [transaction]);
 
   const onSubmit = async (data) => {
     const { amount, type, walletId, description } = data;

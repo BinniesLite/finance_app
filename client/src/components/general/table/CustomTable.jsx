@@ -14,7 +14,7 @@ function getKeyList(data) {
   }
   console.log("in Transaction: ", data);
   var listKeys = Object.keys(data[0]);
-  // listKeys.shift();
+  listKeys.shift();
   return listKeys;
 }
 
@@ -58,7 +58,7 @@ const CustomTable = ({ data }) => {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {index+1}
+                {index}
               </TableCell>
               <TableCell align="right">{row.walletName}</TableCell>
               <TableCell align="right">&nbsp;${row.amount}</TableCell>
