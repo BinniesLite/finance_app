@@ -6,7 +6,8 @@ import { Stack } from '@mui/material';
 import CustomTabs from '../../general/CustomTabs';
 import CustomTable from '../../general/table/CustomTable';
 import Section from '../../Layout/Section/Section';
-import TransactionGridView from '../../Layout/TransactionGridView/TransactionGridView';
+import TransactionGridView from './components/TransactionGridView/TransactionGridView';
+import { formatTransactionList } from '../../../utils/helper';
 
 //api
 import AppContext from '../../../context/app/context';
@@ -26,16 +27,16 @@ const TransactionPage = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        await appContext.getTransactions(); // Call the getWallets function from the appContext
-        const formattedTransaction = await formatTransactionList(transactions);
-        setTransactionData(appContext.formattedTransaction);
+        // await appContext.getTransactions(); // Call the getWallets function from the appContext
+        const formattedTransaction = await formatTransactionList(transactionData);
+        setTransactionData(formattedTransaction);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchTransactions();
-  }, [appContext]);
+  }, [transactionData]);
   const tabs = [
     {
       id: 'list',

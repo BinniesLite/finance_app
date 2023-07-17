@@ -53,6 +53,23 @@ const AppState = (props) => {
     }
   };
 
+  // Get Wallets by ID
+  const getWallet = async (id) => {
+    setLoading();
+    try {
+      const res = await axios.get(baseUrl + `/wallet/${id}`);
+      dispatch({
+        type: GET_WALLETS,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: WALLET_ERROR,
+        payload: err.response.msg,
+      });
+    }
+  };
+
   // Add Wallet
   const addWallet = async (wallet) => {
     setLoading();
