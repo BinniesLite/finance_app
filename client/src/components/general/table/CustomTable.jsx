@@ -336,17 +336,11 @@ export default function CustomTable({data}) {
     [order, orderBy, page, rowsPerPage]
   );
 
-  // const selectedRows = visibleRows.filter((row) =>
-  //   newSelected.includes(row.name)
-  // );
-  // setSelectedRows(selectedRows);
-
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar
           numSelected={selected.length}
-          // selectedRows={selectedRows}
         />
         <TableContainer>
           <Table
@@ -395,7 +389,6 @@ export default function CustomTable({data}) {
                     >
                       {row.walletName}
                     </TableCell>
-                    {/* <TableCell align="right">{row.walletName}</TableCell> */}
                     <TableCell align="right">{row.amount}</TableCell>
                     <TableCell align="right">{row.createdAt}</TableCell>
                     <TableCell align="right">{row.description}</TableCell>
@@ -407,8 +400,6 @@ export default function CustomTable({data}) {
                     >
                       {row.type}
                     </TableCell>
-                    {/* <TableCell align="right">{row.description}</TableCell>
-                    <TableCell align="right">{row.date}</TableCell> */}
                   </TableRow>
                 );
               })}
