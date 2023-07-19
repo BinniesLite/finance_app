@@ -28,7 +28,7 @@ CREATE TABLE "Transaction" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "description" TEXT,
     "type" "TransactionType" NOT NULL,
-
+    "image" TEXT,
     CONSTRAINT "Transaction_pkey" PRIMARY KEY ("id")
 );
 
