@@ -1,23 +1,22 @@
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Card from "@mui/material/Card";
+import React, { useMemo } from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Card from '@mui/material/Card';
 
 function getKeyList(data) {
   if (data == null || data.length === 0 || data[0] == null) {
     return [];
   }
-  console.log("in Transaction: ", data);
+  console.log('in Transaction: ', data);
   var listKeys = Object.keys(data[0]);
   listKeys.shift();
   return listKeys;
 }
-
 
 function getValueList(data, start, end) {
   var valueList = [];
@@ -30,7 +29,9 @@ function getValueList(data, start, end) {
   return valueList;
 }
 const CustomTable = ({ data }) => {
-  const listAttributes = getKeyList(data);
+  const listAttributes = useMemo(() => getKeyList(data), [data]);
+
+  // const listAttributes = getKeyList(data);
   const listValues = getValueList(data, 0, 1);
   return (
     <TableContainer
@@ -40,12 +41,12 @@ const CustomTable = ({ data }) => {
         marginBottom: 50,
       }}
     >
-      <Table aria-label="simple table">
+      <Table aria-label='simple table'>
         <TableHead>
           <TableRow>
-            <TableCell key={"count"}>Count</TableCell>
+            <TableCell key={'count'}>Count</TableCell>
             {listAttributes.map((feature) => (
-              <TableCell align="right" key={feature}>
+              <TableCell align='right' key={feature}>
                 {feature}
               </TableCell>
             ))}
@@ -55,16 +56,16 @@ const CustomTable = ({ data }) => {
           {Object.values(data).map((row, index) => (
             <TableRow
               key={row.id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell component='th' scope='row'>
                 {index}
               </TableCell>
-              <TableCell align="right">{row.walletName}</TableCell>
-              <TableCell align="right">&nbsp;${row.amount}</TableCell>
-              <TableCell align="right">{row.createdAt}</TableCell>
-              <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right">{row.type}</TableCell>
+              <TableCell align='right'>{row.walletName}</TableCell>
+              <TableCell align='right'>&nbsp;${row.amount}</TableCell>
+              <TableCell align='right'>{row.createdAt}</TableCell>
+              <TableCell align='right'>{row.description}</TableCell>
+              <TableCell align='right'>{row.type}</TableCell>
             </TableRow>
           ))}
         </TableBody>

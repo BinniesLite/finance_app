@@ -52,7 +52,7 @@ const TransactionAdd = ({ open, handleClose }) => {
   useEffect(() => {
     const fetchTransactions = async () => {
       const transactions = await appContext.getTransactions();
-      setTransaction(...transaction, transactions);
+      // setTransaction(...transaction, transactions);
     };
     fetchTransactions();
   }, [transaction]);

@@ -27,16 +27,19 @@ const TransactionPage = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        await appContext.getTransactions(); // Call the getWallets function from the appContext
-        // const formattedTransaction = await formatTransactionList(transactionData);
-        // setTransactionData(formattedTransaction);
-        setTransactionData(appContext.transactions);
+        // await appContext.getTransactions(); // Call the getWallets function from the appContext
+        const formattedTransaction = await formatTransactionList(transactionData);
+        setTransactionData(formattedTransaction);
       } catch (error) {
         console.log(error);
       }
     };
     fetchTransactions();
-  }, []);
+  }, [transactionData]);
+
+  // useEffect(() => {
+  //   setTransactionData(appContext.transactions);
+  // }, [appContext.transactions]);
 
   const tabs = [
     {
