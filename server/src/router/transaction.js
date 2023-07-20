@@ -1,51 +1,24 @@
-// ORM - Object Relational Mapping
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const express = require("express");
+const validate = require("../middleware/validate");
+const transactionSchema = require("../validations/transaction.validation");
 
-const express = require('express');
+const {
+  getTransaction,
+  getTransactionById,
+  createTransaction,
+} = require("../controllers/transaction");
+
+
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-   
-    try {
-        
-        const transactions = await prisma.transaction.findMany();
-        
-        res.json(transactions);
-    }
-    catch (error) {
-        res.json(error);    
-    }
-});
 
+// get all transactions
+router.get("/", getTransaction);
 
 // get transaction by id
-router.get('/:id', async (req, res) => {
-    const { id } = req.params;
-    const transaction = await prisma.transaction.findUnique({
-        where: {
-            id: id
-        }
-    });
-    res.json(transaction);
-});
+router.get("/:id", getTransactionById);
 
-router.post("/create", async (req, res) => {
-    const { amount, description, type, walletId } = req.body;
-   
-    const result = await prisma.transaction.create({
-        data: {
-            amount: amount,
-            description: description,
-            type: type,
-            walletId: walletId,
-        }});
-    res.status(201).json(result)
-});
-
-
-
-// get transaction by wallet id
-
+// create transaction
+router.post("/create", validate(transactionSchema), createTransaction);
 
 module.exports = router;

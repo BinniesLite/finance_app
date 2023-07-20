@@ -1,9 +1,9 @@
 import {BsCash} from "react-icons/bs"
 import {FaWallet} from "react-icons/fa"
-
 import {AiFillDollarCircle} from "react-icons/ai"
 import {HiSquares2X2} from "react-icons/hi2"
 import {TbReportAnalytics} from "react-icons/tb"
+
 export const links = [
     {
         name: 'dashboard',

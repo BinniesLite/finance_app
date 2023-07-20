@@ -5,6 +5,7 @@ CREATE TYPE "TransactionType" AS ENUM ('expense', 'income');
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -13,9 +14,9 @@ CREATE TABLE "User" (
 CREATE TABLE "Wallet" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "balance" DOUBLE PRECISION NOT NULL,
+    "balance" DOUBLE PRECISION,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "payments" TEXT NOT NULL,
+    "description" TEXT,
 
     CONSTRAINT "Wallet_pkey" PRIMARY KEY ("id")
 );

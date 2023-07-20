@@ -1,33 +1,34 @@
+// express
 const express = require('express');
-
-// router
-const TransactionRouter = require("./router/transaction");
-const WalletRouter = require("./router/wallet");
-const IncomeRouter = require("./router/income");
-
+const routers = require('./router');
 const cors = require('cors');
+const timeout = require('express-timeout');
+const { 
+    corsOptions, 
+    PORT, 
+    TIMEOUT  
+} = require('./configs/configs');
+
+require('dotenv').config();
+
+
 const app = express();
 
-const PORT = 3000;
- 
-
-app.get('/', (req, res) => {
-    res.send('Hello World!!!!!');
-});
-
 // Cors configuration
-let corsOptions = {
-    origin: "http://localhost:80"
-};
 
 cors(corsOptions);
 
+// Body parser configuration
 app.use(express.json());
+
+// Cors configuration
 app.use(cors());
 
-app.use("/api/transaction", TransactionRouter)
-app.use("/api/wallet", WalletRouter)
-app.use("/api/income", IncomeRouter)
+// timeout
+app.use(timeout(TIMEOUT));
+
+// Api routes
+app.use('/api', routers);
 
 app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);
