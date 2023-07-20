@@ -16,25 +16,26 @@ router.get('/transaction', async (req, res) => {
     }
 });
 
+
 // filter by date range
-// endpoint: /api/filter/transaction/date
+// endpoint: /api/filter/transactions-by-date
+// router example: /api/filter/transactions-by-date?start=2023-07-17&end=2023-07-18
 // note: this get request requires query parameters.
-// router example: /api/filter/transaction/date?start=2023-07-17T02:50:53.765Z&end=2023-07-18T02:50:53.765Z
 // date format: YYYY-MM-DD
-// =>>> still debugging
-router.get('/transaction/date', async (req, res) => {
-    const startDate = req.query.startDate; // eg. req.query.startDate = 2021-01-01
-    const endDate = req.query.endDate; // eg. req.query.endDate = 2021-01-31
+router.get('/transactions-by-date', async (req, res) => {
+    const start = req.query.start;
+    const end = req.query.end;
+    const startDate = start + 'T00:00:00.000Z'; // add time to the date to make it ISO format as required by prisma
+    const endDate = end + 'T23:59:59.999Z'; // add time to the date to make it ISO format as required by prisma
+
     try {
         const transactions = await prisma.transaction.findMany({
             where: {
-                AND: 
-                [
-                    { createdAt: { gte: startDate } },
-                    { createdAt: { lte: endDate } }
-                ]
+                createdAt: {
+                    gte: startDate,
+                    lte: endDate
             }
-        });
+        }});
         res.status(200).json(transactions);
     } catch (error) {
         res.status(500).json(error);
@@ -42,9 +43,11 @@ router.get('/transaction/date', async (req, res) => {
 });
 
 // filter by type expense/income
-// endpoint: /api/filter/transaction
+// endpoint: /api/filter/transaction/:type
+// example: /api/filter/transaction/expense
 router.get('/transaction/:type', async (req, res) => {
     const type = req.params.type;
+    console.log(type);
     try {
         const transactions = await prisma.transaction.findMany({
             where: {
@@ -58,10 +61,10 @@ router.get('/transaction/:type', async (req, res) => {
 });
 
 // filter by amount range
-// endpoint: /api/filter/transaction/amount
+// endpoint: api/filter/transactions-by-amount
 // note: this get request requires query parameters.
-// example: /api/filter/transaction/amount?min=100&max=1000
-router.get('/transaction/amount', async (req, res) => {
+// example: /api/filter/transactions-by-amount?min=100&max=200
+router.get('/transactions-by-amount', async (req, res) => {
     const min = parseFloat(req.query.min);
     const max = parseFloat(req.query.max);
     try {
