@@ -9,8 +9,13 @@
   "dependencies": {
     "@prisma/client": "^4.14.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "prisma": "^4.14.1"
+    "express-timeout": "^0.2.1",
+    "http-status": "^1.6.2",
+    "openai": "^3.3.0",
+    "prisma": "^4.14.1",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
