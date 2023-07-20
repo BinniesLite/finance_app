@@ -4,12 +4,12 @@ const express = require('express');
 const TransactionRouter = require("./router/transaction");
 const WalletRouter = require("./router/wallet");
 const IncomeRouter = require("./router/income");
+const FilterRouter = require("./router/filter");
 
 const cors = require('cors');
 const app = express();
 
 const PORT = 3000;
- 
 
 app.get('/', (req, res) => {
     res.send('Hello World!!');
@@ -28,6 +28,7 @@ app.use(cors());
 app.use("/api/transaction", TransactionRouter)
 app.use("/api/wallet", WalletRouter)
 app.use("/api/income", IncomeRouter)
+app.use("/api/filter", FilterRouter)
 
 app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);
