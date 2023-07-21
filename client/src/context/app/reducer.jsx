@@ -2,6 +2,8 @@ import {
   GET_WALLETS,
   ADD_WALLET,
   DELETE_WALLET,
+  WALLET_ERROR,
+  TRANSACTION_ERROR,
   GET_TRANSACTIONS,
   ADD_TRANSACTION,
   DELETE_TRANSACTION,
@@ -35,6 +37,16 @@ export default (state, action) => {
           (wallet) => wallet._id !== action.payload
         ),
         loading: false,
+      };
+    case WALLET_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case TRANSACTION_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     case GET_TRANSACTIONS:
       return {
@@ -92,9 +104,12 @@ export default (state, action) => {
         totalBalance: action.payload,
         loading: false,
       };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
     default:
       return state;
   }
 };
-
-

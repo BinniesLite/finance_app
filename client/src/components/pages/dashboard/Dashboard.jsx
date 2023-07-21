@@ -198,8 +198,6 @@ const Dashboard = () => {
             <h4 variant='h6'>Recent Transactions</h4>
             <p>Latest transaction all the time</p>
             <CustomTable data={transactionData} />
-            <AddWallet />
-
           </Stack>
         </Grid>
         <Grid item xs={12} md={3} lg={3}>

@@ -16,12 +16,16 @@ import { set, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 // api
-// import { postTransactions, getWallets } from "../../utils/http-request";
+import {
+  postTransactions,
+  getWallets,
+  getTransactions,
+} from '../../utils/http-request';
 import AppContext from '../../context/app/context';
 
 const transactionSchema = z.object({
   amount: z.string(),
-  type: z.enum(["income", "expense"]),
+  type: z.enum(['income', 'expense']),
   walletId: z.string(),
   description: z.string(),
 });
@@ -42,17 +46,24 @@ const TransactionAdd = ({ open, handleClose }) => {
   //fetch wallets
   useEffect(() => {
     const fetchWallets = async () => {
-      await appContext.getWallets();
-      setWallets(appContext.wallets);
+      const response = await getWallets();
+      setWallets(response);
+      // await appContext.getWallets();
+      // setWallets(appContext.wallets);
     };
     fetchWallets();
   }, [wallets]);
 
+  // useEffect(() => {
+  //   setWallets(appContext.wallets);
+  // }, [appContext.wallets]);
+
   //fetch transactions
   useEffect(() => {
     const fetchTransactions = async () => {
-      const transactions = await appContext.getTransactions();
-      // setTransaction(...transaction, transactions);
+      const response = await getTransactions();
+      const formattedTransaction = await formatTransactionList(response);
+      setTransactionData(formattedTransaction);
     };
     fetchTransactions();
   }, [transaction]);
@@ -60,7 +71,7 @@ const TransactionAdd = ({ open, handleClose }) => {
   const onSubmit = async (data) => {
     const { amount, type, walletId, description } = data;
     handleClose();
-    
+
     try {
       const response = await appContext.addTransaction({
         amount: parseFloat(amount),
@@ -68,7 +79,6 @@ const TransactionAdd = ({ open, handleClose }) => {
         walletId,
         description,
       });
-      
     } catch (error) {
       console.log(error);
     }
@@ -137,8 +147,8 @@ const TransactionAdd = ({ open, handleClose }) => {
               variant='standard'
               sx={{ py: 3, maxHeight: '7rem', overflowY: 'auto' }}
             >
-              <InputLabel id="">Select Wallet</InputLabel>
-              <Select {...register("walletId")} label="Select Wallet">
+              <InputLabel id=''>Select Wallet</InputLabel>
+              <Select {...register('walletId')} label='Select Wallet'>
                 {wallets?.map((wallet) => (
                   <MenuItem key={wallet.id} value={wallet.id}>
                     {wallet.name}

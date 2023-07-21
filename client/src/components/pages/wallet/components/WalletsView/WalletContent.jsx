@@ -3,13 +3,7 @@ import WalletCard from '../WalletCard/WalletCard';
 import 'reactjs-popup/dist/index.css';
 import './WalletContent.css';
 
-// api
-import { getTransactions } from '../../../../../utils/http-request';
-import { postTransactions } from '../../../../../utils/http-request';
-
-const WalletsPage = ({ data }) => {
-  const [walletData, setWalletData] = useState([]);
-
+const WalletContent = ({ data }) => {
   return (
     <>
       <div
@@ -36,7 +30,7 @@ const WalletsPage = ({ data }) => {
             }}
             key={wallet.id}
           >
-            <WalletCard name={wallet.name} amount={wallet.amount} description={wallet.description}/>
+            <WalletCard name={wallet.name} id={wallet.id} date={wallet.date} description={wallet.description}/>
           </div>
         ))}
       </div>
@@ -44,4 +38,4 @@ const WalletsPage = ({ data }) => {
   );
 };
 
-export default WalletsPage;
+export default WalletContent;

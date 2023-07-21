@@ -10,13 +10,14 @@ import TransactionGridView from './components/TransactionGridView/TransactionGri
 import { formatTransactionList } from '../../../utils/helper';
 
 //api
-import AppContext from '../../../context/app/context';
+// import AppContext from '../../../context/app/context';
+import { getTransactions } from '../../../utils/http-request';
 
 //styles
 import './Transactions.css';
 
 const TransactionPage = () => {
-  const appContext = useContext(AppContext);
+  // const appContext = useContext(AppContext);
   var [activeTab, setView] = useState(0);
 
   const changeView = (event, newView) => {
@@ -27,15 +28,18 @@ const TransactionPage = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        // await appContext.getTransactions(); // Call the getWallets function from the appContext
-        const formattedTransaction = await formatTransactionList(transactionData);
+        const response = await getTransactions();
+        const formattedTransaction = await formatTransactionList(response);
         setTransactionData(formattedTransaction);
+        // await appContext.getTransactions();
+        // const formattedTransaction = await formatTransactionList(transactionData);
+        // setTransactionData(formattedTransaction);
       } catch (error) {
         console.log(error);
       }
     };
     fetchTransactions();
-  }, [transactionData]);
+  }, []);
 
   // useEffect(() => {
   //   setTransactionData(appContext.transactions);

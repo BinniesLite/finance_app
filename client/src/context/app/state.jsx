@@ -7,7 +7,9 @@ import {
   GET_WALLETS,
   ADD_WALLET,
   DELETE_WALLET,
+  WALLET_ERROR,
   GET_TRANSACTIONS,
+  TRANSACTION_ERROR,
   ADD_TRANSACTION,
   DELETE_TRANSACTION,
   GET_INCOME,
@@ -54,21 +56,21 @@ const AppState = (props) => {
   };
 
   // Get Wallets by ID
-  const getWallet = async (id) => {
-    setLoading();
-    try {
-      const res = await axios.get(baseUrl + `/wallet/${id}`);
-      dispatch({
-        type: GET_WALLETS,
-        payload: res.data,
-      });
-    } catch (err) {
-      dispatch({
-        type: WALLET_ERROR,
-        payload: err.response.msg,
-      });
-    }
-  };
+  // const getWallet = async (id) => {
+  //   setLoading();
+  //   try {
+  //     const res = await axios.get(baseUrl + `/wallet/${id}`);
+  //     dispatch({
+  //       type: GET_WALLETS,
+  //       payload: res.data,
+  //     });
+  //   } catch (err) {
+  //     dispatch({
+  //       type: WALLET_ERROR,
+  //       payload: err.response.msg,
+  //     });
+  //   }
+  // };
 
   // Add Wallet
   const addWallet = async (wallet) => {

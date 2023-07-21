@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { faker } from '@faker-js/faker';
 import { getWallet } from './http-request';
-import AppContext from '../context/app/context';
+// import AppContext from '../context/app/context';
 import { formatDate } from './formatDate';
 
 export const generateFakeTransactionData = (numberOfData) => {
@@ -45,7 +45,7 @@ export const generateFakeUser = () => {
 
 // Get the wallet name based on the id
 const getWalletName = async (id) => {
-  const { getWallet } = useContext(AppContext);
+  // const { getWallet } = useContext(AppContext);
   try {
     const walletData = await getWallet(id);
     return walletData.name;
@@ -71,3 +71,21 @@ export const formatTransactionList = async (data) => {
   }
   return transactionData;
 };
+
+// Format the list of wallets
+export const formatWalletList = async (data) => {
+  let walletData = [];
+  for (let i = 0; i < data.length; i++) {
+    const wallet = data[i];
+    let formatteData = {
+      id: wallet.id,
+      name: wallet.name,
+      // amount: wallet.amount,
+      createdAt: formatDate(wallet.createdAt),
+      description: wallet.description,
+      // type: wallet.type,
+    };
+    walletData.push(formatteData);
+  }
+  return walletData;
+}

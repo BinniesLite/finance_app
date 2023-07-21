@@ -22,7 +22,6 @@ services:
       - ./server/prisma:/usr/src/app/prisma
     ports:
       - 3000:3000
-    command: ["sh", "-c", "until nc -z postgresql 5432; do sleep 1; done && yarn prisma migrate dev && yarn run dev"]
     networks:
       finance:
         aliases:

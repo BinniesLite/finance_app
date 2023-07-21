@@ -8,8 +8,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import './WalletCard.css';
 
-const WalletCard = ({ name, amount, id, description }) => {
-  const [walletName, setWalletName] = useState('');
+const WalletCard = ({ name, id, date, description }) => {
+  // const [walletName, setWalletName] = useState('');
 
   const buttonStyle = {
     boxSizing: 'border-box',
@@ -45,7 +45,6 @@ const WalletCard = ({ name, amount, id, description }) => {
       <CardMedia
         sx={{ height: 100 }}
         image={'src/assets/wallet-card-image.jpg'}
-        title={walletName}
       />
       <CardContent>
         <Typography gutterBottom variant='h6' component='div'>
@@ -64,10 +63,27 @@ const WalletCard = ({ name, amount, id, description }) => {
             variant='body2'
             color='text.secondary'
           >
-            {description}
+            {date}
           </Typography>
+
+          {/* <Typography
+            style={dateAmountStyles}
+            variant='body2'
+            color='text.secondary'
+          >
+            {balance}
+          </Typography> */}
         </div>
+        <Typography
+          style={dateAmountStyles}
+          variant='body2'
+          color='text.secondary'
+        >
+          {description}
+        </Typography>
       </CardContent>
+
+      {/* category for wallet coming soon */}
       {/* <CardActions>
         <Button style={buttonStyle} size='small'>
           Label

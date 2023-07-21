@@ -9,12 +9,15 @@ import Section from '../../Layout/Section/Section';
 
 //api
 import AppContext from '../../../context/app/context';
+import { getWallets } from '../../../utils/http-request';
+import { formatWalletList } from '../../../utils/helper';
+
 
 //css
 import './WalletsPage.css';
 
 const WalletsPage = () => {
-  const appContext = useContext(AppContext);
+  // const appContext = useContext(AppContext);
   var [activeTab, setView] = useState(0);
 
   const changeView = (event, newView) => {
@@ -27,12 +30,18 @@ const WalletsPage = () => {
 
   useEffect(() => {
     const fetchWallets = async () => {
-      await appContext.getWallets(); // Call the getWallets function from the appContext
-      setWalletData(appContext.wallets); // Update the walletData state with the wallets from the appContext
+      const response = await getWallets();
+      const formattedWallet = await formatWalletList(response);
+      setWalletData(formattedWallet);
+      // setWalletData(appContext.wallets);
     };
 
     fetchWallets();
-  }, [appContext]);
+  }, []);
+
+  // useEffect(() => {
+  //   setWalletData(appContext.wallets);
+  // }, [appContext.wallets]);
 
   const tabs = [
     {

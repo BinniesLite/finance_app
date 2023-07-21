@@ -65,30 +65,6 @@ const headCells = [
     disablePadding: false,
     label: 'ID',
   },
-  // {
-  //   id: 'category',
-  //   numeric: false,
-  //   disablePadding: false,
-  //   label: 'Category',
-  // },
-  // {
-  //   id: 'account',
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: 'Account',
-  // },
-  // {
-  //   id: 'files',
-  //   numeric: false,
-  //   disablePadding: false,
-  //   label: 'Files',
-  // },
-  // {
-  //   id: 'amount',
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: 'Amount',
-  // },
   {
     id: 'description',
     numeric: false,

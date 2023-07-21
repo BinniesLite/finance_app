@@ -62,7 +62,7 @@ const Navbar = () => {
         columnGap={1}
       >
         {/* Add Wallet button here */}
-        <Box>
+        {/* <Box>
           <Button
             onClick={() => dispatch({ type: 'wallet' })}
             size='small'
@@ -71,16 +71,37 @@ const Navbar = () => {
           >
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>Add Wallet </Box>{' '}
             {' + '}
-          </Button>
-          <Popup
+          </Button> */}
+          {/* <Popup
             position={'top center'}
-            open={state.openWallet}
-            onClose={() => dispatch({ type: 'wallet' })}
+            // open={state.openWallet}
+            // onClose={() => dispatch({ type: 'wallet' })}
             closeOnDocumentClick
             id='add-wallet-popup'
+          > */}
+          {/* <AddWallet
+            open={state.openWallet}
+            handleClose={() => dispatch({ type: 'wallet' })}
+          /> */}
+          {/* </Popup> */}
+        {/* </Box> */}
+
+        <Box>
+          <Button
+            onClick={() => dispatch({ type: 'wallet' })}
+            size='small'
+            variant='outlined'
+            sx={{ borderRadius: '10px', backgroundColor: '#12131c' }}
           >
-            <AddWallet />
-          </Popup>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              Add Wallet
+            </Box>
+            {' + '}
+          </Button>
+          <AddWallet
+            open={state.openWallet}
+            handleClose={() => dispatch({ type: 'wallet' })}
+          />
         </Box>
 
         <Box>
