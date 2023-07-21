@@ -37,7 +37,7 @@ const WalletsPage = () => {
     };
 
     fetchWallets();
-  }, []);
+  }, [walletData]);
 
   // useEffect(() => {
   //   setWalletData(appContext.wallets);

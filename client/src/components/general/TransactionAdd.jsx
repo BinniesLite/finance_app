@@ -21,6 +21,7 @@ import {
   getWallets,
   getTransactions,
 } from '../../utils/http-request';
+import { formatTransactionList } from '../../utils/helper';
 import AppContext from '../../context/app/context';
 
 const transactionSchema = z.object({
@@ -63,7 +64,7 @@ const TransactionAdd = ({ open, handleClose }) => {
     const fetchTransactions = async () => {
       const response = await getTransactions();
       const formattedTransaction = await formatTransactionList(response);
-      setTransactionData(formattedTransaction);
+      setTransaction(formattedTransaction);
     };
     fetchTransactions();
   }, [transaction]);
@@ -149,7 +150,7 @@ const TransactionAdd = ({ open, handleClose }) => {
             >
               <InputLabel id=''>Select Wallet</InputLabel>
               <Select {...register('walletId')} label='Select Wallet'>
-                {wallets?.map((wallet) => (
+                {Object.values(wallets).map((wallet) => (
                   <MenuItem key={wallet.id} value={wallet.id}>
                     {wallet.name}
                   </MenuItem>

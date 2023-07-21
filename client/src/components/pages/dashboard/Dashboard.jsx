@@ -3,7 +3,7 @@ import Section from '../../Layout/Section/Section';
 import LineChart from './component/LineChart/LineChart';
 import PieCharts from './component/PieChart/PieCharts';
 import DBCard from './component/DBCard/DBCard';
-import CustomTable from '../../general/table/CustomTable';
+// import CustomTable from '../../general/table/CustomTable';
 import { Grid, Stack } from '@mui/material';
 import { HiCurrencyDollar } from 'react-icons/hi';
 
@@ -26,6 +26,7 @@ const Dashboard = () => {
 
     fetchTransactions();
   }, []);
+  
   //hardcoded data for the charts
   const lineData = [
     {
@@ -197,7 +198,7 @@ const Dashboard = () => {
           >
             <h4 variant='h6'>Recent Transactions</h4>
             <p>Latest transaction all the time</p>
-            <CustomTable data={transactionData} />
+            {/* <CustomTable data={transactionData} /> */}
           </Stack>
         </Grid>
         <Grid item xs={12} md={3} lg={3}>
