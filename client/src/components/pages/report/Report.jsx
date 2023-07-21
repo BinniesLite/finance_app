@@ -1,8 +1,8 @@
 import React from 'react'
-
+import Section from '../../layout/Section/Section'
 const Report = () => {
   return (
-    <div>Report</div>
+    <Section title="Report">Report</Section>
   )
 }
 

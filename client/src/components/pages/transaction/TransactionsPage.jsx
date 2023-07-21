@@ -13,8 +13,11 @@ import { formatTransactionList } from '../../../utils/helper';
 // import AppContext from '../../../context/app/context';
 import { getTransactions } from '../../../utils/http-request';
 
-//styles
-import './Transactions.css';
+import CustomTable from "../../general/table/CustomTable";
+import Section from "../../layout/Section/Section";
+import TransactionGridView from "./components/TransactionGridView/TransactionGridView";
+import { formatTransactionList, generateFakeTransactionData, generateFakeWallets, pushTransactions, pushWallets } from "../../../utils/helper";
+import { getTransactions } from "../../../utils/http-request";
 
 const TransactionPage = () => {
   // const appContext = useContext(AppContext);
@@ -26,6 +29,23 @@ const TransactionPage = () => {
   const [transactionData, setTransactionData] = useState([]);
 
   useEffect(() => {
+    const feedData = async () => {
+      const wallets = generateFakeWallets(10);
+      try {
+        await pushWallets(wallets);
+      } catch(error) {
+        console.log(error);
+      }
+      
+      try {
+        const trans = await generateFakeTransactionData(10);
+        console.log(trans);
+        await pushTransactions(trans);
+      }
+      catch(error) {
+        console.log(error);
+      }
+    };
     const fetchTransactions = async () => {
       try {
         const response = await getTransactions();
@@ -38,6 +58,7 @@ const TransactionPage = () => {
         console.log(error);
       }
     };
+    feedData();
     fetchTransactions();
   }, []);
 
