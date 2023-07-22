@@ -179,13 +179,8 @@ const Dashboard = () => {
             justifyContent='space-around'
             alignItems='center'
             sx={{
-              background: 'hsla(348, 88%, 66%, 1)',
               background:
                 'linear-gradient(180deg, hsla(348, 88%, 66%, 1) 0%, hsla(36, 89%, 68%, 1) 100%)',
-              background:
-                '-moz-linear-gradient(180deg, hsla(348, 88%, 66%, 1) 0%, hsla(36, 89%, 68%, 1) 100%)',
-              background:
-                '-webkit-linear-gradient(180deg, hsla(348, 88%, 66%, 1) 0%, hsla(36, 89%, 68%, 1) 100%)',
               filter:
                 'progid: DXImageTransform.Microsoft.gradient( startColorstr="#f55c7a", endColorstr="#f6bc66", GradientType=1 )',
               height: '100px',

@@ -30,8 +30,6 @@ app.use(timeout(TIMEOUT));
 // Api routes
 app.use('/api', routers);
 
-console.log("quan nulo qua dihh");
-
 app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);
 });
