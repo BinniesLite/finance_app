@@ -1,0 +1,7 @@
+#wallet-card-div {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 60px;
+}

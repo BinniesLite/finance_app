@@ -9,7 +9,4 @@ COPY ./server .
 COPY ./server/package.json .
 
 RUN yarn install
-
 CMD ["yarn", "run", "dev"]
-
-

@@ -2,7 +2,7 @@ version: "1.5"
 
 services:
   client:
-    container_name: frontend
+    container_name: fe
     build:
       dockerfile: ./client/Dockerfile
     volumes: 
@@ -12,19 +12,22 @@ services:
     networks:
       finance:
         aliases:
-          - frontend
+          - fe 
   server:
     container_name: backend
     build:
       dockerfile: ./server/Dockerfile
     volumes: 
       - ./server/src:/usr/src/app/src
+      - ./server/prisma:/usr/src/app/prisma
     ports:
       - 3000:3000
     networks:
       finance:
         aliases:
           - backend
+    depends_on:
+      - postgresql
   postgresql:
     container_name: postgres
     build:

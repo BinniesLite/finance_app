@@ -1,18 +1,36 @@
+// express
 const express = require('express');
+const routers = require('./router');
+const cors = require('cors');
+const timeout = require('express-timeout');
+const { 
+    corsOptions, 
+    PORT, 
+    TIMEOUT  
+} = require('./configs/configs');
+
+require('dotenv').config();
+
 
 const app = express();
 
-const PORT = 3000;
+// Cors configuration
 
-app.get('/', (req, res) => {
-    res.send('Hi there Is it me you are looking for this is me and who I meant to be this is me look out ');
-    console.log(request); 
-});
+cors(corsOptions);
 
+// Body parser configuration
+app.use(express.json());
 
+// Cors configuration
+app.use(cors());
 
+// timeout
+app.use(timeout(TIMEOUT));
 
+// Api routes
+app.use('/api', routers);
 
+console.log("quan nulo qua dihh");
 
 app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);
