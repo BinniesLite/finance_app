@@ -91,9 +91,9 @@ const Navbar = () => {
             onClick={() => dispatch({ type: 'wallet' })}
             size='small'
             variant='outlined'
-            sx={{ borderRadius: '10px', backgroundColor: '#12131c' }}
+            sx={{ borderRadius: '10px', backgroundColor: '#555597' }}
           >
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Box sx={{ display: { xs: 'none', md: 'block', color:'white' } }}>
               Add Wallet
             </Box>
             {' + '}
@@ -109,9 +109,9 @@ const Navbar = () => {
             onClick={() => dispatch({ type: 'transaction' })}
             size='small'
             variant='outlined'
-            sx={{ borderRadius: '10px', backgroundColor: '#12131c' }}
+            sx={{ borderRadius: '10px', backgroundColor: '#555597' }}
           >
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Box sx={{ display: { xs: 'none', md: 'block', color:'white' } }}>
               Add Transaction
             </Box>
             {' + '}

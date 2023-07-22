@@ -10,9 +10,12 @@ import {
   Stack,
   SvgIcon,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
 
 const DBCard = ({ name, difference, positive = false, sx, value, icon }) => {
+  const isMediumScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   return (
     <Card sx={sx}>
@@ -29,18 +32,20 @@ const DBCard = ({ name, difference, positive = false, sx, value, icon }) => {
             </Typography>
             <Typography variant='h4'>${value}</Typography>
           </Stack>
-          <Avatar
-            sx={{
-              backgroundColor: 'error.main',
-              height: 56,
-              width: 56,
-            }}
-          >
-            <SvgIcon>
-              {icon}
-              {/* <HiCurrencyDollar /> */}
-            </SvgIcon>
-          </Avatar>
+          {(isSmallScreen) ? null : (
+            <Avatar
+              sx={{
+                backgroundColor: 'error.main',
+                height: 56,
+                width: 56,
+              }}
+            >
+              <SvgIcon>
+                {icon}
+                {/* <HiCurrencyDollar /> */}
+              </SvgIcon>
+            </Avatar>
+          )}
         </Stack>
         {difference && (
           <Stack alignItems='center' direction='row' spacing={2} sx={{ mt: 2 }}>

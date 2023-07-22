@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import WalletCard from '../WalletCard/WalletCard';
 import 'reactjs-popup/dist/index.css';
-import './WalletContent.css';
+import './WalletContent.css';   
 
 const WalletContent = ({ data }) => {
   return (
