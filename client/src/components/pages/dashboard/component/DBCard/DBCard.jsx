@@ -10,10 +10,13 @@ import {
   Stack,
   SvgIcon,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
 
-const DBCard = ({ difference, positive = false, sx, value }) => {
-  
+const DBCard = ({ name, difference, positive = false, sx, value, icon }) => {
+  const isMediumScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
   return (
     <Card sx={sx}>
       <CardContent>
@@ -25,21 +28,24 @@ const DBCard = ({ difference, positive = false, sx, value }) => {
         >
           <Stack spacing={1}>
             <Typography color='text.secondary' variant='overline'>
-              Budget
+              {name}
             </Typography>
             <Typography variant='h4'>${value}</Typography>
           </Stack>
-          <Avatar
-            sx={{
-              backgroundColor: 'error.main',
-              height: 56,
-              width: 56,
-            }}
-          >
-            <SvgIcon>
-              <HiCurrencyDollar />
-            </SvgIcon>
-          </Avatar>
+          {(isSmallScreen) ? null : (
+            <Avatar
+              sx={{
+                backgroundColor: 'error.main',
+                height: 56,
+                width: 56,
+              }}
+            >
+              <SvgIcon>
+                {icon}
+                {/* <HiCurrencyDollar /> */}
+              </SvgIcon>
+            </Avatar>
+          )}
         </Stack>
         {difference && (
           <Stack alignItems='center' direction='row' spacing={2} sx={{ mt: 2 }}>
@@ -65,10 +71,12 @@ const DBCard = ({ difference, positive = false, sx, value }) => {
 };
 
 DBCard.prototypes = {
+  name: PropTypes.string.isRequired,
   difference: PropTypes.number,
   positive: PropTypes.bool,
   sx: PropTypes.object,
   value: PropTypes.string.isRequired,
+  icon: PropTypes.elementType.isRequired,
 };
 
 export default DBCard;

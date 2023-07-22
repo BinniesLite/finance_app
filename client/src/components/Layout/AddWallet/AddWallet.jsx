@@ -1,123 +1,123 @@
-import { useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 // form
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-// components 
-import { Input, Label, FormGroup, Button, Form } from 'reactstrap';
+// components
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  TextField,
+  FormGroup,
+  FormLabel,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from '@mui/material';
 import Typography from '@mui/material/Typography';
-// css
-import './AddWallet.css';
+
+//context
+import AppContext from '../../../context/app/context';
+
 // api
 import { postWallets } from '../../../utils/http-request';
+// import getWallets from '../../../utils/http-request';
 
 const walletSchema = z.object({
   name: z.string(),
   description: z.string(),
 });
 
-const AddWallet = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+const AddWallet = ({ open, handleClose }) => {
+  const [wallets, setWallets] = useState([]);
+  // const appContext = useContext(AppContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: zodResolver(walletSchema),
   });
 
-  const addWalletStyle = {
-    width: '310px',
-    height: 'fit-content',
-    padding: '15px',
-    background: 'white',
-  justifyContent: 'center',
-    margin: 'auto',
-  };
+  useEffect(() => {
+    const fetchWallets = async () => {
+      const response = await getWallets();
+      setWallets(response);
+    };
+    fetchWallets();
+  }, [wallets]);
 
-
-
-  // const handleDateChange = (dates) => {
-  //   const [start, end] = dates;
-  //   setStartDate(start);
-  //   setEndDate(end);
-  // };
-
-  // const formatRange = () => {
-  //   if (startDate && endDate) {
-  //     const formattedStartDate = startDate.format('MM/DD/YYYY');
-  //     const formattedEndDate = endDate.format('MM/DD/YYYY');
-  //     return `${formattedStartDate} - ${formattedEndDate}`;
-  //   }
-  //   return '';
-  // };
+  // useEffect(() => {
+  //   setWallets(appContext.wallets);
+  // }, [appContext.wallets]);
 
   const onSubmit = async (data) => {
     const { name, description } = data;
-    
+    handleClose();
+
     try {
       const response = await postWallets({
         name,
         description,
       });
       console.log(response);
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
-
-
   };
 
-
   return (
-    <Form style={addWalletStyle} onSubmit={handleSubmit(onSubmit)}>
-      <Typography>
-        <h3>Add Wallet</h3>
-      </Typography>
-      <FormGroup>
-        <div className='d-flex align-items-center justify-content-flex-start'>
-          <Label
-            className='label-left'
-            style={{ color: 'black' }}
-            for='walletName'
+    <Dialog open={open} onClose={handleClose}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <DialogTitle>
+          <Typography
+            variant='h5'
+            sx={{ marginBottom: '10px', textAlign: 'center' }}
           >
-            Name
-          </Label>
-          <Label className='label-right' style={{ color: 'lightgrey' }}>
-            Mandatory
-          </Label>
-        </div>
-
-        <input
-          {...register('name')}
-          
-          type='text'
-         
-          placeholder='Name of the wallet'
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <div className='d-flex align-items-center justify-content-flex-start'>
-          <Label
-            className='label-left'
-            style={{ color: 'black' }}
-            for='walletName'
+            Add Wallet
+          </Typography>
+        </DialogTitle>
+        <DialogContent>
+          <FormControl sx={{ py: 3 }} fullWidth error={errors.name}>
+            <FormLabel for='walletName'>Wallet Name</FormLabel>
+            <TextField
+              {...register('name')}
+              type='text'
+              placeholder='Name of the wallet'
+              required
+              fullWidth
+            ></TextField>{' '}
+            <p>{errors?.name?.message}</p>
+          </FormControl>
+          <FormControl sx={{ py: 2 }} fullWidth error={errors.description}>
+            <FormLabel>Description</FormLabel>
+            <TextField
+              {...register('description')}
+              type='text'
+              placeholder='Description of the wallet'
+              required
+              fullWidth
+            ></TextField>
+            <p>{errors?.description?.message}</p>
+          </FormControl>
+          <button
+            type='submit'
+            style={{
+              display: 'block',
+              background: '#e0a4ed',
+              textAlign: 'center',
+              color: 'black',
+            }}
           >
-            Description
-          </Label>
-          <Label className='label-right' style={{ color: 'lightgrey' }}>
-            Mandatory
-          </Label>
-        </div>
-
-        <input
-          {...register('description')}
-          type='text'
-          placeholder='Name of the wallet'
-          required
-        />
-      </FormGroup>
-      <Button type='submit' id='add-w-save-b'>
-        Save Wallet
-      </Button>
-    </Form>
+            Save Wallet
+          </button>
+          <Button onClick={handleClose} sx={{ marginTop: '30px' }}>
+            Cancel
+          </Button>
+        </DialogContent>
+      </form>
+    </Dialog>
   );
 };
 

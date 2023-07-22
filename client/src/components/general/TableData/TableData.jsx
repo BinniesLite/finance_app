@@ -18,48 +18,11 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import FilterListIcon from '@mui/icons-material/FilterList';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FilterListIcon from '@mui/icons-material/FilterList';
 import { Button } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 
-function createData(
-  name,
-  id,
-  category,
-  account,
-  files,
-  amount,
-  description,
-  date
-) {
-  return {
-    name,
-    id,
-    category,
-    account,
-    files,
-    amount,
-    description,
-    date,
-  };
-}
-
-const rows = [
-  createData(
-    'Cupcake',
-    1,
-    'Grocery',
-    'Scotiabank',
-    null,
-    430,
-    '',
-    '2023-06-01'
-  ),
-  createData('Donut', 1, 'Grocery', 'Scotiabank', null, 430, '', '2023-06-01'),
-  createData('Pie', 1, 'Grocery', 'Scotiabank', null, 430, '', '2023-06-01'),
-  createData('Pizza', 1, 'Grocery', 'Scotiabank', null, 430, '', '2023-06-01'),
-];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -103,52 +66,28 @@ const headCells = [
     label: 'ID',
   },
   {
-    id: 'category',
-    numeric: false,
-    disablePadding: false,
-    label: 'Category',
-  },
-  {
-    id: 'account',
-    numeric: true,
-    disablePadding: false,
-    label: 'Account',
-  },
-  {
-    id: 'files',
-    numeric: false,
-    disablePadding: false,
-    label: 'Files',
-  },
-  {
-    id: 'amount',
-    numeric: true,
-    disablePadding: false,
-    label: 'Amount',
-  },
-  {
     id: 'description',
     numeric: false,
     disablePadding: false,
     label: 'Description',
   },
   {
-    id: 'date',
+    id: 'createdAt',
     numeric: true,
     disablePadding: false,
     label: 'Date',
   },
 ];
 
-function EnhancedTableHead(props) {
-  const {
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
+function EnhancedTableHead({
+  onSelectAllClick,
+  order,
+  orderBy,
+  numSelected,
+  rowCount,
+  onRequestSort,
+  data,
+}) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -170,7 +109,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.id == 'name'? "left" : "right"}
+            align={headCell.id == 'name' ? 'left' : 'right'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -200,11 +139,11 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
-function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
-  const [row, setRow] = React.useState([...rows]);
+function EnhancedTableToolbar({ numSelected, data}) {
+  const [row, setRow] = React.useState([...data]);
   const [selected, setSelected] = React.useState([]);
   const handleDelete = () => {
     // const updatedRows = row.filter((e) => !selected.includes(e.name));
@@ -249,13 +188,13 @@ function EnhancedTableToolbar(props) {
       {numSelected > 0 ? (
         <Tooltip title='Delete'>
           <IconButton onClick={handleDelete}>
-            {/* <DeleteIcon /> */}
+            <DeleteIcon />
           </IconButton>
         </Tooltip>
       ) : (
         <Tooltip title='Filter list'>
           <IconButton>
-            {/* <FilterListIcon /> */}
+            <FilterListIcon />
           </IconButton>
         </Tooltip>
       )}
@@ -265,9 +204,10 @@ function EnhancedTableToolbar(props) {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ data }) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('id');
   const [selected, setSelected] = React.useState([]);
@@ -283,7 +223,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = data.map((n) => n.name);
       setSelected(newSelected);
       return;
     }
@@ -331,7 +271,7 @@ export default function EnhancedTable() {
 
   const visibleRows = React.useMemo(
     () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
+      stableSort(data, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
@@ -348,6 +288,7 @@ export default function EnhancedTable() {
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar
           numSelected={selected.length}
+          data={data}
           // selectedRows={selectedRows}
         />
         <TableContainer>
@@ -362,7 +303,7 @@ export default function EnhancedTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={Object.values(data).length}
             />
             <TableBody>
               {visibleRows.map((row, index) => {
@@ -397,13 +338,9 @@ export default function EnhancedTable() {
                     >
                       {row.name}
                     </TableCell>
-                    <TableCell align='right'>{row.id}</TableCell>
-                    <TableCell align='right'>{row.category}</TableCell>
-                    <TableCell align='right'>{row.account}</TableCell>
-                    <TableCell align='right'>{row.files}</TableCell>
-                    <TableCell align='right'>{row.amount}</TableCell>
+                    <TableCell align='right'>{row.walletID}</TableCell>
                     <TableCell align='right'>{row.description}</TableCell>
-                    <TableCell align='right'>{row.date}</TableCell>
+                    <TableCell align='right'>{row.createdAt}</TableCell>
                   </TableRow>
                 );
               })}
@@ -422,7 +359,7 @@ export default function EnhancedTable() {
         <TablePagination
           rowsPerPageOptions={[10, 25, 40]}
           component='div'
-          count={rows.length}
+          count={Object.values(data).length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
