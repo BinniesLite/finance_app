@@ -75,7 +75,7 @@ const SignInPage = () => {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </i>
         </div>
-        <button type='submit'>Submit</button>
+        <button type='submit' onClick={() => navigate('/dashboard')}>Submit</button>
 
         <div className='signup-link'>
           <p> Do not have an account?</p>

@@ -1,35 +1,41 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useContext, useMemo } from 'react';
 // components
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Typography from "@mui/material/Typography";
-import { FormControl, InputLabel, InputAdornment } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Typography from '@mui/material/Typography';
+import { FormControl, InputLabel, InputAdornment } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 // form
-import { useForm } from "react-hook-form";
+import { set, useForm } from 'react-hook-form';
 // schema validation
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 // api
-import { postTransactions, getWallets } from "../../utils/http-request";
+import {
+  postTransactions,
+  getWallets,
+  getTransactions,
+} from '../../utils/http-request';
+import { formatTransactionList } from '../../utils/helper';
+import AppContext from '../../context/app/context';
 
 const transactionSchema = z.object({
   amount: z.string(),
-  type: z.enum(["income", "expense"]),
+  type: z.enum(['income', 'expense']),
   walletId: z.string(),
   description: z.string(),
 });
 
 const TransactionAdd = ({ open, handleClose }) => {
-
+  const appContext = useContext(AppContext);
   const [wallets, setWallets] = React.useState([]);
-  
-  
+  const [transaction, setTransaction] = React.useState([]);
+
   const {
     register,
     handleSubmit,
@@ -38,26 +44,42 @@ const TransactionAdd = ({ open, handleClose }) => {
     resolver: zodResolver(transactionSchema),
   });
 
+  //fetch wallets
   useEffect(() => {
     const fetchWallets = async () => {
-      const wallets = await getWallets();
-      setWallets(wallets);
+      const response = await getWallets();
+      setWallets(response);
+      // await appContext.getWallets();
+      // setWallets(appContext.wallets);
     };
     fetchWallets();
-  }, []);
+  }, [wallets]);
+
+  // useEffect(() => {
+  //   setWallets(appContext.wallets);
+  // }, [appContext.wallets]);
+
+  //fetch transactions
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      const response = await getTransactions();
+      const formattedTransaction = await formatTransactionList(response);
+      setTransaction(formattedTransaction);
+    };
+    fetchTransactions();
+  }, [transaction]);
 
   const onSubmit = async (data) => {
     const { amount, type, walletId, description } = data;
     handleClose();
-    
+
     try {
-      await postTransactions({
+      const response = await appContext.addTransaction({
         amount: parseFloat(amount),
         type,
         walletId,
         description,
       });
-      
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +89,7 @@ const TransactionAdd = ({ open, handleClose }) => {
     <Dialog open={open} onClose={handleClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogTitle>
-          <Typography variant="h5" color="primary.main">
+          <Typography variant='h5' color='primary.main'>
             Add Transaction
           </Typography>
         </DialogTitle>
@@ -77,24 +99,24 @@ const TransactionAdd = ({ open, handleClose }) => {
               <InputLabel>Amount</InputLabel>
               <TextField
                 sx={{ pt: 4 }}
-                {...register("amount")}
-                type="number"
+                {...register('amount')}
+                type='number'
                 fullWidth
-                variant="standard"
+                variant='standard'
                 onBlur={(e) => {
                   const numericValue = e.target.value;
-                  const formattedValue = numericValue.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
+                  const formattedValue = numericValue.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
                   });
                   e.target.value = formattedValue;
                 }}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
+                    <InputAdornment position='start'>$</InputAdornment>
                   ),
-                  step: "any",
-                  pattern: "\\d*",
+                  step: 'any',
+                  pattern: '\\d*',
                 }}
               />
               <p>{errors?.amount?.message}</p>
@@ -103,17 +125,17 @@ const TransactionAdd = ({ open, handleClose }) => {
             <FormControl
               sx={{ py: 2 }}
               error={errors.type}
-              variant="standard"
+              variant='standard'
               fullWidth
             >
               <InputLabel>Type</InputLabel>
-              <Select {...register("type")}>
-                <MenuItem value="income">
-                  <Typography sx={{ color: "green" }} color="primary.success">
+              <Select {...register('type')}>
+                <MenuItem value='income'>
+                  <Typography sx={{ color: 'green' }} color='primary.success'>
                     Income
                   </Typography>
                 </MenuItem>
-                <MenuItem sx={{ color: "red" }} value="expense">
+                <MenuItem sx={{ color: 'red' }} value='expense'>
                   Expense
                 </MenuItem>
               </Select>
@@ -123,12 +145,12 @@ const TransactionAdd = ({ open, handleClose }) => {
             <FormControl
               error={errors.wallet}
               fullWidth
-              variant="standard"
-              sx={{ py: 3, maxHeight: "7rem", overflowY: "auto" }}
+              variant='standard'
+              sx={{ py: 3, maxHeight: '7rem', overflowY: 'auto' }}
             >
-              <InputLabel id="">Select Wallet</InputLabel>
-              <Select {...register("walletId")} label="Select Wallet">
-                {wallets?.map((wallet) => (
+              <InputLabel id=''>Select Wallet</InputLabel>
+              <Select {...register('walletId')} label='Select Wallet'>
+                {Object.values(wallets).map((wallet) => (
                   <MenuItem key={wallet.id} value={wallet.id}>
                     {wallet.name}
                   </MenuItem>
@@ -137,22 +159,22 @@ const TransactionAdd = ({ open, handleClose }) => {
               <p>{errors?.wallet?.message}</p>
             </FormControl>
             <TextField
-              {...register("description")}
-              type="text"
+              {...register('description')}
+              type='text'
               fullWidth
-              label="Description"
-              variant="standard"
+              label='Description'
+              variant='standard'
               sx={{ py: 3 }}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start"></InputAdornment>
+                  <InputAdornment position='start'></InputAdornment>
                 ),
-                step: "any",
-                pattern: "\\d*",
+                step: 'any',
+                pattern: '\\d*',
               }}
             />
             <Button onClick={handleClose}>Cancel</Button>
-            <button type="submit">Add Transaction</button>
+            <button type='submit'>Add Transaction</button>
           </DialogContentText>
         </DialogContent>
       </form>

@@ -1,12 +1,26 @@
 import React from 'react';
-import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  Legend,
+  Tooltip,
+  Cell,
+  ResponsiveContainer,
+} from 'recharts';
 import PropTypes from 'prop-types';
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#c698f5', '#fa5757'];
+const COLORS = [
+  '#0088FE',
+  '#00C49F',
+  '#FFBB28',
+  '#FF8042',
+  '#c698f5',
+  '#fa5757',
+];
 
 const PieCharts = ({ pieData }) => {
   return (
-    <PieChart width={1000} height={400}>
+    <PieChart width={400} height={400}>
       <Pie
         dataKey='value'
         isAnimationActive={false}

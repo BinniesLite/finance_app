@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../Navbar/Navbar';
-import Sidebar from '../Sidebar/SidebarDesktop';
+import Navbar from '../../Layout/Navbar/Navbar';
+import Sidebar from '../../Layout/Sidebar/SidebarDesktop';
 import { useNavigate } from 'react-router-dom';
 import Chat from '../../chat/Chat';
 
@@ -28,7 +28,6 @@ const LayoutWrapper = ({ children }) => {
       <div
         style={{
           width: '100%',
-         
           marginLeft: '0',
         }}
       >

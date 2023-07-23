@@ -1,13 +1,19 @@
 import { React, useState, useEffect } from "react";
-import "./Transactions.css"; 
-import { Grid, Button, Typography, Avatar, Stack } from "@mui/material";
+import "./Transactions.css";
+import { Stack } from "@mui/material";
 import CustomTabs from "../../general/CustomTabs";
 
-import CustomTable from "../../general/table/CustomTable";
-import Section from "../../layout/Section/Section";
+import Section from "../../Layout/Section/Section";
 import TransactionGridView from "./components/TransactionGridView/TransactionGridView";
-import { formatTransactionList, generateFakeTransactionData, generateFakeWallets, pushTransactions, pushWallets } from "../../../utils/helper";
+import {
+  formatTransactionList,
+  generateFakeTransactionData,
+  generateFakeWallets,
+  pushTransactions,
+  pushWallets,
+} from "../../../utils/helper";
 import { getTransactions } from "../../../utils/http-request";
+import CustomTable from "../../general/table/CustomTable";
 
 const TransactionPage = () => {
   var [activeTab, setView] = useState(0);
@@ -19,19 +25,18 @@ const TransactionPage = () => {
 
   useEffect(() => {
     const feedData = async () => {
-      const wallets = generateFakeWallets(10);
+      const wallets = generateFakeWallets(1);
       try {
         await pushWallets(wallets);
-      } catch(error) {
+      } catch (error) {
         console.log(error);
       }
-      
+
       try {
-        const trans = await generateFakeTransactionData(10);
+        const trans = await generateFakeTransactionData(1);
         console.log(trans);
         await pushTransactions(trans);
-      }
-      catch(error) {
+      } catch (error) {
         console.log(error);
       }
     };
@@ -39,6 +44,7 @@ const TransactionPage = () => {
       try {
         const transactions = await getTransactions();
         const formattedTransaction = await formatTransactionList(transactions);
+        console.log(formattedTransaction);
         setTransactionData(formattedTransaction);
       } catch (error) {
         console.log(error);
@@ -47,16 +53,16 @@ const TransactionPage = () => {
     feedData();
     fetchTransactions();
   }, []);
-const tabs = [
+  const tabs = [
     {
       id: "list",
       label: "List",
-      component: <CustomTable data={transactionData} />,
+      component: <CustomTable transactions={transactionData} />,
     },
     {
       id: "grid",
       label: "Grid",
-      component: <TransactionGridView transactions={transactionData}/>,
+      component: <TransactionGridView transactions={transactionData} />,
     },
   ];
   return (

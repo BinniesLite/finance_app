@@ -38,4 +38,5 @@ model Transaction {
   createdAt DateTime @default(now())
   description String? 
   type TransactionType
+  image String?
 }

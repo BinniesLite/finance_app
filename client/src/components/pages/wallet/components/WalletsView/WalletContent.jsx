@@ -1,28 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import WalletCard from '../WalletCard/WalletCard';
 import 'reactjs-popup/dist/index.css';
-import './WalletContent.css';
+import './WalletContent.css';   
 
-// api
-import { getTransactions } from '../../../../../utils/http-request';
-import { postTransactions } from '../../../../../utils/http-request';
-
-const WalletsPage = () => {
-  const [walletData, setWalletData] = useState([]);
-
-  // CORS
-
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      const transactions = await getTransactions();
-      
-      setWalletData(transactions);
-    };
-
-    fetchTransactions();
-  }, []);
-
-
+const WalletContent = ({ data }) => {
   return (
     <>
       <div
@@ -38,7 +19,7 @@ const WalletsPage = () => {
           background: 'rgba(255,255,255, 0.3)',
         }}
       >
-        {Object.values(walletData).map((wallet) => (
+        {Object.values(data).map((wallet) => (
           <div
             style={{
               marginTop: '15px',
@@ -49,7 +30,7 @@ const WalletsPage = () => {
             }}
             key={wallet.id}
           >
-            <WalletCard name={wallet.name} amount={wallet.amount} />
+            <WalletCard name={wallet.name} id={wallet.id} date={wallet.date} description={wallet.description}/>
           </div>
         ))}
       </div>
@@ -57,4 +38,4 @@ const WalletsPage = () => {
   );
 };
 
-export default WalletsPage;
+export default WalletContent;

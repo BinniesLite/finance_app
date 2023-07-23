@@ -3,11 +3,7 @@ import Stack from '@mui/material/Stack';
 import { links } from '../../../constants/links';
 import Typography from '@mui/material/Typography';
 import { Divider, IconButton } from '@mui/material';
-import {
-  AiOutlineCaretRight,
- 
-  AiOutlineMenu,
-} from 'react-icons/ai';
+import { AiOutlineCaretRight, AiOutlineMenu } from 'react-icons/ai';
 
 const buckets = [
   {
@@ -30,7 +26,12 @@ const Circle = ({ backgroundColor }) => {
   );
 };
 
-const Sidebar = ({ activePage, handleActivePage, isMinimized, setIsMinimized }) => {
+const Sidebar = ({
+  activePage,
+  handleActivePage,
+  isMinimized,
+  setIsMinimized,
+}) => {
   // const [isMinimized, setIsMinimized] = useState(false);
 
   const toggleIsMinimized = () => {
@@ -48,11 +49,12 @@ const Sidebar = ({ activePage, handleActivePage, isMinimized, setIsMinimized }) 
         top: '0',
         color: 'gray ',
         zIndex: '10',
-        backgroundColor: 'background.dark',
+        backgroundColor: '#f5f6f7',
+        // backgroundColor: 'background.dark',
         boxShadow: '0 0 10px rgba(0,0,0,0.2)',
         transition: 'width 0.2s',
         minWidth: '50px',
-        maxWidth: isMinimized ? '50px' : '15rem',
+        maxWidth: isMinimized ? '60px' : '15rem',
       }}
     >
       <Stack
@@ -69,7 +71,7 @@ const Sidebar = ({ activePage, handleActivePage, isMinimized, setIsMinimized }) 
           </Typography>
         )}
         <IconButton onClick={toggleIsMinimized}>
-          <AiOutlineMenu style={{ color: 'white' }} />
+          <AiOutlineMenu style={{ color: 'black' }} />
         </IconButton>
       </Stack>
       <Divider color='gray' />
@@ -79,6 +81,7 @@ const Sidebar = ({ activePage, handleActivePage, isMinimized, setIsMinimized }) 
             onClick={() => handleActivePage(link.name)}
             style={{
               display: 'flex',
+              flexDirection: isMinimized ? 'column' : 'row',
               alignItems: 'center',
               background: `${activePage === link.name ? 'black' : 'none'}`,
               cursor: 'pointer',
@@ -118,7 +121,7 @@ const Sidebar = ({ activePage, handleActivePage, isMinimized, setIsMinimized }) 
             variant='h5'
           ></Typography>
         ) : (
-          <Typography color='background.default' fontWeight='600' variant='h5'>
+          <Typography color='black' fontWeight='600' variant='h5'>
             Auth Pages
           </Typography>
         )}

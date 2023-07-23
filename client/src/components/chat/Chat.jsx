@@ -7,7 +7,7 @@ import {SiChatbot} from 'react-icons/si'
 
 const Chat = () => {
   return (
-    <Box sx={{position: "fixed", bottom: "5rem", right: "5rem", cursor: "pointer"}}>
+    <Box sx={{position: "fixed", bottom: "5rem", right: "5rem", cursor: "pointer", zIndex: '9999'}}>
         <Tooltip title="Chat bot">
           <Paper elevation={5}>
             <Box sx={{p:  1}}>
