@@ -19,6 +19,13 @@ import {
   GET_TOTAL_EXPENSES,
   GET_TOTAL_BALANCE,
   SET_LOADING,
+  AUTH_ERROR,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
 } from '../types';
 
 const AppState = (props) => {
@@ -33,10 +40,23 @@ const AppState = (props) => {
     totalBalance: [],
     error: null,
     loading: true,
+    token: localStorage.getItem('token'),
+    isAuthenticated: null,
+    user: null,
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const baseUrl = 'http://localhost:3000/api';
+
+  // Load User
+  
+  // Register User
+
+  // Login User
+
+  // Logout
+
+  // Clear Errors
 
   // Get Wallets
   const getWallets = async () => {
@@ -203,6 +223,11 @@ const AppState = (props) => {
   return (
     <AppContext.Provider
       value={{
+        token: state.token,
+        isAuthenticated: state.isAuthenticated,
+        user: state.user,
+        error: state.error,
+
         wallets: state.wallets,
         transactions: state.transactions,
         income: state.income,
@@ -217,6 +242,7 @@ const AppState = (props) => {
         getTransactions,
         addTransaction,
         deleteTransaction,
+
       }}
     >
       {props.children}

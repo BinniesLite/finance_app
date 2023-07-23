@@ -27,7 +27,6 @@ const getTransactionById = async (req, res) => {
 };
 
 const createTransaction = async (req, res) => {
-    
         try {
         const { amount, description, type, walletId } = req.body;
        
