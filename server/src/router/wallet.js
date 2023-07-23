@@ -1,51 +1,36 @@
-const prisma = require('../prisma');
+const express = require("express");
+// controller
+const {
+  getAllWallets,
+  getWalletById,
+  createWallet,
+  deleteWallet,
+  changeWalletName
+} = require("../controllers/wallet");
+// validation
+const validate = require("../middleware/validate");
+const walletSchema = require("../validations/wallet.validation");
 
-const {getTransactionByWalletId} = require('../controllers/wallet');
-const express = require('express');
 const router = express.Router();
 
-
-router.get('/', async (req, res) => {
-    
-    try {
-        const wallets = await prisma.wallet.findMany();   
-        res.json(wallets)
-
-    }
-    catch (error) {
-        res.json(error);    
-    }
-})
+// get all wallets
+//endpoint: /api/wallet
+router.get("/", getAllWallets);
 
 // get wallet by id
-router.get('/:id', async (req, res) => {
-    const { id } = req.params;
-    const wallet = await prisma.wallet.findUnique({
-        where: {
-            id: id
-        }
-    });
-    res.json(wallet);
-});
+// endpoint: /api/wallet/:id
+router.get("/:id", getWalletById);
 
-router.post("/create", async (req, res) => {
-        const { name } = req.body;
-        const result = await prisma.wallet.create({
-            data: {
-                name: name,
-            }
-        });
+// create wallet
+// endpoint: /api/wallet/create
+router.post("/create", validate(walletSchema), createWallet);
 
-        res.status(201).json(result)
-    }
-);
+// delete wallet
+// endpoint: /api/wallet/delete/:id
+router.delete("/delete/:id", deleteWallet);
 
-
-
-
-// query transaction by wallet id
-router.get('/:id/transactions', getTransactionByWalletId);
-
-
+// name change
+// endpoint: /api/wallet/name/:id
+router.put("/name/:id", validate(walletSchema), changeWalletName);
 
 module.exports = router;
