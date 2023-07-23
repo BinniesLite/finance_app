@@ -30,6 +30,9 @@ app.use(timeout(TIMEOUT));
 // Api routes
 app.use('/api', routers);
 
+console.log("Backend is running");
+
+
 app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);
 });

@@ -1,7 +1,8 @@
 const express = require("express");
 const transactionRouter = require("./transaction");
 const walletRouter = require("./wallet");
-const incomeRouter = require("./income");
+const filterRouter = require("./filter");
+const calculationRouter = require("./calculation");
 const chatRouter = require("./chat");
 
 
@@ -17,14 +18,24 @@ const appRoutes = [
         route: walletRouter,
     },
     {
-        path: "/income",
-        route: incomeRouter,
+        path: "/filter",
+        route: filterRouter,
+    },
+    {
+        path: "/calculation",
+        route: calculationRouter,
     },
     {
         path: "/chat",
         route: chatRouter,
+    },
+    {
+        path: "/",
+        route: async (req, res) => {
+            console.log("Welcome to Wallet API");
+            res.send("Welcome to Wallet API");
+        }
     }
-
 ]
 
 appRoutes.forEach((route) => {
