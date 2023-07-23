@@ -22,7 +22,7 @@ import AppContext from '../../../context/app/context';
 
 // api
 import { postWallets } from '../../../utils/http-request';
-// import getWallets from '../../../utils/http-request';
+import { getWallets } from '../../../utils/http-request';
 
 const walletSchema = z.object({
   name: z.string(),

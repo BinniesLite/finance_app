@@ -23,7 +23,6 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { Button } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -58,12 +57,6 @@ const headCells = [
     numeric: false,
     disablePadding: true,
     label: 'Wallet Name',
-  },
-  {
-    id: 'walletID',
-    numeric: true,
-    disablePadding: false,
-    label: 'ID',
   },
   {
     id: 'description',
@@ -109,7 +102,7 @@ function EnhancedTableHead({
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.id == 'name' ? 'left' : 'right'}
+            align='left'
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -142,14 +135,9 @@ EnhancedTableHead.propTypes = {
   data: PropTypes.array.isRequired,
 };
 
-function EnhancedTableToolbar({ numSelected, data}) {
+function EnhancedTableToolbar({ numSelected, data }) {
   const [row, setRow] = React.useState([...data]);
   const [selected, setSelected] = React.useState([]);
-  const handleDelete = () => {
-    // const updatedRows = row.filter((e) => !selected.includes(e.name));
-    // setRow(updatedRows);
-    // setSelected([]);
-  };
 
   return (
     <Toolbar
@@ -187,7 +175,7 @@ function EnhancedTableToolbar({ numSelected, data}) {
 
       {numSelected > 0 ? (
         <Tooltip title='Delete'>
-          <IconButton onClick={handleDelete}>
+          <IconButton>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -207,7 +195,7 @@ EnhancedTableToolbar.propTypes = {
   data: PropTypes.array.isRequired,
 };
 
-export default function EnhancedTable({ data }) {
+export default function TableData({ data }) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('id');
   const [selected, setSelected] = React.useState([]);
@@ -278,19 +266,10 @@ export default function EnhancedTable({ data }) {
     [order, orderBy, page, rowsPerPage]
   );
 
-  // const selectedRows = visibleRows.filter((row) =>
-  //   newSelected.includes(row.name)
-  // );
-  // setSelectedRows(selectedRows);
-
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar
-          numSelected={selected.length}
-          data={data}
-          // selectedRows={selectedRows}
-        />
+        <EnhancedTableToolbar numSelected={selected.length} data={data} />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -338,8 +317,7 @@ export default function EnhancedTable({ data }) {
                     >
                       {row.name}
                     </TableCell>
-                    <TableCell align='right'>{row.walletID}</TableCell>
-                    <TableCell align='right'>{row.description}</TableCell>
+                    <TableCell align='left'>{row.description}</TableCell>
                     <TableCell align='right'>{row.createdAt}</TableCell>
                   </TableRow>
                 );

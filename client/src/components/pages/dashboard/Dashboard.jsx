@@ -3,35 +3,21 @@ import Section from '../../Layout/Section/Section';
 import LineChart from './component/LineChart/LineChart';
 import PieCharts from './component/PieChart/PieCharts';
 import DBCard from './component/DBCard/DBCard';
-// import CustomTable from '../../general/table/CustomTable';
+import CustomTable from '../../general/table/CustomTable';
 import { Grid, Stack, Typography, useMediaQuery } from '@mui/material';
-import { HiCurrencyDollar } from 'react-icons/hi';
 
 //api
 import { getTransactions } from '../../../utils/http-request';
-import AddWallet from '../../Layout/AddWallet/AddWallet';
 
 //image
 import char5 from '../../../assets/char5.svg';
+import { HiCurrencyDollar } from 'react-icons/hi';
 import pointDown from '../../../assets/pointDown.jpg';
 import assistant from '../../../assets/assistant.webp';
 
 const Dashboard = () => {
   const [transactionData, setTransactionData] = useState([]);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      try {
-        const transactions = await getTransactions();
-        setTransactionData(transactions);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchTransactions();
-  }, []);
 
   //hardcoded data for the charts
   const lineData = [
@@ -157,6 +143,37 @@ const Dashboard = () => {
       value: '23444',
     },
   ];
+
+  useEffect(() => {
+    const feedData = async () => {
+      const wallets = generateFakeWallets(1);
+      try {
+        await pushWallets(wallets);
+      } catch (error) {
+        console.log(error);
+      }
+
+      try {
+        const trans = await generateFakeTransactionData(1);
+        console.log(trans);
+        await pushTransactions(trans);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const fetchTransactions = async () => {
+      try {
+        const transactions = await getTransactions();
+        const formattedTransaction = await formatTransactionList(transactions);
+        console.log(formattedTransaction);
+        setTransactionData(formattedTransaction);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    feedData();
+    fetchTransactions();
+  }, []);
   return (
     <Section title='Dashboard'>
       <Grid
@@ -278,7 +295,7 @@ const Dashboard = () => {
           >
             <h4 variant='h6'>Recent Transactions</h4>
             <p>Latest transaction all the time</p>
-            {/* <CustomTable data={transactionData} /> */}
+            <CustomTable data={transactionData} />
           </Stack>
           <Stack sx={{ paddingTop: '30px' }}>
             <img
