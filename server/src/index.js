@@ -21,13 +21,13 @@ const app = express();
 
 // Cors configuration
 
-cors(corsOptions);
+// cors(corsOptions);
+// // Cors configuration
+// app.use(cors());
 
 // Body parser configuration
 app.use(express.json());
 
-// Cors configuration
-app.use(cors());
 
 // Compression
 app.use(compression());

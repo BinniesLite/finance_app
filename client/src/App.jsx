@@ -4,6 +4,14 @@ import { navigation } from './router/navigation';
 import './App.css';
 
 function App() {
+  const demo = async () => {
+    const res = await fetch("https://finance-app-bunny-lover-ebeaf04be2db.herokuapp.com/api/transaction")
+    const data = await res.json();
+    console.log(data);
+  }
+
+  demo(); 
+
   return (
     <AppState>
       <Router>
