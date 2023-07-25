@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build:client": "cd client && yarn install && yarn run build",
-    "build:server": "cd server && yarn install && yarn run build",
-    "deploy": "yarn run build:client && yarn run build:server"
+    "build:server": "cd server && yarn install && yarn start",
+    "deploy": "build:client && build:server"
   }
 }
