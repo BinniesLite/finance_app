@@ -1,3 +1,3 @@
 
 // give heroku the command to run the server
-web: yarn start
+web: node server/index.js
