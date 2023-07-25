@@ -7,7 +7,7 @@
     "dev": "nodemon -L",
     "prisma:dev": "yarn prisma migrate dev",
     "prisma:deploy": "yarn prisma migrate deploy",
-    "start": "yarn prisma migrate deploy && node index.js"
+    "start": "yarn prisma migrate deploy && node src/index.js"
   },
   "dependencies": {
     "@prisma/client": "^4.14.1",
