@@ -48,16 +48,19 @@ const columns = [
 const options = {
   filterType: "checkbox",
 };
-const CustomTable = ({transactions}) => {
+const CustomTable = ({transactions, loading}) => {
   const data = transactions;
+  
   return (
-      <MUIDataTable
-      title={"Transaction List"}
+    <MUIDataTable
+      title={"Transactions"}
       data={data}
       columns={columns}
       options={options}
+      loading={loading}
     />
   );
+
 };
 
 export default CustomTable;

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useMemo } from 'react';
+import React, { useEffect, useContext } from 'react';
 // components
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -11,18 +11,17 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 // form
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 // schema validation
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 // api
 import {
-  postTransactions,
   getWallets,
   getTransactions,
 } from '../../utils/http-request';
 import { formatTransactionList } from '../../utils/helper';
-import AppContext from '../../context/app/context';
+import AppContext from '@/context/app/context';
 
 const transactionSchema = z.object({
   amount: z.string(),
@@ -55,11 +54,7 @@ const TransactionAdd = ({ open, handleClose }) => {
     fetchWallets();
   }, [wallets]);
 
-  // useEffect(() => {
-  //   setWallets(appContext.wallets);
-  // }, [appContext.wallets]);
-
-  //fetch transactions
+  
   useEffect(() => {
     const fetchTransactions = async () => {
       const response = await getTransactions();
@@ -74,7 +69,7 @@ const TransactionAdd = ({ open, handleClose }) => {
     handleClose();
 
     try {
-      const response = await appContext.addTransaction({
+      await appContext.addTransaction({
         amount: parseFloat(amount),
         type,
         walletId,

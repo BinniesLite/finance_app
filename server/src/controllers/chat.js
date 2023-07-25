@@ -46,7 +46,10 @@ const sendChat = async (req, res) => {
     conversationHistory.push({ role: 'assistant', content: response.data.choices[0].message.content });
 
     // Send the AI's response to the client
-    res.status(httpStatus.OK).json(conversationHistory);
+    res.status(httpStatus.OK).json({
+      conversationHistory: conversationHistory,
+      data: response.data.choices[0].message.content,
+    });
 
   } catch (error) {
     console.log(error);

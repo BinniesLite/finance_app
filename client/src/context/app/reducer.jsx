@@ -16,7 +16,8 @@ import {
   SET_LOADING,
 } from '../types';
 
-export default (state, action) => {
+
+const AppReducer =(state, action) => {
   switch (action.type) {
     case GET_WALLETS:
       return {
@@ -113,3 +114,6 @@ export default (state, action) => {
       return state;
   }
 };
+
+
+export default AppReducer; 
