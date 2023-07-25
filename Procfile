@@ -1,1 +1,1 @@
-web: nodemon server/index.js
+web: cd server && yarn start
