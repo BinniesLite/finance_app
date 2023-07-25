@@ -1,43 +1,42 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useCallback } from 'react';
 
 //components
 import Stack from '@mui/material/Stack';
-import CustomTabs from '../../general/CustomTabs';
-import TableData from '../../general/TableData/TableData';
+import CustomTabs from '@/components/general/CustomTabs';
+import TableData from '@/components/general/TableData/TableData';
 import WalletContent from './components/WalletsView/WalletContent';
 import Section from '../../Layout/Section/Section';
 
 //api
-import AppContext from '../../../context/app/context';
-import { getWallets } from '../../../utils/http-request';
-import { formatWalletList } from '../../../utils/helper';
+import AppContext from '@/context/app/context';
 
 
 //css
 import './WalletsPage.css';
 
 const WalletsPage = () => {
-  // const appContext = useContext(AppContext);
+  const appContext = useContext(AppContext);
   var [activeTab, setView] = useState(0);
 
   const changeView = (event, newView) => {
     setView(newView);
   };
 
-  const [walletData, setWalletData] = useState([]);
+  const {wallets, loading, getWallets} = appContext;
 
+  
   // CORS
 
+ 
+  console.log(wallets);
   useEffect(() => {
     const fetchWallets = async () => {
-      const response = await getWallets();
-      const formattedWallet = await formatWalletList(response);
-      setWalletData(formattedWallet);
-      // setWalletData(appContext.wallets);
+      await getWallets();
     };
-
+    
     fetchWallets();
-  }, [walletData]);
+  }, []); // Use the memoized function as a dependency instead of getWallets
+
 
   // useEffect(() => {
   //   setWalletData(appContext.wallets);
@@ -47,12 +46,12 @@ const WalletsPage = () => {
     {
       id: 'list',
       label: 'List',
-      component: <TableData data={walletData} />,
+      component: <TableData data={wallets} loading={loading} />,
     },
     {
       id: 'grid',
       label: 'Grid',
-      component: <WalletContent data={walletData} />,
+      component: <WalletContent data={wallets} loading={loading} />,
     },
   ];
 

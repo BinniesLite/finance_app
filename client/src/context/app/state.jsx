@@ -2,8 +2,10 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import AppContext from './context';
 import AppReducer from './reducer';
+import baseUrl from '@/api/baseUrl';
 
-import {
+import 
+{
   GET_WALLETS,
   ADD_WALLET,
   DELETE_WALLET,
@@ -36,18 +38,20 @@ const AppState = (props) => {
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);
-  const baseUrl = 'http://localhost:3000/api';
 
   // Get Wallets
   const getWallets = async () => {
-    setLoading();
+    dispatch({ type: SET_LOADING });
     try {
+      console.log(baseUrl);
       const res = await axios.get(baseUrl + '/wallet');
+      
       dispatch({
         type: GET_WALLETS,
         payload: res.data,
       });
     } catch (err) {
+      
       dispatch({
         type: WALLET_ERROR,
         payload: err.response.msg,
@@ -139,7 +143,7 @@ const AppState = (props) => {
 
   // Get Transactions
   const getTransactions = async () => {
-    setLoading();
+    dispatch({ type: SET_LOADING });
     try {
       const res = await axios.get(baseUrl + '/transaction');
       dispatch({

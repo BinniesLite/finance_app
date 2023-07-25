@@ -3,14 +3,13 @@ const prisma = require("../db/prisma");
 // get all wallets
 //endpoint: /api/wallet
 const getAllWallets = async (req, res) => {
-    console.log("get all wallets");
     try {
         const wallets = await prisma.wallet.findMany();
         res.status(200).json(wallets);
     } catch (error) {
         res.status(500).json(error);
     }
-    console.log("get all wallets end");
+   
 };
 
 // get wallet by id

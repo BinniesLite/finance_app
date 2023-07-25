@@ -50,7 +50,7 @@ const getTransactionByWalletId = async (req, res) => {
 // create transaction
 // endpoint: /api/transaction/create
 const createTransaction = async (req, res) => {
-    const { amount, description, type, walletId } = req.body;
+    const { amount, description, type, walletId, date } = req.body;
     try {
         const result = await prisma.transaction.create({
             data: {
@@ -58,6 +58,7 @@ const createTransaction = async (req, res) => {
                 description: description,
                 type: type,
                 walletId: walletId,
+                createdAt: date
             }
         });
         res.status(201).json(result)
