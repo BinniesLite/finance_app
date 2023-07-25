@@ -7,6 +7,7 @@
   "author": "BinniesLite <89041460+BinniesLite@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
+    "heroku-prebuild": "cd server && yarn install && yarn dev",
     "build:client": "cd client && yarn install && yarn run build",
     "build:server": "cd server && yarn install && yarn start",
     "deploy": "build:client && build:server"

@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useCallback } from 'react';
+import { useEffect, useState, useContext, useMemo } from 'react';
 
 //components
 import Stack from '@mui/material/Stack';
@@ -24,11 +24,6 @@ const WalletsPage = () => {
 
   const {wallets, loading, getWallets} = appContext;
 
-  
-  // CORS
-
- 
-  console.log(wallets);
   useEffect(() => {
     const fetchWallets = async () => {
       await getWallets();
@@ -36,7 +31,6 @@ const WalletsPage = () => {
     
     fetchWallets();
   }, []); // Use the memoized function as a dependency instead of getWallets
-
 
   // useEffect(() => {
   //   setWalletData(appContext.wallets);
@@ -69,7 +63,8 @@ const WalletsPage = () => {
           />
         </Stack>
       </Stack>
-      {tabs[activeTab].component}
+      {wallets  && 
+        tabs[activeTab].component}
     </Section>
   );
 };

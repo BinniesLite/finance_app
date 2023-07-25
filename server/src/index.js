@@ -7,7 +7,6 @@ const compression = require("compression");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 
-
 const { 
     corsOptions, 
     PORT, 
@@ -32,14 +31,7 @@ app.use(cors());
 
 // Compression
 app.use(compression());
-
-// Helmet
-app.use(helmet());
-
-// Rate limiter
-app.use(rateLimit(RATE_LIMITER));
-
-app.use(express.static("public"))
+    
 // timeout
 app.use(timeout(TIMEOUT));
 

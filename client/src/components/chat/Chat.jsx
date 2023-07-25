@@ -6,7 +6,8 @@ import Tooltip from '@mui/material/Tooltip';
 import {SiChatbot} from 'react-icons/si'
 import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
-
+import { getTransactions } from "@/utils/http-request";
+import baseUrl from "@/api/baseUrl";
 // chatbot
 import Chatbot from 'react-chatbot-kit'
 import config from './config'
@@ -20,7 +21,7 @@ import 'react-chatbot-kit/build/main.css';
 const Chat = () => {
   
   const [toggleChat, setState] = React.useState(false)
-
+  
   const handleToggleChat = () => {
     setState(!toggleChat)
   }
