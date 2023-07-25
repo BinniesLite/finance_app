@@ -3,23 +3,28 @@ import Section from '../../Layout/Section/Section';
 import LineChart from './component/LineChart/LineChart';
 import PieCharts from './component/PieChart/PieCharts';
 import DBCard from './component/DBCard/DBCard';
-// import CustomTable from '../../general/table/CustomTable';
+import RecentTable from './component/RecentTable/RecentTable';
 import { Grid, Stack, Typography, useMediaQuery } from '@mui/material';
-import { HiCurrencyDollar } from 'react-icons/hi';
 
 //api
-import { getTransactions } from '../../../utils/http-request';
-import AddWallet from '../../Layout/AddWallet/AddWallet';
+import { getTransactions, getWallets } from '../../../utils/http-request';
+// import AppContext from '../../../../context/app-context';
 
 //image
 import char5 from '../../../assets/char5.svg';
-import pointDown from '../../../assets/pointDown.jpg';
+import { HiCurrencyDollar } from 'react-icons/hi';
 import assistant from '../../../assets/assistant.webp';
+
+//styling
+import './Dashboard.css';
 
 const Dashboard = () => {
   const [transactionData, setTransactionData] = useState([]);
+  const [wallets, setWallets] = useState([]);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  // const { getTransactions } = React.useContext(AppContext);
 
+  //fetch transaction data
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
@@ -29,8 +34,20 @@ const Dashboard = () => {
         console.log(error);
       }
     };
-
     fetchTransactions();
+  }, []);
+
+  //fetch wallet data
+  useEffect(() => {
+    const fetchWallets = async () => {
+      try {
+        const wallets = await getWallets();
+        setWallets(wallets);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchWallets();
   }, []);
 
   //hardcoded data for the charts
@@ -157,6 +174,7 @@ const Dashboard = () => {
       value: '23444',
     },
   ];
+
   return (
     <Section title='Dashboard'>
       <Grid
@@ -175,6 +193,7 @@ const Dashboard = () => {
           spacing={2}
         >
           <Stack
+            className='rubberBand'
             direction='row'
             justifyContent='space-around'
             alignItems='center'
@@ -191,12 +210,22 @@ const Dashboard = () => {
               marginBottom: '20px',
             }}
           >
-            <Typography
-              variant='h4'
-              sx={{ color: 'white', paddingRight: '50px' }}
-            >
-              Welcome back, Trang!
-            </Typography>
+            {isSmallScreen ? (
+              <Typography
+                variant='h4'
+                sx={{ color: 'white', fontSize: '20px' }}
+              >
+                Welcome back, Trang!
+              </Typography>
+            ) : (
+              <Typography
+                variant='h4'
+                sx={{ color: 'white', paddingRight: '50px' }}
+              >
+                Welcome back, Trang!
+              </Typography>
+            )}
+
             <img
               src={char5}
               style={{
@@ -240,7 +269,7 @@ const Dashboard = () => {
                       alignItems: 'center',
                       height: 'fit-content',
                       width: '100%',
-                      padding: '20px',
+                      padding: '5px',
                       background: 'white',
                       borderRadius: '10px',
                       marginTop: '20px',
@@ -249,7 +278,7 @@ const Dashboard = () => {
                   : {
                       display: 'flex',
                       flexDirection: 'column',
-                      justifyContent: 'space-between',
+                      justifyContent: 'center',
                       alignItems: 'center',
                       width: '100%',
                       padding: '30px',
@@ -278,10 +307,16 @@ const Dashboard = () => {
           >
             <h4 variant='h6'>Recent Transactions</h4>
             <p>Latest transaction all the time</p>
-            {/* <CustomTable data={transactionData} /> */}
+            <RecentTable
+              walletsData={wallets}
+              transactionsData={transactionData}
+            />
           </Stack>
           <Stack sx={{ paddingTop: '30px' }}>
-            <img src={assistant} style={{ width: '100%', zIndex: '1', borderRadius: '10px'  }} />
+            <img
+              src={assistant}
+              style={{ width: '100%', zIndex: '1', borderRadius: '10px' }}
+            />
           </Stack>
         </Grid>
       </Grid>

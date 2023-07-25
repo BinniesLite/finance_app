@@ -107,21 +107,3 @@ export const formatTransactionList = async (data) => {
   }
   return transactionData;
 };
-
-// Format the list of wallets
-export const formatWalletList = async (data) => {
-  let walletData = [];
-  for (let i = 0; i < data.length; i++) {
-    const wallet = data[i];
-    let formatteData = {
-      id: wallet.id,
-      name: wallet.name,
-      // amount: wallet.amount,
-      createdAt: formatDate(wallet.createdAt),
-      description: wallet.description,
-      // type: wallet.type,
-    };
-    walletData.push(formatteData);
-  }
-  return walletData;
-};

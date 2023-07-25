@@ -1,4 +1,4 @@
-const {z} = require('zod');
+const { z } = require('zod');
 
 const transactionSchema = z.object({
     amount: z.number().positive(),

@@ -48,13 +48,11 @@ const TransactionAdd = ({ open, handleClose }) => {
     const fetchWallets = async () => {
       const response = await getWallets();
       setWallets(response);
-      // await appContext.getWallets();
-      // setWallets(appContext.wallets);
     };
     fetchWallets();
-  }, [wallets]);
+  }, []);
 
-  
+  //fetch transactions
   useEffect(() => {
     const fetchTransactions = async () => {
       const response = await getTransactions();

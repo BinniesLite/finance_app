@@ -20,12 +20,12 @@ const COLORS = [
 
 const PieCharts = ({ pieData }) => {
   return (
-    <PieChart width={400} height={400}>
+    <PieChart width={350} height={400}>
       <Pie
         dataKey='value'
         isAnimationActive={false}
         data={pieData}
-        cx={200}
+        cx={350/2}
         cy={200}
         outerRadius={80}
         label

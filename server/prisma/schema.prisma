@@ -14,10 +14,13 @@ model User {
   id        String      @id @default(uuid())
   email     String   @unique 
   name String
+  wallets Wallet[]
 }
 
 model Wallet {
   id String @id @default(uuid())
+  userId String?
+  user User? @relation(fields: [userId], references: [id])
   name String 
   balance Float?
   createdAt DateTime @default(now()) 

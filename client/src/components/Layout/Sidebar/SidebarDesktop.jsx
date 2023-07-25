@@ -7,7 +7,7 @@ import { AiOutlineCaretRight, AiOutlineMenu } from 'react-icons/ai';
 
 const buckets = [
   {
-    name: 'Sign In',
+    name: 'About us',
     color: '#FDD652',
   },
 ];
@@ -32,7 +32,6 @@ const Sidebar = ({
   isMinimized,
   setIsMinimized,
 }) => {
-  // const [isMinimized, setIsMinimized] = useState(false);
 
   const toggleIsMinimized = () => {
     setIsMinimized(!isMinimized);
@@ -50,7 +49,6 @@ const Sidebar = ({
         color: 'gray ',
         zIndex: '10',
         backgroundColor: '#f5f6f7',
-        // backgroundColor: 'background.dark',
         boxShadow: '0 0 10px rgba(0,0,0,0.2)',
         transition: 'width 0.2s',
         minWidth: '50px',

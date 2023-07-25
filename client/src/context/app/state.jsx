@@ -21,6 +21,13 @@ import
   GET_TOTAL_EXPENSES,
   GET_TOTAL_BALANCE,
   SET_LOADING,
+  AUTH_ERROR,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
 } from '../types';
 
 const AppState = (props) => {
@@ -34,47 +41,42 @@ const AppState = (props) => {
     totalExpenses: [],
     totalBalance: [],
     error: null,
-    loading: true,
+    loading: false,
+    token: localStorage.getItem('token'),
+    isAuthenticated: null,
+    user: null,
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);
+  const baseUrl = 'http://localhost:3000/api';
+
+  // Load User
+
+  // Register User
+
+  // Login User
+
+  // Logout
+
+  // Clear Errors
 
   // Get Wallets
   const getWallets = async () => {
-    dispatch({ type: SET_LOADING });
-    try {
-      console.log(baseUrl);
-      const res = await axios.get(baseUrl + '/wallet');
-      
-      dispatch({
-        type: GET_WALLETS,
-        payload: res.data,
-      });
-    } catch (err) {
-      
-      dispatch({
-        type: WALLET_ERROR,
-        payload: err.response.msg,
-      });
-    }
+    setLoading();
+    // try {
+    const res = await axios.get(baseUrl + '/wallet');
+    dispatch({
+      type: GET_WALLETS,
+      payload: res.data,
+    });
+    // } catch (err) {
+    //   dispatch({
+    //     type: WALLET_ERROR,
+    //     payload: err.response.msg,
+    //   });
+    // }
   };
 
-  // Get Wallets by ID
-  // const getWallet = async (id) => {
-  //   setLoading();
-  //   try {
-  //     const res = await axios.get(baseUrl + `/wallet/${id}`);
-  //     dispatch({
-  //       type: GET_WALLETS,
-  //       payload: res.data,
-  //     });
-  //   } catch (err) {
-  //     dispatch({
-  //       type: WALLET_ERROR,
-  //       payload: err.response.msg,
-  //     });
-  //   }
-  // };
 
   // Add Wallet
   const addWallet = async (wallet) => {
@@ -101,6 +103,7 @@ const AppState = (props) => {
 
   // Delete Wallet
   const deleteWallet = async (id) => {
+    setLoading();
     try {
       await axios.delete(baseUrl + `/wallet/${id}`);
       dispatch({
@@ -207,6 +210,10 @@ const AppState = (props) => {
   return (
     <AppContext.Provider
       value={{
+        token: state.token,
+        isAuthenticated: state.isAuthenticated,
+        user: state.user,
+        error: state.error,
         wallets: state.wallets,
         transactions: state.transactions,
         income: state.income,
