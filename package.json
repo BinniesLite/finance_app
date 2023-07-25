@@ -1,0 +1,11 @@
+{
+  "name": "finance_app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/BinniesLite/finance_app.git",
+  "author": "BinniesLite <89041460+BinniesLite@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd server && yarn start"
+  }
+}
