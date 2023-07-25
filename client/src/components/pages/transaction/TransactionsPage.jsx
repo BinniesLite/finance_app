@@ -48,7 +48,7 @@ const TransactionPage = () => {
         await getTransactions();
         // memoize the function
         const formattedTransaction = await formatTransactionList(transactions);
-       
+        
         setTransactionData(formattedTransaction);
         
       } catch (error) {
@@ -56,7 +56,7 @@ const TransactionPage = () => {
       }
     };
     if (transactions.length === 0 || transactionData.length === 0) {
-    // feedData();
+      // feedData();
       fetchTransactions();
     }
     
@@ -68,12 +68,12 @@ const TransactionPage = () => {
     {
       id: "list",
       label: "List",
-      component: <CustomTable transactions={transactionData} loading={loading} />,
+      component: <CustomTable transactions={transactions} loading={loading} />,
     },
     {
       id: "grid",
       label: "Grid",
-      component: <TransactionGridView transactions={transactionData} />,
+      component: <TransactionGridView transactions={transactions} />,
     },
   ];
   return (
