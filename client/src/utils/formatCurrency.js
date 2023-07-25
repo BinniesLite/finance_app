@@ -4,3 +4,5 @@ const formatCurrency = (amount) => {
         currency: 'USD'
       });
 } 
+
+export default formatCurrency;

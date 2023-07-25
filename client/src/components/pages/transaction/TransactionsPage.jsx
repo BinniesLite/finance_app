@@ -1,7 +1,7 @@
-import { React, useState, useEffect } from 'react';
-import './Transactions.css';
-import { Stack } from '@mui/material';
-import CustomTabs from '../../general/CustomTabs';
+import { useContext, useState, useEffect, useCallback } from "react";
+import "./Transactions.css";
+import { Stack } from "@mui/material";
+import CustomTabs from "@/components/general/CustomTabs";
 
 import Section from '../../Layout/Section/Section';
 import TransactionGridView from './components/TransactionGridView/TransactionGridView';
@@ -12,17 +12,21 @@ import {
   generateFakeWallets,
   pushTransactions,
   pushWallets,
-} from '../../../utils/helper';
-import { getTransactions } from '../../../utils/http-request';
+} from "@/utils/helper";
+// import { getTransactions } from "@/utils/http-request";
+import AppContext from "@/context/app/context";
+import CustomTable from "../../general/table/CustomTable";
 
 const TransactionPage = () => {
-  var [activeTab, setView] = useState(0);
+  const [activeTab, setView] = useState(0);
   const [transactionData, setTransactionData] = useState([]);
-
+  
+  const {transactions, getTransactions, loading} = useContext(AppContext);
   const changeView = (event, newView) => {
     setView(newView);
   };
-
+  
+  
   useEffect(() => {
     const feedData = async () => {
       const wallets = generateFakeWallets(1);
@@ -42,27 +46,35 @@ const TransactionPage = () => {
     };
     const fetchTransactions = async () => {
       try {
-        const transactions = await getTransactions();
+        await getTransactions();
+        // memoize the function
         const formattedTransaction = await formatTransactionList(transactions);
-        console.log(formattedTransaction);
+        
         setTransactionData(formattedTransaction);
+        
       } catch (error) {
         console.log(error);
       }
     };
-    feedData();
-    fetchTransactions();
-  }, []);
+    if (transactions.length === 0 || transactionData.length === 0) {
+      // feedData();
+      fetchTransactions();
+    }
+    
+
+  }, [transactionData]);
+  
+
   const tabs = [
     {
-      id: 'list',
-      label: 'List',
-      component: <CustomTable transactions={transactionData} />,
+      id: "list",
+      label: "List",
+      component: <CustomTable transactions={transactions} loading={loading} />,
     },
     {
-      id: 'grid',
-      label: 'Grid',
-      component: <TransactionGridView transactions={transactionData} />,
+      id: "grid",
+      label: "Grid",
+      component: <TransactionGridView transactions={transactions} />,
     },
   ];
   return (

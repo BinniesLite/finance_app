@@ -80,3 +80,7 @@ button:focus-visible {
   color: transparent;
   padding: 10px;
 }
+
+form {
+  padding: 0; 
+}

@@ -64,8 +64,10 @@ const CustomTable = ({ transactions }) => {
       data={loading ? <Spinner /> : data}
       columns={columns}
       options={options}
+      loading={loading}
     />
   );
+
 };
 
 export default CustomTable;

@@ -5,6 +5,12 @@ node_modules
 ./database/data
 # Created by https://www.toptal.com/developers/gitignore/api/node
 # Edit at https://www.toptal.com/developers/gitignore?templates=node
+# Ignore all .env files
+**/.env.development
+**/.env.test
+**/.env.production
+
+.env 
 
 ### Node ###
 # Logs
