@@ -12,12 +12,7 @@ import {
 import PropTypes from 'prop-types';
 const LineChart = ({ data }) => {
   return (
-    <AreaChart
-      width={400}
-      height={300}
-      data={data}
-      margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-    >
+    <AreaChart width={330} height={300} data={data}>
       <defs>
         <linearGradient id='colorexpense' x1='0' y1='0' x2='0' y2='1'>
           <stop offset='5%' stopColor='#ff5959' stopOpacity={0.8} />

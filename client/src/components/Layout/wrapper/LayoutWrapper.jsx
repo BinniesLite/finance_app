@@ -33,7 +33,7 @@ const LayoutWrapper = ({ children }) => {
       >
         
        <Navbar/>
-        <div style={{ marginLeft: isMinimized ? '-185px' : 0 }}>{children}</div>
+        <div style={{ marginLeft: isMinimized ? '-185px' : 0, marginRight: '30px'}}>{children}</div>
       </div>
     </div>
   );

@@ -1,27 +1,27 @@
-import { React, useState, useEffect } from "react";
-import "./Transactions.css";
-import { Stack } from "@mui/material";
-import CustomTabs from "../../general/CustomTabs";
+import { React, useState, useEffect } from 'react';
+import './Transactions.css';
+import { Stack } from '@mui/material';
+import CustomTabs from '../../general/CustomTabs';
 
-import Section from "../../Layout/Section/Section";
-import TransactionGridView from "./components/TransactionGridView/TransactionGridView";
+import Section from '../../Layout/Section/Section';
+import TransactionGridView from './components/TransactionGridView/TransactionGridView';
+import CustomTable from '../../general/table/CustomTable';
 import {
   formatTransactionList,
   generateFakeTransactionData,
   generateFakeWallets,
   pushTransactions,
   pushWallets,
-} from "../../../utils/helper";
-import { getTransactions } from "../../../utils/http-request";
-import CustomTable from "../../general/table/CustomTable";
+} from '../../../utils/helper';
+import { getTransactions } from '../../../utils/http-request';
 
 const TransactionPage = () => {
   var [activeTab, setView] = useState(0);
+  const [transactionData, setTransactionData] = useState([]);
 
   const changeView = (event, newView) => {
     setView(newView);
   };
-  const [transactionData, setTransactionData] = useState([]);
 
   useEffect(() => {
     const feedData = async () => {
@@ -55,24 +55,24 @@ const TransactionPage = () => {
   }, []);
   const tabs = [
     {
-      id: "list",
-      label: "List",
+      id: 'list',
+      label: 'List',
       component: <CustomTable transactions={transactionData} />,
     },
     {
-      id: "grid",
-      label: "Grid",
+      id: 'grid',
+      label: 'Grid',
       component: <TransactionGridView transactions={transactionData} />,
     },
   ];
   return (
     <div>
-      <Section title={"Transaction"}>
+      <Section title={'Transaction'}>
         <Stack
-          direction={{ xs: "column", md: "row", width: "100%" }}
+          direction={{ xs: 'column', md: 'row', width: '100%' }}
           columnGap={3}
         >
-          <Stack flexDirection="column" width="100%" ml={2}>
+          <Stack flexDirection='column' width='100%' ml={2}>
             <CustomTabs
               tabs={tabs}
               activeTab={activeTab}

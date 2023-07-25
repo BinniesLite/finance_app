@@ -39,7 +39,7 @@ const AppState = (props) => {
     totalExpenses: [],
     totalBalance: [],
     error: null,
-    loading: true,
+    loading: false,
     token: localStorage.getItem('token'),
     isAuthenticated: null,
     user: null,
@@ -49,7 +49,7 @@ const AppState = (props) => {
   const baseUrl = 'http://localhost:3000/api';
 
   // Load User
-  
+
   // Register User
 
   // Login User
@@ -61,36 +61,20 @@ const AppState = (props) => {
   // Get Wallets
   const getWallets = async () => {
     setLoading();
-    try {
-      const res = await axios.get(baseUrl + '/wallet');
-      dispatch({
-        type: GET_WALLETS,
-        payload: res.data,
-      });
-    } catch (err) {
-      dispatch({
-        type: WALLET_ERROR,
-        payload: err.response.msg,
-      });
-    }
+    // try {
+    const res = await axios.get(baseUrl + '/wallet');
+    dispatch({
+      type: GET_WALLETS,
+      payload: res.data,
+    });
+    // } catch (err) {
+    //   dispatch({
+    //     type: WALLET_ERROR,
+    //     payload: err.response.msg,
+    //   });
+    // }
   };
 
-  // Get Wallets by ID
-  // const getWallet = async (id) => {
-  //   setLoading();
-  //   try {
-  //     const res = await axios.get(baseUrl + `/wallet/${id}`);
-  //     dispatch({
-  //       type: GET_WALLETS,
-  //       payload: res.data,
-  //     });
-  //   } catch (err) {
-  //     dispatch({
-  //       type: WALLET_ERROR,
-  //       payload: err.response.msg,
-  //     });
-  //   }
-  // };
 
   // Add Wallet
   const addWallet = async (wallet) => {
@@ -117,6 +101,7 @@ const AppState = (props) => {
 
   // Delete Wallet
   const deleteWallet = async (id) => {
+    setLoading();
     try {
       await axios.delete(baseUrl + `/wallet/${id}`);
       dispatch({
@@ -227,7 +212,6 @@ const AppState = (props) => {
         isAuthenticated: state.isAuthenticated,
         user: state.user,
         error: state.error,
-
         wallets: state.wallets,
         transactions: state.transactions,
         income: state.income,
@@ -242,7 +226,6 @@ const AppState = (props) => {
         getTransactions,
         addTransaction,
         deleteTransaction,
-
       }}
     >
       {props.children}

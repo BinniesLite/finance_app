@@ -46,7 +46,7 @@ const AddWallet = ({ open, handleClose }) => {
       setWallets(response);
     };
     fetchWallets();
-  }, [wallets]);
+  }, []);
 
   // useEffect(() => {
   //   setWallets(appContext.wallets);

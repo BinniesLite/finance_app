@@ -49,15 +49,9 @@ const TransactionAdd = ({ open, handleClose }) => {
     const fetchWallets = async () => {
       const response = await getWallets();
       setWallets(response);
-      // await appContext.getWallets();
-      // setWallets(appContext.wallets);
     };
     fetchWallets();
-  }, [wallets]);
-
-  // useEffect(() => {
-  //   setWallets(appContext.wallets);
-  // }, [appContext.wallets]);
+  }, []);
 
   //fetch transactions
   useEffect(() => {
