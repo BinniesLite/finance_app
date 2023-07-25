@@ -1,0 +1,97 @@
+#sign-in-header,
+form {
+  text-align: center;
+}
+
+form {
+  width: 60vw;
+  max-width: 500px;
+  min-width: 300px;
+  margin: auto;
+    
+}
+
+.signin-container {
+  padding-top: 50px;
+  text-align: center;
+  height: fit-content;
+}
+
+#sign-in-header {
+  margin-bottom: 40px;
+}
+
+input {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 14px;
+  gap: 5px;
+  width: 545px;
+  height: 44px;
+  background: #ffffff;
+  border: 1.5px solid #646464;
+  border-radius: 8px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+
+label {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px 5px;
+  gap: 10px;
+  width: 545px;
+  height: 36px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  font-weight: bold;
+  text-align: left;
+}
+
+header {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.password-container {
+  width: 400px;
+  position: relative;
+  text-align: center;
+}
+
+#fa-eye {
+  position: absolute;
+  top: 28%;
+  left: 130%;
+  cursor: pointer;
+  color: lightgray;
+}
+
+button[type='submit'] {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 5px;
+  margin: 50px;
+  width: 249px;
+  height: 48px;
+  left: 739px;
+  top: 616px;
+
+  background: #ffd600;
+  border-radius: 30px;
+}
+
+.signup-link > p[type='button'] {
+  color: #322a95;
+}

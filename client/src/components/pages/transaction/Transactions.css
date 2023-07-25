@@ -1,0 +1,17 @@
+#transaction-page {
+  font-size: 50px;
+  padding-bottom: 40px;
+}
+
+
+body {
+  background: inherit;
+  width: 100vw;
+}
+
+.blur-background {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 0px;
+    border-radius: 30px;
+    padding: 20px;
+}

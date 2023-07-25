@@ -1,6 +1,8 @@
+version: "1.5"
+
 services:
   client:
-    container_name: frontend
+    container_name: fe
     build:
       dockerfile: ./client/Dockerfile
     volumes: 
@@ -10,19 +12,39 @@ services:
     networks:
       finance:
         aliases:
-          - frontend
+          - fe 
   server:
     container_name: backend
     build:
       dockerfile: ./server/Dockerfile
     volumes: 
-      - ./server:/usr/src/app/server
+      - ./server/src:/usr/src/app/src
+      - ./server/prisma:/usr/src/app/prisma
     ports:
-      - 5000:5000
+      - 3000:3000
     networks:
       finance:
         aliases:
           - backend
+    depends_on:
+      - postgresql
+  postgresql:
+    container_name: postgres
+    build:
+      dockerfile: ./database/Dockerfile
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=finance
+    volumes:
+      - ./database/data:/usr/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      finance:
+        aliases:
+          - postgresql
+          - db
 networks:
   finance:
     driver: bridge

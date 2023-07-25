@@ -1,12 +1,33 @@
 # Finance Tracker  Platform
 
-- [Finance Tool Platform](#finance-tracker-platformplatform)
+- [Finance Tracker  Platform](#finance-tracker--platform)
   - [About](#about)
-  - [Installation/Usage](#installation)
-  - [Architecture](#architecture)
+  - [Installation](#installation)
+        - [Note for backend](#note-for-backend)
   - [Backend](#backend)
     - [API Documentation](#api-documentation)
+      - [User](#user)
+        - [Get all users](#get-all-users)
+        - [Get transaction by email](#get-transaction-by-email)
+        - [Create user](#create-user)
+        - [Update user](#update-user)
+        - [Delete user](#delete-user)
+      - [Wallet](#wallet)
+        - [Get all wallets](#get-all-wallets)
+        - [Get wallet by id](#get-wallet-by-id)
+        - [Create transaction](#create-transaction)
+        - [Update transaction](#update-transaction)
+        - [Delete transaction](#delete-transaction)
+      - [Transaction](#transaction)
+        - [Get all transactions](#get-all-transactions)
+        - [Get transaction by id](#get-transaction-by-id)
+        - [Create transaction](#create-transaction-1)
+        - [Update transaction](#update-transaction-1)
+        - [Delete transaction](#delete-transaction-1)
+  - [Issues](#issues)
 
+
+  
 ## About
 
 Welcome to our personal finance app! Our app is designed to help you manage your finances and achieve your financial goals. We understand that managing your money can be stressful, time-consuming, and confusing, but we believe that it doesn't have to be. Our app provides a simple, user-friendly interface that makes it easy to track your income, expenses, and savings, so you can get a clear picture of your financial health.
@@ -23,13 +44,22 @@ To start the project from the root of the project using Docker Compose, run the 
 
 Make sure you have Docker and docker compose installed on your machine.
 
-For front-end navigate to **localhost:80** and for back-end navigate to **localhost:5000**
+For front-end navigate to **localhost:80** and for back-end navigate to **localhost:3000**
 
-When adding a new package to the project, delete all images and dockerfile and run `docker compose up --build` to rebuild the images.
+After adding packages or changing dockerfile, run `docker compose up --build -d` to rebuild the images in detached mode.
 
-## Backend
+
+##### Note for backend
+To make changes to database, you will need to first open the integrated terminal inside the container to make changes to the database. Check Prisma documentation for more instructions on how to interact with the database.
+
+Run `docker exec -it backend bash` to open the integrated terminal inside the container. 
+
+
+
+##  Backend
 
 This is the backend of the project. It is a RESTful API built with Node.js and Express.js. It is connected to a PostgreSQL database using Docker.
+
 
 ### API Documentation
 
@@ -114,7 +144,7 @@ GET /api/transaction/${id}
 ##### Create transaction
 
 ```http
-POST /api/transaction/create
+POST /api/transactions/create
 ```
 
 ##### Update transaction
@@ -126,37 +156,41 @@ PUT /api/transaction/${id}
 ##### Delete transaction
 
 ```http
-DELETE /api/transaction/${id}
+DELETE /api/transactions/delete/${id}
 ```
 
-#### Schema
 
 ```mermaid
 erDiagram
-  user ||--o{ wallet: has
-  wallet ||--o{ transaction: has
+  WALLET ||--o{ TRANSACTION : has
+  
+  USER ||--O{ TRANSACTION : make 
+  USER ||--O{ WALLET : has
 
-  user {
-	string email PK
-	string password 
-  }
-  
-  wallet { 
-    int ID PK
-    string user_email FK
-    string name 
-    float balance 
+  WALLET { 
+    string ID PK
+    string name  
     date created_at 
-    string payment_type
-  
+    string description 
   }
   
-  transaction {
-    int ID PK
-    int wallet_id FK
+  TRANSACTION {
+    string ID PK
     string name 
+    int wallet_id FK
     float amount 
+    date created_at 
+    string type 
+  }
+
+  USER {
+    string ID PK
+    string username
+    string password
+    string email
     date created_at
+    url user_image
+
   }
 
 ```

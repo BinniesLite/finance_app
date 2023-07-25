@@ -1,0 +1,53 @@
+body {
+  background: inherit;
+  max-width: 100vw;
+}
+
+.w-header {
+  padding-top: 20px;
+  padding-left: 60px;
+  padding-right: 50px;
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.history-section-container {
+  margin-top: 30px;
+}
+
+.history-section-container {
+  display: inline-flex; /* Use flexbox to create an inline layout */
+  align-items: center;
+  justify-content: left;
+  text-align: center;
+}
+
+.history-section-container .MuiTypography-root {
+  margin-right: 90px;
+}
+
+#wallets-view-more-button {
+  background-color: #ffd600;
+  color: black;
+  border-radius: 50px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.popup-content {
+  width: fit-content;
+}

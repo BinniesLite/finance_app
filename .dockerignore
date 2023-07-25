@@ -1,2 +1,5 @@
+# ignore all node_modules folders
+data
 ./client/node_modules 
 ./server/node_modules
+./database/data

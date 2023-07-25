@@ -1,16 +1,52 @@
+// express
 const express = require('express');
+const routers = require('./router');
+const cors = require('cors');
+const timeout = require('express-timeout');
+const compression = require("compression");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+
+
+const { 
+    corsOptions, 
+    PORT, 
+    TIMEOUT,
+    RATE_LIMITER
+} = require('./configs/configs');
+
+require('dotenv').config();
+
 
 const app = express();
 
-const PORT = 5000;
+// Cors configuration
 
-app.get('/', (req, res) => {
-    res.send('Hi there Is it me you are looking for this is me and who I meant to be');
-    
-});
+cors(corsOptions);
 
+// Body parser configuration
+app.use(express.json());
 
+// Cors configuration
+app.use(cors());
 
+// Compression
+app.use(compression());
+
+// Helmet
+app.use(helmet());
+
+// Rate limiter
+app.use(rateLimit(RATE_LIMITER));
+
+app.use(express.static("public"))
+// timeout
+app.use(timeout(TIMEOUT));
+
+// Api routes
+app.use('/api', routers);
+
+console.log("Backend is running");
 
 
 app.listen(PORT, () => {

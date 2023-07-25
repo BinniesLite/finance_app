@@ -1,5 +1,6 @@
 {
     "watch": ["src"],
     "ext": ".js",
-    "exec": "node ./src/index.js"
+    "exec": "node ./src/index.js",
+    "exitcrash": false
 }

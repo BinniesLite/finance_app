@@ -7,5 +7,36 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DB_URL") 
+}
+
+model User {
+  id        String      @id @default(uuid())
+  email     String   @unique 
+  name String
+}
+
+model Wallet {
+  id String @id @default(uuid())
+  name String 
+  balance Float?
+  createdAt DateTime @default(now()) 
+  transactions Transaction[]
+  description String?
+}
+
+enum TransactionType {
+  expense
+  income
+}
+
+model Transaction {
+  id String @id @default(uuid())
+  walletId String?
+  wallet Wallet? @relation(fields: [walletId], references: [id])
+  amount Float 
+  createdAt DateTime @default(now())
+  description String? 
+  type TransactionType
+  image String?
 }

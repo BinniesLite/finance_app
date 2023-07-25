@@ -1,26 +1,39 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  background: hsla(4, 48%, 94%, 1) no-repeat;
 
-  /* color-scheme: light dark; */
-  color: rgba(255, 255, 255, 0.87);
-  background: 
-            radial-gradient(at 18% 99%, #fff700 0px, transparent 50%) repeat scroll 0% 0%,
-            radial-gradient(at 30% 30%, #a38f3c 0px, transparent 50%) repeat scroll 0% 0%,
-            radial-gradient(at 79% 82%, #472678 0px, transparent 50%) repeat scroll 0% 0%,
-            radial-gradient(at 10% 10%, #b23a3a 0px, transparent 100%) repeat scroll 0% 0%, 
-            radial-gradient(at 97% 8%, #7b4371 0px, transparent 50%) repeat scroll 0% 0%, 
-            radial-gradient(at 20% 50%, #444ca7 0px, transparent 80%) repeat scroll 0% 0%,
-            radial-gradient(at 96% 10%, #d9991d 0px, transparent 50%) repeat scroll 0% 0%,    
-            radial-gradient(at 42% 20%, #8f6957 0px, transparent 50%) repeat scroll 0% 0%,
-            radial-gradient(at 20% 20%, #463990 0px, transparent 50%) repeat scroll 0% 0%,
-            radial-gradient(at 4% 49%, rgb(203, 88, 218) 0px, transparent 50%) repeat scroll 0% 0%, rgba(0, 0, 0, 0) radial-gradient(at 57% 33%, rgb(218, 83, 228) 0px, #a299ff 50%) repeat scroll 0% 0%;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  background: linear-gradient(
+    90deg,
+    hsla(4, 48%, 94%, 1) 0%,
+    hsla(66, 70%, 80%, 1) 50%,
+    hsla(226, 67%, 76%, 1) 100%
+  );
+
+  background: -moz-linear-gradient(
+    90deg,
+    hsla(4, 48%, 94%, 1) 0%,
+    hsla(66, 70%, 80%, 1) 50%,
+    hsla(226, 67%, 76%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    hsla(4, 48%, 94%, 1) 0%,
+    hsla(66, 70%, 80%, 1) 50%,
+    hsla(226, 67%, 76%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F7E9E8", endColorstr="#E9F0AA", GradientType=1 );
+}
+
+body {
+  margin: 0;
+  /* display: flex; */
+  padding: 0;
+  color: black;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 a {
@@ -28,16 +41,9 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -48,7 +54,7 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  padding: 0.1em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -56,23 +62,25 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.orange-gradient {
+  background: linear-gradient(to right, #ffb700, #fb923c, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  padding: 10px;
+}
+
+form {
+  padding: 0; 
 }

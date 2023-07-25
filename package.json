@@ -1,5 +1,14 @@
 {
-  "dependencies": {
-    "react-icons": "^4.8.0"
+  "name": "finance_app",
+  "version": "1",
+  "description": "Finance app ",
+  "main": "none ",
+  "repository": "https://github.com/BinniesLite/finance_app.git",
+  "author": "BinniesLite <89041460+BinniesLite@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "build:client": "cd client && yarn install && yarn run build",
+    "build:server": "cd server && yarn install && yarn start",
+    "deploy": "build:client && build:server"
   }
 }
