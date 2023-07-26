@@ -20,7 +20,7 @@ import CustomTable from "../../general/table/CustomTable";
 const TransactionPage = () => {
   const [activeTab, setView] = useState(0);
   const [transactionData, setTransactionData] = useState([]);
-  
+  console.log(import.meta.env.VITE_BASE_URL);
   const {transactions, getTransactions, loading} = useContext(AppContext);
   const changeView = (event, newView) => {
     setView(newView);
@@ -54,6 +54,8 @@ const TransactionPage = () => {
       fetchTransactions();
     }
   }, []);
+
+  console.log(transactions);
   
   const tabs = [
     {
