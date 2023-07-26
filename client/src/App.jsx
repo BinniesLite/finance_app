@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
   const demo = async () => {
-    const res = await fetch("https://finance-app-bunny-lover-ebeaf04be2db.herokuapp.com/api/transaction")
+    const res = await fetch(import.meta.env.VITE_BASE_URL + '/transaction')
     const data = await res.json();
     console.log(data);
   }
