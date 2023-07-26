@@ -1,6 +1,10 @@
 module.exports = {
     corsOptions: {
-        origin: "http://localhost:80"
+        origin: [
+        "http://localhost:80", 
+        "https://le-feat-deploy--genuine-lily-8b0293.netlify.app"
+],
+        
     },
     PORT: process.env.PORT || 3000,
     TIMEOUT: 10000,
