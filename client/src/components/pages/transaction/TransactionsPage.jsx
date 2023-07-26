@@ -3,7 +3,7 @@ import "./Transactions.css";
 import { Stack } from "@mui/material";
 import CustomTabs from "@/components/general/CustomTabs";
 
-import Section from "../../Layout/Section/Section";
+import Section from "@/components/layout/Section/Section";
 import TransactionGridView from "./components/TransactionGridView/TransactionGridView";
 import {
   formatTransactionList,
