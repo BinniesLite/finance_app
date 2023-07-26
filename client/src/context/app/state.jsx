@@ -41,7 +41,7 @@ const AppState = (props) => {
 
   // Get Wallets
   const getWallets = async () => {
-    dispatch({ type: SET_LOADING });
+    
     try {
       console.log(baseUrl);
       const res = await axios.get(baseUrl + '/wallet');
