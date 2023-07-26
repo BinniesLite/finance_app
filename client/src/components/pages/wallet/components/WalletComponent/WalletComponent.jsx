@@ -14,7 +14,7 @@ const WalletComponent = () => {
   const wallets = generateFakeTransactionData(10);
   console.log(wallets);
   return (
-    <div class="input-field">
+    <div className="input-field">
       <Row>
         <Col xs={7}>
           <Typography className="title" variant="h4">
