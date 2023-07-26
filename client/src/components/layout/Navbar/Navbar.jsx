@@ -30,6 +30,7 @@ const NavButton = ({ title, icon }) => {
 const initialState = {
   openTransaction: false,
   openWallet: false,
+  csvData: null,
 };
 
 const reducer = (state, action) => {
@@ -38,94 +39,100 @@ const reducer = (state, action) => {
       return { ...state, openTransaction: !state.openTransaction };
     case 'wallet':
       return { ...state, openWallet: !state.openWallet };
+    case 'submitCSV':
+      return { ...state, csvData: action.payload };
+    default:
+      return state;
   }
 };
 
 const Navbar = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  return (
-    <Stack
-      mt={2}
-      pr={{ xs: 1, md: 3 }}
-      position='absolute'
-      top={0}
-      width='100%'
-      direction='row'
-      justifyContent='space-between'
-    >
-      <Stack px={4} pl={32} flexDirection='row' columnGap={2}></Stack>
+    const submitCSVHandler = (event) => {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const csvData = reader.result;
+        dispatch({ type: 'submitCSV', payload: csvData });
+      };
+      reader.readAsText(file);
+    };
+
+    return (
       <Stack
-        flexDirection='row'
-        alignItems='center'
-        visibility={{ xs: 'block', md: 'block' }}
-        columnGap={1}
+        mt={2}
+        pr={{ xs: 1, md: 3 }}
+        position='absolute'
+        top={0}
+        width='100%'
+        direction='row'
+        justifyContent='space-between'
       >
-        {/* Add Wallet button here */}
-        {/* <Box>
-          <Button
-            onClick={() => dispatch({ type: 'wallet' })}
-            size='small'
-            variant='outlined'
-            sx={{ borderRadius: '10px', backgroundColor: '#12131c' }}
-          >
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>Add Wallet </Box>{' '}
-            {' + '}
-          </Button> */}
-          {/* <Popup
-            position={'top center'}
-            // open={state.openWallet}
-            // onClose={() => dispatch({ type: 'wallet' })}
-            closeOnDocumentClick
-            id='add-wallet-popup'
-          > */}
-          {/* <AddWallet
-            open={state.openWallet}
-            handleClose={() => dispatch({ type: 'wallet' })}
-          /> */}
-          {/* </Popup> */}
-        {/* </Box> */}
+        <Stack px={4} pl={32} flexDirection='row' columnGap={2}></Stack>
+        <Stack
+          flexDirection='row'
+          alignItems='center'
+          visibility={{ xs: 'block', md: 'block' }}
+          columnGap={1}
+        >
+          {/* Add Wallet button here */}
+          <Box>
+            <Button
+              onClick={() => dispatch({ type: 'wallet' })}
+              size='small'
+              variant='outlined'
+              sx={{ borderRadius: '10px', backgroundColor: '#555597' }}
+            >
+              <Box sx={{ display: { xs: 'none', md: 'block', color:'white' } }}>
+                Add Wallet
+              </Box>
+              {' + '}
+            </Button>
+            <AddWallet
+              open={state.openWallet}
+              handleClose={() => dispatch({ type: 'wallet' })}
+            />
+          </Box>
 
-        <Box>
+          <Box>
+            <Button
+              onClick={() => dispatch({ type: 'transaction' })}
+              size='small'
+              variant='outlined'
+              sx={{ borderRadius: '10px', backgroundColor: '#555597' }}
+            >
+              <Box sx={{ display: { xs: 'none', md: 'block', color:'white' } }}>
+                Add Transaction
+              </Box>
+              {' + '}
+            </Button>
+            <TransactionAdd
+              open={state.openTransaction}
+              handleClose={() => dispatch({ type: 'transaction' })}
+            />
+          </Box>
+
           <Button
-            onClick={() => dispatch({ type: 'wallet' })}
+            component="label"
             size='small'
             variant='outlined'
-            sx={{ borderRadius: '10px', backgroundColor: '#555597' }}
+            sx={{ borderRadius: '10px', backgroundColor: '#555597', color:'white', width: 'auto', height: 'auto' }}
           >
-            <Box sx={{ display: { xs: 'none', md: 'block', color:'white' } }}>
-              Add Wallet
-            </Box>
-            {' + '}
+            Import CSV
+            <input
+              type="file"
+              name="file"
+              accept=".csv"
+              style={{ display: 'none' }}
+              onChange={submitCSVHandler}
+            />
           </Button>
-          <AddWallet
-            open={state.openWallet}
-            handleClose={() => dispatch({ type: 'wallet' })}
-          />
-        </Box>
 
-        <Box>
-          <Button
-            onClick={() => dispatch({ type: 'transaction' })}
-            size='small'
-            variant='outlined'
-            sx={{ borderRadius: '10px', backgroundColor: '#555597' }}
-          >
-            <Box sx={{ display: { xs: 'none', md: 'block', color:'white' } }}>
-              Add Transaction
-            </Box>
-            {' + '}
-          </Button>
-          <TransactionAdd
-            open={state.openTransaction}
-            handleClose={() => dispatch({ type: 'transaction' })}
-          />
-        </Box>
-
-        <NavButton title='Profile' icon={<CgProfile size='1.2rem' />} />
+          <NavButton title='Profile' icon={<CgProfile size='1.2rem' />} />
+        </Stack>
       </Stack>
-    </Stack>
-  );
-};
+    );
+  };
 
 export default Navbar;
