@@ -17,7 +17,6 @@ const {
 
 require('dotenv').config();
 
-
 const app = express();
 
 // Cors configuration
