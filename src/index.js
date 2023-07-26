@@ -14,16 +14,19 @@ const {
     RATE_LIMITER
 } = require('./configs/configs');
 
+
+
 require('dotenv').config();
 
 
 const app = express();
 
 // Cors configuration
+app.get("/", (req, res) => {
+    res.send("Hello World");
+});
 
-// cors(corsOptions);
-// // Cors configuration
-// app.use(cors());
+app.use(cors(corsOptions));
 
 // Body parser configuration
 app.use(express.json());

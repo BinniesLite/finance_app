@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import CustomTabs from '@/components/general/CustomTabs';
 import TableData from '@/components/general/TableData/TableData';
 import WalletContent from './components/WalletsView/WalletContent';
-import Section from '../../Layout/Section/Section';
+import Section from '@/components/layout/Section/Section';
 
 //api
 import AppContext from '@/context/app/context';

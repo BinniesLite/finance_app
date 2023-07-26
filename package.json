@@ -1,11 +1,29 @@
 {
-  "name": "finance_app",
+  "name": "finance_server",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/BinniesLite/finance_app.git",
-  "author": "BinniesLite <89041460+BinniesLite@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "cd server && yarn start"
+    "dev": "nodemon -L",
+    "prisma:dev": "yarn prisma migrate dev",
+    "prisma:deploy": "yarn prisma migrate deploy",
+    "start": "yarn prisma migrate deploy && node src/index.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.14.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.8.0",
+    "express-timeout": "^0.2.1",
+    "helmet": "^7.0.0",
+    "http-status": "^1.6.2",
+    "openai": "^3.3.0",
+    "prisma": "^4.14.1",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }

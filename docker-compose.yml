@@ -16,10 +16,10 @@ services:
   server:
     container_name: backend
     build:
-      dockerfile: ./server/Dockerfile
+      dockerfile: ./Dockerfile
     volumes: 
-      - ./server/src:/usr/src/app/src
-      - ./server/prisma:/usr/src/app/prisma
+      - ./src:/usr/src/app/src
+      - ./prisma:/usr/src/app/prisma
     ports:
       - 3000:3000
     networks:

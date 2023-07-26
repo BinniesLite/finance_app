@@ -6,15 +6,15 @@ import { Row, Col } from "reactstrap";
 import WalletIcon from "@mui/icons-material/Wallet";
 import * as React from "react";
 import "./WalletComponent.css";
-import HistoryCard from "../../../../layout/HistoryCard/HistoryCard";
+import HistoryCard from "@/components/layout/HistoryCard/HistoryCard";
 import { Link } from "react-router-dom";
-import { generateFakeTransactionData } from "../../../../../utils/helper";
+import { generateFakeTransactionData } from "@/utils/helper";
 
 const WalletComponent = () => {
   const wallets = generateFakeTransactionData(10);
   console.log(wallets);
   return (
-    <div class="input-field">
+    <div className="input-field">
       <Row>
         <Col xs={7}>
           <Typography className="title" variant="h4">

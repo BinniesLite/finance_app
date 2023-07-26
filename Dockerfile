@@ -5,8 +5,8 @@ WORKDIR /usr/src/app
 RUN apk add --no-cache bash
 RUN apk add --no-cache postgresql-client
 
-COPY ./server . 
-COPY ./server/package.json .
+COPY ./ . 
+COPY ./package.json .
 
 RUN yarn install
 CMD ["yarn", "run", "dev"]

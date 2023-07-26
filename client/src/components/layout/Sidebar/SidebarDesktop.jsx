@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
-import { links } from '../../../constants/links';
+import { links } from '@/constants/links';
 import Typography from '@mui/material/Typography';
 import { Divider, IconButton } from '@mui/material';
 import { AiOutlineCaretRight, AiOutlineMenu } from 'react-icons/ai';
