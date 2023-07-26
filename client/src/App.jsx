@@ -4,14 +4,6 @@ import { navigation } from './router/navigation';
 import './App.css';
 
 function App() {
-  const demo = async () => {
-    const res = await fetch(import.meta.env.VITE_BASE_URL + '/transaction')
-    const data = await res.json();
-    console.log(data);
-  }
-
-  demo(); 
-
   return (
     <AppState>
       <Router>
