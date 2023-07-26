@@ -1,7 +1,8 @@
 module.exports = {
     corsOptions: {
-        origin: "*", // Or use an array of domains "http://example1.com, http://example2.com"
-        methods: "GET,HEAD,PUT,PATCH,POST,DELETE"   
+        origin: ["https://bunnylover.netlify.app", "http://localhost:80"], // Or use an array of domains "http://example1.com, http://example2.com"
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+
     },
     PORT: process.env.PORT || 3000,
     TIMEOUT: 10000,

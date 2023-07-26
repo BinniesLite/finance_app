@@ -15,9 +15,7 @@ const {
 } = require('./configs/configs');
 
 
-
 require('dotenv').config();
-
 
 const app = express();
 
