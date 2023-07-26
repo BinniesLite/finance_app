@@ -3,7 +3,7 @@ import "./Transactions.css";
 import { Stack } from "@mui/material";
 import CustomTabs from "@/components/general/CustomTabs";
 
-import Section from "../../Layout/Section/Section";
+import Section from "@/components/layout/Section/Section";
 import TransactionGridView from "./components/TransactionGridView/TransactionGridView";
 import {
   formatTransactionList,
@@ -11,8 +11,9 @@ import {
   generateFakeWallets,
   pushTransactions,
   pushWallets,
+  
 } from "@/utils/helper";
-// import { getTransactions } from "@/utils/http-request";
+
 import AppContext from "@/context/app/context";
 import CustomTable from "../../general/table/CustomTable";
 
@@ -44,26 +45,18 @@ const TransactionPage = () => {
       }
     };
     const fetchTransactions = async () => {
-      try {
-        await getTransactions();
-        // memoize the function
-        const formattedTransaction = await formatTransactionList(transactions);
-        
-        setTransactionData(formattedTransaction);
-        
-      } catch (error) {
-        console.log(error);
-      }
+      await getTransactions();
     };
-    if (transactions.length === 0 || transactionData.length === 0) {
+
+
+    if (transactions.length === 0) {
       // feedData();
       fetchTransactions();
     }
-    
+  }, []);
 
-  }, [transactionData]);
+  console.log(transactions);
   
-
   const tabs = [
     {
       id: "list",

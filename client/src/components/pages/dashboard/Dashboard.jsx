@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Section from '../../Layout/Section/Section';
+import Section from '@/components/layout/Section/Section';
 import LineChart from './component/LineChart/LineChart';
 import PieCharts from './component/PieChart/PieCharts';
 import DBCard from './component/DBCard/DBCard';
@@ -8,13 +8,12 @@ import { Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 import { HiCurrencyDollar } from 'react-icons/hi';
 
 //api
-import { getTransactions } from '../../../utils/http-request';
-import AddWallet from '../../Layout/AddWallet/AddWallet';
+import { getTransactions } from '@/utils/http-request';
+import AddWallet from '@/components/layout/AddWallet/AddWallet';
 
 //image
-import char5 from '../../../assets/char5.svg';
-import pointDown from '../../../assets/pointDown.jpg';
-import assistant from '../../../assets/assistant.webp';
+import char5 from '@/assets/char5.svg';
+import assistant from '@/assets/assistant.webp';
 
 const Dashboard = () => {
   const [transactionData, setTransactionData] = useState([]);
