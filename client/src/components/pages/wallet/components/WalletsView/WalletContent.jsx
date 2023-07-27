@@ -9,7 +9,7 @@ const WalletContent = ({ data }) => {
       <div
         style={{
           display: 'flex',
-          justifyContent: 'flex-start',
+          justifyContent: 'space-evenly',
           gap: '40px',
           flexWrap: 'wrap',
           borderRadius: '30px',
@@ -30,7 +30,7 @@ const WalletContent = ({ data }) => {
             }}
             key={wallet.id}
           >
-            <WalletCard name={wallet.name} id={wallet.id} date={wallet.date} description={wallet.description}/>
+            <WalletCard name={wallet.name} date={wallet.date} description={wallet.description}/>
           </div>
         ))}
       </div>

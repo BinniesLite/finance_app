@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from '@/components/layout/Navbar/Navbar';
-import Sidebar from '@/components/layout/Sidebar/SidebarDesktop';
+import Navbar from '../../Layout/Navbar/Navbar';
+import Sidebar from '../../Layout/Sidebar/SidebarDesktop';
 import { useNavigate } from 'react-router-dom';
-import Chat from '@/components/chat/Chat';
+import Chat from '../../chat/Chat';
 
 
 const LayoutWrapper = ({ children }) => {
@@ -33,7 +33,7 @@ const LayoutWrapper = ({ children }) => {
       >
         
        <Navbar/>
-        <div style={{ marginLeft: isMinimized ? '-185px' : 0 }}>{children}</div>
+        <div style={{ marginLeft: isMinimized ? '-185px' : 0, marginRight: '30px'}}>{children}</div>
       </div>
     </div>
   );
