@@ -24,6 +24,8 @@ app.get("/", (req, res) => {
     res.send("Hello World");
 });
 
+
+
 app.use(cors(corsOptions));
 
 // Body parser configuration

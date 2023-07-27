@@ -19,7 +19,7 @@ import * as z from 'zod';
 import {
   getWallets,
   getTransactions,
-} from '../../utils/http-request';
+} from '@/utils/http-request';
 import { formatTransactionList } from '../../utils/helper';
 import AppContext from '@/context/app/context';
 

@@ -7,8 +7,15 @@ export const getTotalIncome = async () => {
 }
 
 export const getTotalExpense = async () => {
-    const response = await axios.get(baseUrl + '/calculation/total-expense');
-    return response.data;
+    try {
+    
+        const response = await axios.get("http://localhost:3000/api/calculation/total-expense");
+        return response.data;
+    
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 
 export const getTotalBalance = async () => {
