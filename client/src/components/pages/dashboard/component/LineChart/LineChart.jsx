@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Legend
 } from 'recharts';
 
 import PropTypes from 'prop-types';
@@ -41,6 +42,7 @@ const LineChart = ({ data }) => {
         fillOpacity={1}
         fill='url(#colorincome)'
       />
+      <Legend />
     </AreaChart>
   );
 };

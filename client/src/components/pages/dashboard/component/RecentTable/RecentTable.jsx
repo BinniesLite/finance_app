@@ -22,7 +22,7 @@ const RecentTable = ({ walletsData, transactionsData }) => {
   const sortedData = mergedData.sort((a, b) => b.createdAt - a.createdAt);
 
   // Slice the data array to only include the first 5 elements
-  const slicedData = sortedData.slice(0, 5);
+  const slicedData = sortedData.slice(0, 3);
 
   return (
     <TableContainer component={Paper}>
@@ -37,7 +37,7 @@ const RecentTable = ({ walletsData, transactionsData }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {slicedData.map((row) => (
+          {Object.values(slicedData).map((row) => (
             <TableRow key={row.name}>
               <TableCell component='th' scope='row'>
                 {row.name}

@@ -7,9 +7,6 @@ import {
   GET_TRANSACTIONS,
   ADD_TRANSACTION,
   DELETE_TRANSACTION,
-  GET_INCOME,
-  GET_EXPENSES,
-  GET_BALANCE,
   GET_TOTAL_INCOME,
   GET_TOTAL_EXPENSES,
   GET_TOTAL_BALANCE,
@@ -66,24 +63,6 @@ export default (state, action) => {
         transactions: state.transactions.filter(
           (transaction) => transaction._id !== action.payload
         ),
-        loading: false,
-      };
-    case GET_INCOME:
-      return {
-        ...state,
-        income: action.payload,
-        loading: false,
-      };
-    case GET_EXPENSES:
-      return {
-        ...state,
-        expenses: action.payload,
-        loading: false,
-      };
-    case GET_BALANCE:
-      return {
-        ...state,
-        balance: action.payload,
         loading: false,
       };
     case GET_TOTAL_INCOME:

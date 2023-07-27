@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AiOutlineArrowDown } from 'react-icons/ai';
 import { AiOutlineArrowUp } from 'react-icons/ai';
-import { HiCurrencyDollar } from 'react-icons/hi';
 import {
   Avatar,
   Card,
@@ -16,7 +15,15 @@ import {
 const DBCard = ({ name, difference, positive = false, sx, value, icon }) => {
   const isMediumScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-
+  const getBackgroundColor = () => {
+    if (name === 'Total Income') {
+      return 'green';
+    } else if (name === 'Total Expense') {
+      return 'red';
+    } else if (name === 'Total Balance') {
+      return 'blue';
+    }
+  };
   return (
     <Card sx={sx}>
       <CardContent>
@@ -32,18 +39,15 @@ const DBCard = ({ name, difference, positive = false, sx, value, icon }) => {
             </Typography>
             <Typography variant='h4'>${value}</Typography>
           </Stack>
-          {(isSmallScreen) ? null : (
+          {isSmallScreen ? null : (
             <Avatar
               sx={{
-                backgroundColor: 'error.main',
+                backgroundColor: getBackgroundColor(),
                 height: 56,
                 width: 56,
               }}
             >
-              <SvgIcon>
-                {icon}
-                {/* <HiCurrencyDollar /> */}
-              </SvgIcon>
+              <SvgIcon>{icon}</SvgIcon>
             </Avatar>
           )}
         </Stack>

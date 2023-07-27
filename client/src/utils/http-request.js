@@ -62,3 +62,8 @@ export const getTransactionsByWalletId = async (id) => {
   const response = await axios.get(baseUrl + '/wallet/' + id + '/transactions');
   return response.data;
 }
+
+export const getTotalIncome = async () => {
+  const response = await axios.get(baseUrl + '/calculation/total-income');
+  return response.data;
+}

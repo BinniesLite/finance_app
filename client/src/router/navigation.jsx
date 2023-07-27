@@ -6,6 +6,7 @@ import Dashboard from "../components/pages/dashboard/Dashboard";
 import LayoutWrapper from "../components/layout/wrapper/LayoutWrapper";
 import Budget from "../components/pages/budget/Budget";
 import Report from "../components/pages/report/Report";
+import HomePage from "../components/pages/auth/HomePage/HomePage";
 
 export const navigation = [
   {
@@ -16,6 +17,11 @@ export const navigation = [
   {
     path: "/signup",
     component: <SignUpPage />,
+    isPrivate: false,
+  },
+  {
+    path: "/homepage",
+    component: <HomePage />,
     isPrivate: false,
   },
   {

@@ -12,9 +12,6 @@ import {
   TRANSACTION_ERROR,
   ADD_TRANSACTION,
   DELETE_TRANSACTION,
-  GET_INCOME,
-  GET_EXPENSES,
-  GET_BALANCE,
   GET_TOTAL_INCOME,
   GET_TOTAL_EXPENSES,
   GET_TOTAL_BALANCE,
@@ -32,9 +29,6 @@ const AppState = (props) => {
   const initialState = {
     wallets: [],
     transactions: [],
-    income: [],
-    expenses: [],
-    balance: [],
     totalIncome: [],
     totalExpenses: [],
     totalBalance: [],
@@ -48,33 +42,15 @@ const AppState = (props) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const baseUrl = 'http://localhost:3000/api';
 
-  // Load User
-
-  // Register User
-
-  // Login User
-
-  // Logout
-
-  // Clear Errors
-
   // Get Wallets
   const getWallets = async () => {
     setLoading();
-    // try {
     const res = await axios.get(baseUrl + '/wallet');
     dispatch({
       type: GET_WALLETS,
       payload: res.data,
     });
-    // } catch (err) {
-    //   dispatch({
-    //     type: WALLET_ERROR,
-    //     payload: err.response.msg,
-    //   });
-    // }
   };
-
 
   // Add Wallet
   const addWallet = async (wallet) => {
@@ -205,6 +181,37 @@ const AppState = (props) => {
 
   //Set loading
   const setLoading = () => dispatch({ type: SET_LOADING });
+
+  // Get Total Income
+  const getTotalIncome = async () => {
+    setLoading();
+    const res = await axios.get(baseUrl + '/calculation/total-income');
+    dispatch({
+      type: GET_TOTAL_INCOME,
+      payload: res.data,
+    });
+  };
+
+  // Get Total Expenses
+  const getTotalExpenses = async () => {
+    setLoading();
+    const res = await axios.get(baseUrl + '/calculation/total-expense');
+    dispatch({
+      type: GET_TOTAL_EXPENSES,
+      payload: res.data,
+    });
+  };
+
+  // Get Total Balance
+  const getTotalBalance = async () => {
+    setLoading();
+    const res = await axios.get(baseUrl + '/calculation/balance');
+    dispatch({
+      type: GET_TOTAL_BALANCE,
+      payload: res.data,
+    });
+  }
+  
   return (
     <AppContext.Provider
       value={{
@@ -214,10 +221,9 @@ const AppState = (props) => {
         error: state.error,
         wallets: state.wallets,
         transactions: state.transactions,
-        income: state.income,
-        expenses: state.expenses,
-        balance: state.balance,
         totalIncome: state.totalIncome,
+        totalExpenses: state.totalExpenses,
+        totalBalance: state.totalBalance,
         loading: state.loading,
         getWallets,
         addWallet,
@@ -226,6 +232,9 @@ const AppState = (props) => {
         getTransactions,
         addTransaction,
         deleteTransaction,
+        getTotalIncome,
+        getTotalExpenses,
+        getTotalBalance,
       }}
     >
       {props.children}

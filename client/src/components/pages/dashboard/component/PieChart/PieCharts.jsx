@@ -1,49 +1,70 @@
 import React from 'react';
-import {
-  PieChart,
-  Pie,
-  Legend,
-  Tooltip,
-  Cell,
-  ResponsiveContainer,
-} from 'recharts';
+import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts';
 import PropTypes from 'prop-types';
+import { Stack, Typography, Box } from '@mui/material';
 
-const COLORS = [
-  '#0088FE',
-  '#00C49F',
-  '#FFBB28',
-  '#FF8042',
-  '#c698f5',
-  '#fa5757',
-];
+// const COLORS = [
+//   '#0088FE',
+//   '#00C49F',
+//   '#FFBB28',
+//   '#FF8042',
+//   '#c698f5',
+//   '#fa5757',
+// ];
 
-const PieCharts = ({ pieData }) => {
+const COLORS = {
+  'Auto Loan Account': '#0088FE',
+  'Investment Account': '#00C49F',
+  'Savings Account': '#FFBB28',
+  'Personal Loan Account': '#FF8042',
+  'Checking Account': '#c698f5',
+  'Home Loan Account': '#fa5757',
+};
+
+const PieCharts = ({ wallets }) => {
+  // const pieData = Object.values(wallets).map((wallet) => ({
+  //   name: wallet.name,
+  //   value: wallet.balance || 100, // Replace null balance with 0 if necessary
+  // }));
+
   return (
-    <PieChart width={350} height={400}>
+    <PieChart width={350} height={350}>
       <Pie
         dataKey='value'
         isAnimationActive={false}
-        data={pieData}
-        cx={350/2}
+        data={wallets}
+        cx={350 / 2}
         cy={200}
         outerRadius={80}
-        label
       >
-        {pieData.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        {wallets.map((entry, index) => (
+          <Cell
+            key={`cell-${entry.name}`}
+            fill={COLORS[entry.name] || '#8884d8'}
+          />
         ))}
       </Pie>
       <Tooltip />
+      <Legend />
     </PieChart>
   );
 };
 
 PieCharts.propTypes = {
-  pieData: PropTypes.arrayOf(
+  // wallets: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     id: PropTypes.string.isRequired,
+  //     userId: PropTypes.string,
+  //     name: PropTypes.string.isRequired,
+  //     balance: PropTypes.number,
+  //     createdAt: PropTypes.string.isRequired,
+  //     description: PropTypes.string,
+  //   })
+  // ).isRequired,
+  wallets: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      value: PropTypes.number.isRequired,
+      value: PropTypes.number,
     })
   ).isRequired,
 };
