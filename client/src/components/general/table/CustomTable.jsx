@@ -1,6 +1,7 @@
 import * as React from "react";
 import Chip from "@mui/material/Chip";
 import MUIDataTable, { TableFilterList } from "mui-datatables";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const columns = [
   {
@@ -46,11 +47,12 @@ const columns = [
 ];
 
 const options = {
-  filterType: "checkbox",
+  filterType: "dropdown",
 };
-const CustomTable = ({transactions, loading}) => {
+
+const CustomTable = ({ transactions, loading }) => {
   const data = transactions;
-  
+
   return (
     <MUIDataTable
       title={"Transactions"}
@@ -60,7 +62,6 @@ const CustomTable = ({transactions, loading}) => {
       loading={loading}
     />
   );
-
 };
 
 export default CustomTable;

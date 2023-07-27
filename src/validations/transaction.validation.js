@@ -5,7 +5,7 @@ const transactionSchema = z.object({
   description: z.string().min(1).max(255).optional(),
   type: z.enum(["income", "expense"]),
   walletId: z.string(),
-  date: z.string().optional(),
+  createdAt: z.string().optional(),
   image: z.string().optional(),
 });
 

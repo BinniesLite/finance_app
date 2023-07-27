@@ -4,3 +4,9 @@ export const formatDate = (dateString) => {
     const formattedDate = date.toLocaleDateString("en-US", options);
     return formattedDate
 }
+
+export const formatDateToDateObject = (inputDate) =>{
+    const dateObject = new Date(inputDate);
+    const formattedDate = dateObject.toISOString();
+    return formattedDate;
+}
