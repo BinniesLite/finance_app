@@ -89,7 +89,7 @@ const TransactionPage = () => {
       if (transactions.length === 0) {
         // If there are no transactions in the context, generate fake data and push it.
         // Note: You may want to remove this part in the production environment.
-        feedData();
+        // feedData();
         fetchTransactions();
       } else {
         // Format the transactions from the context
