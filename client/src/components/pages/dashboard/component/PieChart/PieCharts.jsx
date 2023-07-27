@@ -44,7 +44,7 @@ const PieCharts = ({ wallets }) => {
           />
         ))}
       </Pie>
-      <Tooltip />
+      {/* <Tooltip /> */}
       <Legend />
     </PieChart>
   );

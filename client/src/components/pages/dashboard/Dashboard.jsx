@@ -37,18 +37,6 @@ const Dashboard = () => {
   } = useContext(appContext);
 
   //fetch transaction data
-  // useEffect(() => {
-  //   const fetchTransactions = async () => {
-  //     try {
-  //       const transactions = await getTransactions();
-  //       setTransactionData(transactions);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchTransactions();
-  // }, []);
-
   useEffect(() => {
     const fetchTransactions = async () => {
       await getTransactions();
@@ -169,27 +157,27 @@ const Dashboard = () => {
 
   const pieData = [
     {
-      name: 'Group A',
-      value: 2400,
+      name: 'Savings',
+      value: 1000,
     },
     {
-      name: 'Group B',
-      value: 4567,
+      name: 'Montreal Trip Fund',
+      value: 500,
     },
     {
-      name: 'Group C',
-      value: 1398,
+      name: 'Food Budget',
+      value: 400,
     },
     {
-      name: 'Group D',
-      value: 9800,
+      name: 'Shopping',
+      value: 200,
     },
     {
-      name: 'Group E',
-      value: 3908,
+      name: 'Rent',
+      value: 600,
     },
     {
-      name: 'Group F',
+      name: 'Emergency Fund',
       value: 4800,
     },
   ];

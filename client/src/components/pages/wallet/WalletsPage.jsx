@@ -10,7 +10,6 @@
 // //api
 // import AppContext from '@/context/app/context';
 
-
 // //css
 // import './WalletsPage.css';
 
@@ -28,7 +27,7 @@
 //     const fetchWallets = async () => {
 //       await getWallets();
 //     };
-    
+
 //     fetchWallets();
 //   }, []); // Use the memoized function as a dependency instead of getWallets
 
@@ -63,7 +62,7 @@
 //           />
 //         </Stack>
 //       </Stack>
-//       {wallets  && 
+//       {wallets  &&
 //         tabs[activeTab].component}
 //     </Section>
 //   );
@@ -107,10 +106,6 @@ const WalletsPage = () => {
 
     fetchWallets();
   }, []);
-
-  // useEffect(() => {
-  //   setWalletData(wallets);
-  // }, [wallets]);
 
   const tabs = [
     {
