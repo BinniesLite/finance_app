@@ -6,10 +6,16 @@ import Dashboard from "@/components/pages/dashboard/Dashboard";
 import LayoutWrapper from "@/components/layout/wrapper/LayoutWrapper";
 import Budget from "@/components/pages/budget/Budget";
 import Report from "@/components/pages/report/Report";
+import HomePage from "@/components/pages/auth/HomePage/HomePage";
 
 export const navigation = [
   {
     path: "/",
+    component: <HomePage />,
+    isPrivate: false,
+  },
+  {
+    path: "/signin",
     component: <SignInPage />,
     isPrivate: false,
   },
@@ -62,5 +68,5 @@ export const navigation = [
       </LayoutWrapper>
     ),
     isPrivate: true,
-  }
+  },
 ];
