@@ -16,12 +16,12 @@ const LineChart = ({ data }) => {
     <AreaChart width={330} height={300} data={data}>
       <defs>
         <linearGradient id='colorexpense' x1='0' y1='0' x2='0' y2='1'>
-          <stop offset='5%' stopColor='#ff5959' stopOpacity={0.8} />
-          <stop offset='95%' stopColor='#ff5959' stopOpacity={0} />
+          <stop offset='5%' stopColor='#ff3f2e' stopOpacity={0.8} />
+          <stop offset='95%' stopColor='#ff3f2e' stopOpacity={0} />
         </linearGradient>
         <linearGradient id='colorincome' x1='0' y1='0' x2='0' y2='1'>
-          <stop offset='5%' stopColor='#82ca9d' stopOpacity={0.8} />
-          <stop offset='95%' stopColor='#82ca9d' stopOpacity={0} />
+          <stop offset='5%' stopColor='#2c8011' stopOpacity={0.8} />
+          <stop offset='95%' stopColor='#2c8011' stopOpacity={0} />
         </linearGradient>
       </defs>
       <XAxis dataKey='name' />

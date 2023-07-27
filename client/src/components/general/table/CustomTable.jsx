@@ -42,6 +42,16 @@ const columns = [
     options: {
       filter: true,
       sort: true,
+      customBodyRender: (value) => {
+        // Define a function to render the type with different colors
+        const typeColor = value === 'income' ? 'green' : 'red';
+        return (
+          <Chip
+            label={value}
+            style={{ color: typeColor, bacgroundColor: 'none' }}
+          />
+        );
+      },
     },
   },
 ];

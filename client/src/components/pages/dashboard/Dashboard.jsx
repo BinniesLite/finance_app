@@ -161,8 +161,8 @@ const Dashboard = () => {
       value: 1000,
     },
     {
-      name: 'Montreal Trip Fund',
-      value: 500,
+      name: 'Transportation',
+      value: 128,
     },
     {
       name: 'Food Budget',

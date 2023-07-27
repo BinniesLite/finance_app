@@ -13,12 +13,12 @@ import { Stack, Typography, Box } from '@mui/material';
 // ];
 
 const COLORS = {
-  'Auto Loan Account': '#0088FE',
-  'Investment Account': '#00C49F',
-  'Savings Account': '#FFBB28',
-  'Personal Loan Account': '#FF8042',
-  'Checking Account': '#c698f5',
-  'Home Loan Account': '#fa5757',
+  'Savings': '#74a4e3',
+  'Transportation': '#ff6188',
+  'Food Budget': '#49f5b6',
+  'Shopping': '#ffc34d',
+  'Rent': '#ffea00',
+  'Emergency Fund': '#da96ff',
 };
 
 const PieCharts = ({ wallets }) => {
@@ -36,6 +36,7 @@ const PieCharts = ({ wallets }) => {
         cx={350 / 2}
         cy={200}
         outerRadius={80}
+        label
       >
         {wallets.map((entry, index) => (
           <Cell
