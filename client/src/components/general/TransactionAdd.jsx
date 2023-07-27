@@ -56,7 +56,7 @@ const TransactionAdd = ({ open, handleClose }) => {
       setWallets(response);
     };
     fetchWallets();
-  }, [wallets]);
+  }, []);
 
   const onSubmit = async (data) => {
     const { amount, type, walletId, description } = data;

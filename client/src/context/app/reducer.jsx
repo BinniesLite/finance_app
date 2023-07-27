@@ -7,17 +7,13 @@ import {
   GET_TRANSACTIONS,
   ADD_TRANSACTION,
   DELETE_TRANSACTION,
-  GET_INCOME,
-  GET_EXPENSES,
-  GET_BALANCE,
   GET_TOTAL_INCOME,
   GET_TOTAL_EXPENSES,
   GET_TOTAL_BALANCE,
   SET_LOADING,
 } from '../types';
 
-
-const AppReducer =(state, action) => {
+export default (state, action) => {
   switch (action.type) {
     case GET_WALLETS:
       return {
@@ -69,24 +65,6 @@ const AppReducer =(state, action) => {
         ),
         loading: false,
       };
-    case GET_INCOME:
-      return {
-        ...state,
-        income: action.payload,
-        loading: false,
-      };
-    case GET_EXPENSES:
-      return {
-        ...state,
-        expenses: action.payload,
-        loading: false,
-      };
-    case GET_BALANCE:
-      return {
-        ...state,
-        balance: action.payload,
-        loading: false,
-      };
     case GET_TOTAL_INCOME:
       return {
         ...state,
@@ -114,6 +92,3 @@ const AppReducer =(state, action) => {
       return state;
   }
 };
-
-
-export default AppReducer; 
