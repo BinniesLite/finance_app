@@ -1,14 +1,19 @@
-import React from "react";
-import { useNavigate } from 'react-router-dom';
-// Calculation 
-import { getTotalIncome, getTotalExpense, getTotalBalance } from "@/api/calculation";
-// GPT 
-import { sendChat } from "@/api/chatAI";
+import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
+// Calculation
+import {
+  getTotalIncome,
+  getTotalExpense,
+  getTotalBalance,
+} from "@/api/calculation";
+// GPT
+import { sendChat, sendChatWallet } from "@/api/chatAI";
 
 import formatCurrency from "@/utils/formatCurrency";
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   // Helper function to add a new message to the state
   const addBotMessage = (content, plugins) => {
@@ -21,11 +26,14 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleHello = () => {
     addBotMessage("Hello!");
-    addBotMessage("Here're what I can do for you. Let me know if you need more assistance", {
-      widget: "overview",
-      loading: true,
-      withAvatar: false
-      });
+    addBotMessage(
+      "Here're what I can do for you. Let me know if you need more assistance",
+      {
+        widget: "overview",
+        loading: true,
+        withAvatar: false,
+      }
+    );
   };
 
   const handlePeace = () => {
@@ -34,16 +42,18 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleNavigateTransaction = () => {
     addBotMessage("Right away! Navigating to transactions");
-    navigate('/transactions');
+    navigate("/transactions");
   };
 
   const handleOverview = () => {
-    addBotMessage("Here're what I can do for you. Let me know if you need more assistance", {
-      widget: "overview",
-      loading: true
-    });
+    addBotMessage(
+      "Here're what I can do for you. Let me know if you need more assistance",
+      {
+        widget: "overview",
+        loading: true,
+      }
+    );
   };
-
 
   const handleTotalIncome = async () => {
     const totalIncome = await getTotalIncome();
@@ -51,9 +61,8 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   const handleTotalExpense = async () => {
-    
     const totalExpense = await getTotalExpense();
-    
+
     console.log("Herre total expense");
     addBotMessage(`Your total expense is ${formatCurrency(totalExpense)}`);
   };
@@ -65,30 +74,65 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleNavigateWallet = () => {
     addBotMessage("Right away! Navigating to wallet");
-    navigate('/wallets');
+    navigate("/wallets");
   };
 
   const handleDefault = () => {
     addBotMessage("Sorry, I don't understand. Please try again.");
-    addBotMessage("Here're what I can do for you. Let me know if you need more assistance", {
-      widget: "overview",
-      loading: true,
-      withAvatar: false 
-    });
-
+    addBotMessage(
+      "Here're what I can do for you. Let me know if you need more assistance",
+      {
+        widget: "overview",
+        loading: true,
+        withAvatar: false,
+      }
+    );
   };
 
   const handleNavigateDashboard = () => {
     addBotMessage("Right away! Navigating to dashboard");
-    navigate('/dashboard');
-  }
+    navigate("/dashboard");
+  };
 
   const handleChatGPT = async (message) => {
-    const response = await sendChat(message);
+    try {
+      const response = await sendChat(message);
     addBotMessage(response.data);
+    }
+    catch (error) {
+      addBotMessage(
+        "Sorry we have some errors currently please try again late, in the mean time here're some fun fact about dogs: "
+      );
+      console.log(error);
+    }
+  };
+
+  const handleChatWallet = async (message) => {
+    try {
+      setLoading(true); // Set loading state to true when request starts
+      const response = await sendChatWallet(message);
+      addBotMessage(response.data, {
+        loading: false, // Set loading state to false when request completes
+        withAvatar: false,
+      });
+    } catch (error) {
+      addBotMessage(
+        "Sorry we have some errors currently, please try again later"
+      );
+      console.log(error);
+    } finally {
+      setLoading(false); // Make sure to clear loading state in case of any errors too
+    }
+  };
+
+  const handleChatAI = (message) => {
+    addBotMessage("Right Away",{
+      loading: true,
+      withAvatar: false,
+      widget: "chatAI",
+    })
   }
-
-
+  
 
   // Pass the actions object with the helper functions to the MessageParser
   return (
@@ -106,7 +150,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handleNavigateDashboard,
             handleTotalExpense,
             handleTotalBalance,
-            handleChatGPT
+            handleChatGPT,
+            handleChatWallet,
+            handleChatAI,
           },
         });
       })}

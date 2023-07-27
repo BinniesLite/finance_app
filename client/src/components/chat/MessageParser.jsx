@@ -6,6 +6,7 @@ const MessageParser = ({ children, actions }) => {
     // demo
     if (message.includes("hello")) {
       
+
       actions.handleHello();
     }
     else if (message.includes("peace")) {
@@ -37,8 +38,17 @@ const MessageParser = ({ children, actions }) => {
     else if (message.match(/give\s+me\s+some\s+financial\s+tips/i)) {
       actions.handleNavigateTransaction();
     }
-    else if (message.include("tell")) {
-      actions.handleChatGPT(message)
+    else if (message.includes("give") && message.includes("wallet")) {
+      actions.handleChatWallet(message.replace("give","").replace("me", ""));
+    }
+    else if (message.includes("give") && message.includes("transaction")) {
+      actions.handleChat(message.replace("give","").replace("me", ""));
+    }
+    else if (message.includes("give") && message.includes("budget")) {
+      actions.handleChatAI(message);
+    }
+    else if (message.includes("tell")) {
+    actions.handleChatGPT(message)
     }
     else {
       actions.handleDefault();

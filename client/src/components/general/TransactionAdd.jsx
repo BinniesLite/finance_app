@@ -74,7 +74,7 @@ const TransactionAdd = ({ open, handleClose }) => {
         type,
         walletId,
         description,
-      });
+      }); 
     } catch (error) {
       console.log(error);
     }
@@ -94,8 +94,15 @@ const TransactionAdd = ({ open, handleClose }) => {
               <InputLabel>Amount</InputLabel>
               <TextField
                 sx={{ pt: 4 }}
-                {...register('amount')}
-                type='number'
+                {...register('amount', 
+                {
+                  pattern: {
+                    value: /^[0-9]+(\.[0-9]{1,2})?$/, // Regular expression for valid decimal numbers up to two decimal places
+                    message: 'Invalid amount format',
+                  },
+                }
+                )}
+                type='text'
                 fullWidth
                 variant='standard'
                 onBlur={(e) => {
@@ -111,7 +118,7 @@ const TransactionAdd = ({ open, handleClose }) => {
                     <InputAdornment position='start'>$</InputAdornment>
                   ),
                   step: 'any',
-                  pattern: '\\d*',
+                  pattern: /^[0-9]+(\.[0-9]{1,2})?$/,
                 }}
               />
               <p>{errors?.amount?.message}</p>

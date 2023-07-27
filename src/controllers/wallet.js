@@ -31,15 +31,29 @@ const getWalletById = async (req, res) => {
 // create wallet
 // endpoint: /api/wallet/create
 const createWallet = async (req, res) => {
-    const name = req.body.name;
+    const {name, description} = req.body;
+
     try {
+        // check if wallet already exists
+        const wallet = await prisma.wallet.findUnique({
+            where: {
+                name: name
+            }
+        });
+
+        if (wallet) {
+            return res.status(400).json({message: "Wallet already exists"});
+        }
+
         const result = await prisma.wallet.create({
             data: {
-                name: name
+                name: name,
+                description: description
             }
         });
         res.status(201).json(result)
     } catch (error) {
+        console.log(error);
         res.status(500).json(error);
     }
 };
