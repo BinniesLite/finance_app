@@ -1,40 +1,43 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from "react";
 // components
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Typography from '@mui/material/Typography';
-import { FormControl, InputLabel, InputAdornment } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Typography from "@mui/material/Typography";
+import { FormControl, InputLabel, InputAdornment } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 // form
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 // schema validation
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 // api
-import {
-  getWallets,
-  getTransactions,
-} from '@/utils/http-request';
-import { formatTransactionList } from '../../utils/helper';
-import AppContext from '@/context/app/context';
+import { getWallets, getTransactions } from "@/utils/http-request";
+import { formatTransactionList } from "../../utils/helper";
+import AppContext from "@/context/app/context";
+import { uploadImageToFirebase } from "../../utils/uploadImage";
 
 const transactionSchema = z.object({
   amount: z.string(),
-  type: z.enum(['income', 'expense']),
+  type: z.enum(["income", "expense"]),
   walletId: z.string(),
   description: z.string(),
+  // image: z.string(),
 });
 
 const TransactionAdd = ({ open, handleClose }) => {
   const appContext = useContext(AppContext);
   const [wallets, setWallets] = React.useState([]);
   const [transaction, setTransaction] = React.useState([]);
-
+  const [imageFile, setImageFile] = React.useState(null);
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+  };
   const {
     register,
     handleSubmit,
@@ -54,7 +57,6 @@ const TransactionAdd = ({ open, handleClose }) => {
     fetchWallets();
   }, [wallets]);
 
-  
   useEffect(() => {
     const fetchTransactions = async () => {
       const response = await getTransactions();
@@ -66,6 +68,9 @@ const TransactionAdd = ({ open, handleClose }) => {
 
   const onSubmit = async (data) => {
     const { amount, type, walletId, description } = data;
+    const image = await uploadImageToFirebase(imageFile);
+    // const imageURL = "";
+    console.log(image);
     handleClose();
 
     try {
@@ -74,6 +79,7 @@ const TransactionAdd = ({ open, handleClose }) => {
         type,
         walletId,
         description,
+        image,
       });
     } catch (error) {
       console.log(error);
@@ -84,7 +90,7 @@ const TransactionAdd = ({ open, handleClose }) => {
     <Dialog open={open} onClose={handleClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogTitle>
-          <Typography variant='h5' color='primary.main'>
+          <Typography variant="h5" color="primary.main">
             Add Transaction
           </Typography>
         </DialogTitle>
@@ -94,24 +100,24 @@ const TransactionAdd = ({ open, handleClose }) => {
               <InputLabel>Amount</InputLabel>
               <TextField
                 sx={{ pt: 4 }}
-                {...register('amount')}
-                type='number'
+                {...register("amount")}
+                type="number"
                 fullWidth
-                variant='standard'
+                variant="standard"
                 onBlur={(e) => {
                   const numericValue = e.target.value;
-                  const formattedValue = numericValue.toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
+                  const formattedValue = numericValue.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
                   });
                   e.target.value = formattedValue;
                 }}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position='start'>$</InputAdornment>
+                    <InputAdornment position="start">$</InputAdornment>
                   ),
-                  step: 'any',
-                  pattern: '\\d*',
+                  step: "any",
+                  pattern: "\\d*",
                 }}
               />
               <p>{errors?.amount?.message}</p>
@@ -120,17 +126,17 @@ const TransactionAdd = ({ open, handleClose }) => {
             <FormControl
               sx={{ py: 2 }}
               error={errors.type}
-              variant='standard'
+              variant="standard"
               fullWidth
             >
               <InputLabel>Type</InputLabel>
-              <Select {...register('type')}>
-                <MenuItem value='income'>
-                  <Typography sx={{ color: 'green' }} color='primary.success'>
+              <Select {...register("type")}>
+                <MenuItem value="income">
+                  <Typography sx={{ color: "green" }} color="primary.success">
                     Income
                   </Typography>
                 </MenuItem>
-                <MenuItem sx={{ color: 'red' }} value='expense'>
+                <MenuItem sx={{ color: "red" }} value="expense">
                   Expense
                 </MenuItem>
               </Select>
@@ -140,11 +146,11 @@ const TransactionAdd = ({ open, handleClose }) => {
             <FormControl
               error={errors.wallet}
               fullWidth
-              variant='standard'
-              sx={{ py: 3, maxHeight: '7rem', overflowY: 'auto' }}
+              variant="standard"
+              sx={{ py: 3, maxHeight: "7rem", overflowY: "auto" }}
             >
-              <InputLabel id=''>Select Wallet</InputLabel>
-              <Select {...register('walletId')} label='Select Wallet'>
+              <InputLabel id="">Select Wallet</InputLabel>
+              <Select {...register("walletId")} label="Select Wallet">
                 {Object.values(wallets).map((wallet) => (
                   <MenuItem key={wallet.id} value={wallet.id}>
                     {wallet.name}
@@ -153,23 +159,46 @@ const TransactionAdd = ({ open, handleClose }) => {
               </Select>
               <p>{errors?.wallet?.message}</p>
             </FormControl>
-            <TextField
-              {...register('description')}
-              type='text'
+            <FormControl
+              error={errors.description}
               fullWidth
-              label='Description'
-              variant='standard'
-              sx={{ py: 3 }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position='start'></InputAdornment>
-                ),
-                step: 'any',
-                pattern: '\\d*',
-              }}
-            />
+              variant="standard"
+              sx={{ py: 3, maxHeight: "7rem", overflowY: "auto" }}
+            >
+              <TextField
+                {...register("description")}
+                type="text"
+                fullWidth
+                label="Description"
+                variant="standard"
+                sx={{ py: 3 }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start"></InputAdornment>
+                  ),
+                  step: "any",
+                  pattern: "\\d*",
+                }}
+              />
+            </FormControl>
+
+            <FormControl
+              error={errors.image}
+              fullWidth
+              variant="standard"
+              sx={{ py: 3, maxHeight: "7rem", overflowY: "auto" }}
+            >
+              <Typography>Add Image</Typography>
+              <input
+                {...register("image")}
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+            </FormControl>
+
             <Button onClick={handleClose}>Cancel</Button>
-            <button type='submit'>Add Transaction</button>
+            <button type="submit">Add Transaction</button>
           </DialogContentText>
         </DialogContent>
       </form>
