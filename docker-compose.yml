@@ -9,6 +9,8 @@ services:
       - ./client/src:/usr/src/app/src
     ports:
       - 80:80
+    environment:
+      - VITE_BASE_URL=http://localhost:3000/api
     networks:
       finance:
         aliases:
@@ -22,6 +24,8 @@ services:
       - ./prisma:/usr/src/app/prisma
     ports:
       - 3000:3000
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@postgresql:5432/finance
     networks:
       finance:
         aliases:

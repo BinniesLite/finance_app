@@ -51,7 +51,10 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   const handleTotalExpense = async () => {
+    
     const totalExpense = await getTotalExpense();
+    
+    console.log("Herre total expense");
     addBotMessage(`Your total expense is ${formatCurrency(totalExpense)}`);
   };
 
