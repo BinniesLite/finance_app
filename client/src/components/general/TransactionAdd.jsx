@@ -20,6 +20,8 @@ import { getWallets, getTransactions } from "@/utils/http-request";
 import { formatTransactionList } from "../../utils/helper";
 import AppContext from "@/context/app/context";
 import { uploadImageToFirebase } from "../../utils/uploadImage";
+import { formatDateToDateObject } from "../../utils/formatDate";
+
 
 const transactionSchema = z.object({
   amount: z.string(),
@@ -34,6 +36,7 @@ const TransactionAdd = ({ open, handleClose }) => {
   const [wallets, setWallets] = React.useState([]);
   const [transaction, setTransaction] = React.useState([]);
   const [imageFile, setImageFile] = React.useState(null);
+  const [selectedDate, setSelectedDate] = React.useState(null);
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setImageFile(file);
@@ -51,36 +54,43 @@ const TransactionAdd = ({ open, handleClose }) => {
     const fetchWallets = async () => {
       const response = await getWallets();
       setWallets(response);
-      // await appContext.getWallets();
-      // setWallets(appContext.wallets);
     };
     fetchWallets();
   }, [wallets]);
 
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      const response = await getTransactions();
-      const formattedTransaction = await formatTransactionList(response);
-      setTransaction(formattedTransaction);
-    };
-    fetchTransactions();
-  }, [transaction]);
-
   const onSubmit = async (data) => {
     const { amount, type, walletId, description } = data;
-    const image = await uploadImageToFirebase(imageFile);
-    // const imageURL = "";
-    console.log(image);
+    var image = "";
+    if(imageFile!=null){
+      image = await uploadImageToFirebase(imageFile);
+    }
+    var createdAt = null;
+    if (selectedDate!=null) {
+      createdAt = formatDateToDateObject(selectedDate);
+    }
+    console.log(createdAt);
     handleClose();
 
     try {
-      await appContext.addTransaction({
+      if (createdAt != null) {
+        await appContext.addTransaction({
+          amount: parseFloat(amount),
+          type,
+          walletId,
+          description,
+          image,
+          createdAt,
+        });
+      }
+      else {
+        await appContext.addTransaction({
         amount: parseFloat(amount),
         type,
         walletId,
         description,
         image,
       });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -101,21 +111,14 @@ const TransactionAdd = ({ open, handleClose }) => {
               <TextField
                 sx={{ pt: 4 }}
                 {...register("amount")}
-                type="number"
+                type="text" // Change 'number' to 'text'
                 fullWidth
                 variant="standard"
-                onBlur={(e) => {
-                  const numericValue = e.target.value;
-                  const formattedValue = numericValue.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  });
-                  e.target.value = formattedValue;
-                }}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
                   ),
+                  inputMode: "decimal", // Specify input as a decimal number
                   step: "any",
                   pattern: "\\d*",
                 }}
@@ -194,6 +197,15 @@ const TransactionAdd = ({ open, handleClose }) => {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
+              />
+            </FormControl>
+            <FormControl fullWidth>
+              {/* <InputLabel>Date</InputLabel> */}
+              <TextField
+                type="date"
+                {...register("createdAt")}
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
               />
             </FormControl>
 

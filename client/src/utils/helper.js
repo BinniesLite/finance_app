@@ -8,7 +8,7 @@ import {
 } from './http-request';
 // import AppContext from '../context/app/context';
 import { formatDate } from './formatDate';
-
+const walletName = [];
 export const generateFakeTransactionData = async (numberOfData) => {
   const fakeData = [];
   try {
