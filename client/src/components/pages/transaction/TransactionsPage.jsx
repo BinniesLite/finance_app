@@ -27,6 +27,42 @@ const TransactionPage = () => {
   };
   
   
+  // useEffect(() => {
+  //   const feedData = async () => {
+  //     const wallets = generateFakeWallets(1);
+  //     try {
+  //       await pushWallets(wallets);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+
+  //     try {
+  //       const trans = await generateFakeTransactionData(1);
+  //       console.log(trans);
+  //       await pushTransactions(trans);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   const fetchTransactions = async () => {
+  //     await getTransactions();
+  //   };
+
+  //   const formatData = async () => {
+  //     try {
+  //       const formattedData = await formatTransactionList(transactions);
+  //       return formattedData;
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+
+  //   if (transactions.length === 0) {
+  //     // feedData();
+  //     fetchTransactions();
+  //   }
+  // }, []);
+
   useEffect(() => {
     const feedData = async () => {
       const wallets = generateFakeWallets(1);
@@ -44,29 +80,47 @@ const TransactionPage = () => {
         console.log(error);
       }
     };
-    const fetchTransactions = async () => {
-      await getTransactions();
+
+      const fetchTransactions = async () => {
+        await getTransactions();
+      };
+
+    const fetchAndFormatTransactions = async () => {
+      if (transactions.length === 0) {
+        // If there are no transactions in the context, generate fake data and push it.
+        // Note: You may want to remove this part in the production environment.
+        feedData();
+        getTransactions();
+      } else {
+        // Format the transactions from the context
+        try {
+          const formattedData = await formatTransactionList(transactions);
+          setTransactionData(formattedData);
+        } catch (error) {
+          console.log(error);
+        }
+      }
     };
 
+    fetchAndFormatTransactions();
+  }, [transactions]);
 
-    if (transactions.length === 0) {
-      // feedData();
-      fetchTransactions();
-    }
-  }, []);
-
-  console.log(transactions);
-  
+  console.log("trans", transactions);
+  console.log("trans data:", transactionData);
+  // const formattedTransaction = formatTransactionList(transactions);
+  // console.log(formattedTransaction);
   const tabs = [
     {
       id: "list",
       label: "List",
-      component: <CustomTable transactions={transactions} loading={loading} />,
+      component: (
+        <CustomTable transactions={transactionData} loading={loading} />
+      ),
     },
     {
       id: "grid",
       label: "Grid",
-      component: <TransactionGridView transactions={transactions} />,
+      component: <TransactionGridView transactions={transactionData} />,
     },
   ];
   return (
