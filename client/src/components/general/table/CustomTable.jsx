@@ -57,7 +57,7 @@ const columns = [
 ];
 
 const options = {
-  filterType: 'checkbox',
+  filterType: 'dropdown',
   textLabels: {
     body: {
       noMatch: 'Let sip a tea while the transactions are loaded... hihi :)',

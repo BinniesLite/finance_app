@@ -28,6 +28,7 @@ const transactionSchema = z.object({
   type: z.enum(["income", "expense"]),
   walletId: z.string(),
   description: z.string(),
+  createdAt: z.string().optional(),
   // image: z.string(),
 });
 
@@ -59,18 +60,16 @@ const TransactionAdd = ({ open, handleClose }) => {
   }, []);
 
   const onSubmit = async (data) => {
-    const { amount, type, walletId, description } = data;
+    const { amount, type, walletId, description, createdAt } = data;
     var image = "";
     if(imageFile!=null){
       image = await uploadImageToFirebase(imageFile);
     }
-    var createdAt = null;
-    if (selectedDate!=null) {
-      createdAt = formatDateToDateObject(selectedDate);
-    }
-    console.log(createdAt);
+   
+   
+    console.log("here is the date", formatDateToDateObject(createdAt));
+    
     handleClose();
-
     try {
       if (createdAt != null) {
         await appContext.addTransaction({
@@ -79,7 +78,7 @@ const TransactionAdd = ({ open, handleClose }) => {
           walletId,
           description,
           image,
-          createdAt,
+          createdAt: formatDateToDateObject(createdAt),
         });
       }
       else {
@@ -91,7 +90,9 @@ const TransactionAdd = ({ open, handleClose }) => {
         image,
       });
       }
+     
     } catch (error) {
+      handleClose();
       console.log(error);
     }
   };
@@ -204,8 +205,7 @@ const TransactionAdd = ({ open, handleClose }) => {
               <TextField
                 type="date"
                 {...register("createdAt")}
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
+               
               />
             </FormControl>
 

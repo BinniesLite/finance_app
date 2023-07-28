@@ -27,8 +27,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:password@postgresql:5432/finance
       - PORT=3000
-    env_file:
-      - .env
+      - CHATGPT_SECRET_KEY=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
     networks:
       finance:
         aliases:

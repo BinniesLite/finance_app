@@ -37,7 +37,7 @@ const DBCard = ({ name, difference, positive = false, sx, value, icon }) => {
             <Typography color='text.secondary' variant='overline'>
               {name}
             </Typography>
-            <Typography variant='h4'>${value}</Typography>
+            <Typography variant='h4'>{value}</Typography>
           </Stack>
           {isSmallScreen ? null : (
             <Avatar
@@ -65,7 +65,7 @@ const DBCard = ({ name, difference, positive = false, sx, value, icon }) => {
               </Typography>
             </Stack>
             <Typography color='text.secondary' variant='caption'>
-              Since last week
+              Since last 2 weeks
             </Typography>
           </Stack>
         )}

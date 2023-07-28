@@ -22,7 +22,7 @@ const RecentTable = ({ walletsData, transactionsData }) => {
   const sortedData = mergedData.sort((a, b) => b.createdAt - a.createdAt);
 
   // Slice the data array to only include the first 5 elements
-  const slicedData = sortedData.slice(0, 3);
+  const slicedData = sortedData.slice(0, 4);
 
   return (
     <TableContainer component={Paper}>
@@ -32,8 +32,8 @@ const RecentTable = ({ walletsData, transactionsData }) => {
         </caption>
         <TableHead>
           <TableRow>
-            <TableCell>Transaction</TableCell>
-            <TableCell align='right'>Amount</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }}>Transaction</TableCell>
+            <TableCell align='right' sx={{ fontWeight: 'bold' }}>Amount ($)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
