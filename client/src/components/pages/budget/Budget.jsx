@@ -5,7 +5,7 @@ import Chatbot from "../../chat/Chatbot";
 
 const Budget = () => {
   return (
-    <Section title="Budget">
+    <Section title="Financial Virtual Assistant">
        <Chatbot/>
        
     </Section>

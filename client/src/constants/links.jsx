@@ -21,8 +21,8 @@ export const links = [
         icon: <FaWallet style={{color: "#948B93"}}  />
     },
     {
-        name: 'budgets',
-        path: '/budgets',
+        name: 'virtual assistant',
+        path: '/virtual-assistant',
         icon: <AiFillDollarCircle style={{color: "#948B93"}} />
     },
     {

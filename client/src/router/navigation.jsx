@@ -52,7 +52,7 @@ export const navigation = [
     isPrivate: true,
   },
   {
-    path: "/budgets",
+    path: "/virtualassistant",
     component: (
       <LayoutWrapper>
         <Budget />
