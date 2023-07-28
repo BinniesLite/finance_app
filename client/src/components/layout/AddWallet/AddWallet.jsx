@@ -18,7 +18,7 @@ import {
 import Typography from '@mui/material/Typography';
 
 //context
-import AppContext from '../../../context/app/context';
+import AppContext from '@/context/app/context';
 
 // api
 import { postWallets } from '@/utils/http-request';
