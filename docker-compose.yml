@@ -26,6 +26,9 @@ services:
       - 3000:3000
     environment:
       - DATABASE_URL=postgresql://postgres:password@postgresql:5432/finance
+      - PORT=3000
+    env_file:
+      - .env
     networks:
       finance:
         aliases:

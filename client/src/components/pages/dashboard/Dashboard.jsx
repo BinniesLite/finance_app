@@ -1,35 +1,82 @@
-import React, { useState, useEffect } from 'react';
-import Section from '@/components/layout/Section/Section';
+import React, { useState, useEffect, useContext } from 'react';
+import Section from '../../Layout/Section/Section';
 import LineChart from './component/LineChart/LineChart';
 import PieCharts from './component/PieChart/PieCharts';
 import DBCard from './component/DBCard/DBCard';
-// import CustomTable from '../../general/table/CustomTable';
+import RecentTable from './component/RecentTable/RecentTable';
 import { Grid, Stack, Typography, useMediaQuery } from '@mui/material';
-import { HiCurrencyDollar } from 'react-icons/hi';
 
 //api
-import { getTransactions } from '@/utils/http-request';
-import AddWallet from '@/components/layout/AddWallet/AddWallet';
+import { getTransactions, getWallets } from '../../../utils/http-request';
+import appContext from '../../../context/app/context';
 
 //image
-import char5 from '@/assets/char5.svg';
-import assistant from '@/assets/assistant.webp';
+import char5 from '../../../assets/char5.svg';
+import assistant from '../../../assets/assistant.webp';
+import { HiCurrencyDollar } from 'react-icons/hi';
+import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
+import { GiReceiveMoney } from 'react-icons/gi';
+
+//styling
+import './Dashboard.css';
 
 const Dashboard = () => {
-  const [transactionData, setTransactionData] = useState([]);
+  // const [transactionData, setTransactionData] = useState([]);
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  const {
+    wallets,
+    transactions,
+    getWallets,
+    getTransactions,
+    totalIncome,
+    getTotalIncome,
+    totalExpenses,
+    getTotalExpenses,
+    totalBalance,
+    getTotalBalance,
+  } = useContext(appContext);
 
+  //fetch transaction data
   useEffect(() => {
     const fetchTransactions = async () => {
-      try {
-        const transactions = await getTransactions();
-        setTransactionData(transactions);
-      } catch (error) {
-        console.log(error);
-      }
+      await getTransactions();
     };
 
     fetchTransactions();
+  }, []);
+
+  //fetch wallet data
+  useEffect(() => {
+    const fetchWallets = async () => {
+      await getWallets();
+    };
+
+    fetchWallets();
+  }, []);
+
+  //fetch total income
+  useEffect(() => {
+    const fetchTotalIncome = async () => {
+      await getTotalIncome();
+    };
+
+    fetchTotalIncome();
+  }, []);
+
+  //fetch total expenses
+  useEffect(() => {
+    const fetchTotalExpenses = async () => {
+      await getTotalExpenses();
+    };
+    fetchTotalExpenses();
+  }, []);
+
+  //fetch total balance
+  useEffect(() => {
+    const fetchTotalBalance = async () => {
+      await getTotalBalance();
+    };
+    fetchTotalBalance();
   }, []);
 
   //hardcoded data for the charts
@@ -110,27 +157,27 @@ const Dashboard = () => {
 
   const pieData = [
     {
-      name: 'Group A',
-      value: 2400,
+      name: 'Savings',
+      value: 1000,
     },
     {
-      name: 'Group B',
-      value: 4567,
+      name: 'Transportation',
+      value: 128,
     },
     {
-      name: 'Group C',
-      value: 1398,
+      name: 'Food Budget',
+      value: 400,
     },
     {
-      name: 'Group D',
-      value: 9800,
+      name: 'Shopping',
+      value: 200,
     },
     {
-      name: 'Group E',
-      value: 3908,
+      name: 'Rent',
+      value: 600,
     },
     {
-      name: 'Group F',
+      name: 'Emergency Fund',
       value: 4800,
     },
   ];
@@ -156,6 +203,7 @@ const Dashboard = () => {
       value: '23444',
     },
   ];
+
   return (
     <Section title='Dashboard'>
       <Grid
@@ -174,6 +222,7 @@ const Dashboard = () => {
           spacing={2}
         >
           <Stack
+            className='rubberBand'
             direction='row'
             justifyContent='space-around'
             alignItems='center'
@@ -190,12 +239,22 @@ const Dashboard = () => {
               marginBottom: '20px',
             }}
           >
-            <Typography
-              variant='h4'
-              sx={{ color: 'white', paddingRight: '50px' }}
-            >
-              Welcome back, Trang!
-            </Typography>
+            {isSmallScreen ? (
+              <Typography
+                variant='h4'
+                sx={{ color: 'white', fontSize: '20px' }}
+              >
+                Welcome back, Trang!
+              </Typography>
+            ) : (
+              <Typography
+                variant='h4'
+                sx={{ color: 'white', paddingRight: '50px' }}
+              >
+                Welcome back, Trang!
+              </Typography>
+            )}
+
             <img
               src={char5}
               style={{
@@ -211,22 +270,53 @@ const Dashboard = () => {
             spacing={3}
             sx={{ paddingBottom: '20px', justifyContent: 'center' }}
           >
-            {cardData.map((card) => (
-              <DBCard
-                name={card.name}
-                difference={card.difference}
-                positive={card.positive}
-                sx={{
-                  width: '250px',
-                  height: 'fit-content',
-                  borderRadius: '10px',
-                  boxShadow: ' 0px 10px 15px 5px rgba(0,0,0,0.1)',
-                  whiteSpace: 'nowrap',
-                }}
-                value={card.value}
-                icon={card.icon}
-              />
-            ))}
+            {/* total income card */}
+            <DBCard
+              name='Total Income'
+              difference={10}
+              positive={true}
+              sx={{
+                width: '250px',
+                height: 'fit-content',
+                borderRadius: '10px',
+                boxShadow: '0px 10px 15px 5px rgba(0,0,0,0.1)',
+                whiteSpace: 'nowrap',
+              }}
+              value={totalIncome} // Pass the fetched total income value
+              icon={<HiCurrencyDollar />}
+            />
+
+            {/* total expense card */}
+            <DBCard
+              name='Total Expense'
+              difference={10}
+              positive={true}
+              sx={{
+                width: '250px',
+                height: 'fit-content',
+                borderRadius: '10px',
+                boxShadow: '0px 10px 15px 5px rgba(0,0,0,0.1)',
+                whiteSpace: 'nowrap',
+              }}
+              value={totalExpenses}
+              icon={<GiReceiveMoney />}
+            />
+
+            {/* totbal balance card */}
+            <DBCard
+              name='Total Balance'
+              difference={10}
+              positive={true}
+              sx={{
+                width: '250px',
+                height: 'fit-content',
+                borderRadius: '10px',
+                boxShadow: '0px 10px 15px 5px rgba(0,0,0,0.1)',
+                whiteSpace: 'nowrap',
+              }}
+              value={totalBalance}
+              icon={<MdOutlineAccountBalanceWallet />}
+            />
           </Stack>
           <Stack direction='row'>
             <div
@@ -239,7 +329,8 @@ const Dashboard = () => {
                       alignItems: 'center',
                       height: 'fit-content',
                       width: '100%',
-                      padding: '20px',
+                      padding: '5px',
+                      paddingTop: '20px',
                       background: 'white',
                       borderRadius: '10px',
                       marginTop: '20px',
@@ -248,7 +339,7 @@ const Dashboard = () => {
                   : {
                       display: 'flex',
                       flexDirection: 'column',
-                      justifyContent: 'space-between',
+                      justifyContent: 'center',
                       alignItems: 'center',
                       width: '100%',
                       padding: '30px',
@@ -259,8 +350,30 @@ const Dashboard = () => {
                     }
               }
             >
-              <LineChart data={lineData} />
-              <PieCharts pieData={pieData} />
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  paddingTop: '30px',
+                }}
+              >
+                <LineChart data={lineData} />
+                <Typography variant='h6'>Income vs Expense</Typography>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  marginTop: '-40px',
+                }}
+              >
+                <PieCharts wallets={pieData} />
+                <Typography variant='h6' sx={{ marginTop: '20px' }}>
+                  Category
+                </Typography>
+              </div>
             </div>
           </Stack>
         </Grid>
@@ -277,10 +390,16 @@ const Dashboard = () => {
           >
             <h4 variant='h6'>Recent Transactions</h4>
             <p>Latest transaction all the time</p>
-            {/* <CustomTable data={transactionData} /> */}
+            <RecentTable
+              walletsData={wallets}
+              transactionsData={transactions}
+            />
           </Stack>
           <Stack sx={{ paddingTop: '30px' }}>
-            <img src={assistant} style={{ width: '100%', zIndex: '1', borderRadius: '10px'  }} />
+            <img
+              src={assistant}
+              style={{ width: '100%', zIndex: '1', borderRadius: '10px' }}
+            />
           </Stack>
         </Grid>
       </Grid>

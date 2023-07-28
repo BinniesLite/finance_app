@@ -29,18 +29,12 @@ const appRoutes = [
         path: "/chat",
         route: chatRouter,
     },
-    {
-        path: "/",
-        route: async (req, res) => {
-            console.log("Welcome to Wallet API");
-            res.send("Welcome to Wallet API");
-        }
-    }
 ]
 
 appRoutes.forEach((route) => {
     router.use(route.path, route.route);
 });
 
+console.log("Router is running");
 
 module.exports = router;

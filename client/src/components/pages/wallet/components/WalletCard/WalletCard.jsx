@@ -6,9 +6,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import './WalletCard.css';
+import { Stack } from '@mui/material';
 
-const WalletCard = ({ name, id, date, description }) => {
+const WalletCard = ({ name, date, description }) => {
   // const [walletName, setWalletName] = useState('');
 
   const buttonStyle = {
@@ -34,53 +34,31 @@ const WalletCard = ({ name, id, date, description }) => {
     fontFamily: 'Courier New, Courier, monospace',
   };
 
-  const dateAmountStyles = {
-    margin: 'auto',
-    textAlign: 'left',
-    fontSize: '11px',
-  };
-
   return (
     <Card sx={{ width: 200, height: 242, borderRadius: 3 }}>
       <CardMedia
         sx={{ height: 100 }}
         image={'src/assets/wallet-card-image.jpg'}
       />
-      <CardContent>
-        <Typography gutterBottom variant='h6' component='div'>
-          {name}
-        </Typography>
-        <div id='wallet-card-div'>
-          {/* <Typography
-            style={dateAmountStyles}
-            variant='body2'
-            color='text.secondary'
-          >
-            ${amount}
-          </Typography> */}
-          <Typography
-            style={dateAmountStyles}
-            variant='body2'
-            color='text.secondary'
-          >
-            {date}
+      <CardContent sx={{ padding: '8px'}}>
+        <Stack direction='column' justifyContent='space-between'>
+          <Typography gutterBottom variant='h6' component='div'>
+            {name}
           </Typography>
-
-          {/* <Typography
-            style={dateAmountStyles}
+          <Typography
+            display='block'
+            style={{
+              fontSize: '11px',
+              justifyContent: 'center',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
             variant='body2'
             color='text.secondary'
           >
-            {balance}
-          </Typography> */}
-        </div>
-        <Typography
-          style={dateAmountStyles}
-          variant='body2'
-          color='text.secondary'
-        >
-          {description}
-        </Typography>
+            {description}
+          </Typography>
+        </Stack>
       </CardContent>
 
       {/* category for wallet coming soon */}

@@ -33,6 +33,7 @@ const TransactionGridView = ({ transactions }) => {
                         amount={transaction.amount}
                         date={transaction.createdAt}
                         type={transaction.type}
+                        image={transaction.image}
                       />
                     </Item>
                   </Grid>

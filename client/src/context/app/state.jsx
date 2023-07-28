@@ -2,10 +2,8 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import AppContext from './context';
 import AppReducer from './reducer';
-import baseUrl from '@/api/baseUrl';
 
-import 
-{
+import {
   GET_WALLETS,
   ADD_WALLET,
   DELETE_WALLET,
@@ -14,67 +12,45 @@ import
   TRANSACTION_ERROR,
   ADD_TRANSACTION,
   DELETE_TRANSACTION,
-  GET_INCOME,
-  GET_EXPENSES,
-  GET_BALANCE,
   GET_TOTAL_INCOME,
   GET_TOTAL_EXPENSES,
   GET_TOTAL_BALANCE,
   SET_LOADING,
+  AUTH_ERROR,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
 } from '../types';
 
 const AppState = (props) => {
   const initialState = {
     wallets: [],
     transactions: [],
-    income: [],
-    expenses: [],
-    balance: [],
     totalIncome: [],
     totalExpenses: [],
     totalBalance: [],
     error: null,
-    loading: true,
+    loading: false,
+    token: localStorage.getItem('token'),
+    isAuthenticated: null,
+    user: null,
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);
+  const baseUrl = 'http://localhost:3000/api';
 
   // Get Wallets
   const getWallets = async () => {
-    
-    try {
-      console.log(baseUrl);
-      const res = await axios.get(baseUrl + '/wallet');
-      
-      dispatch({
-        type: GET_WALLETS,
-        payload: res.data,
-      });
-    } catch (err) {
-      
-      dispatch({
-        type: WALLET_ERROR,
-        payload: err.response.msg,
-      });
-    }
+    setLoading();
+    const res = await axios.get(baseUrl + '/wallet');
+    dispatch({
+      type: GET_WALLETS,
+      payload: res.data,
+    });
   };
-
-  // Get Wallets by ID
-  // const getWallet = async (id) => {
-  //   setLoading();
-  //   try {
-  //     const res = await axios.get(baseUrl + `/wallet/${id}`);
-  //     dispatch({
-  //       type: GET_WALLETS,
-  //       payload: res.data,
-  //     });
-  //   } catch (err) {
-  //     dispatch({
-  //       type: WALLET_ERROR,
-  //       payload: err.response.msg,
-  //     });
-  //   }
-  // };
 
   // Add Wallet
   const addWallet = async (wallet) => {
@@ -101,6 +77,7 @@ const AppState = (props) => {
 
   // Delete Wallet
   const deleteWallet = async (id) => {
+    setLoading();
     try {
       await axios.delete(baseUrl + `/wallet/${id}`);
       dispatch({
@@ -142,11 +119,17 @@ const AppState = (props) => {
   };
 
   // Get Transactions
-  const getTransactions = async () => {
-    
-    console.log(baseUrl);
+  const getTransactions = async (type) => {
+    setLoading();
     try {
-      const res = await axios.get(baseUrl + '/transaction');
+      
+      const res = await axios.get(baseUrl + '/transaction', {
+        params: {
+          type: type,
+        
+        },
+      });
+
       dispatch({
         type: GET_TRANSACTIONS,
         payload: res.data,
@@ -205,15 +188,49 @@ const AppState = (props) => {
 
   //Set loading
   const setLoading = () => dispatch({ type: SET_LOADING });
+
+  // Get Total Income
+  const getTotalIncome = async () => {
+    setLoading();
+    const res = await axios.get(baseUrl + '/calculation/total-income');
+    dispatch({
+      type: GET_TOTAL_INCOME,
+      payload: res.data,
+    });
+  };
+
+  // Get Total Expenses
+  const getTotalExpenses = async () => {
+    setLoading();
+    const res = await axios.get(baseUrl + '/calculation/total-expense');
+    dispatch({
+      type: GET_TOTAL_EXPENSES,
+      payload: res.data,
+    });
+  };
+
+  // Get Total Balance
+  const getTotalBalance = async () => {
+    setLoading();
+    const res = await axios.get(baseUrl + '/calculation/balance');
+    dispatch({
+      type: GET_TOTAL_BALANCE,
+      payload: res.data,
+    });
+  }
+  
   return (
     <AppContext.Provider
       value={{
+        token: state.token,
+        isAuthenticated: state.isAuthenticated,
+        user: state.user,
+        error: state.error,
         wallets: state.wallets,
         transactions: state.transactions,
-        income: state.income,
-        expenses: state.expenses,
-        balance: state.balance,
         totalIncome: state.totalIncome,
+        totalExpenses: state.totalExpenses,
+        totalBalance: state.totalBalance,
         loading: state.loading,
         getWallets,
         addWallet,
@@ -222,6 +239,9 @@ const AppState = (props) => {
         getTransactions,
         addTransaction,
         deleteTransaction,
+        getTotalIncome,
+        getTotalExpenses,
+        getTotalBalance,
       }}
     >
       {props.children}
