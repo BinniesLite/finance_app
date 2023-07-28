@@ -7,9 +7,9 @@ import RecentTable from './component/RecentTable/RecentTable';
 import { Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 
 //api
-import { getTransactions, getWallets } from '../../../utils/http-request';
+import { getTransactions, getWallets, } from '../../../utils/http-request';
 import appContext from '@/context/app/context';
-
+import formatCurrency from '@/utils/formatCurrency';
 //image
 import char5 from '@/assets/char5.svg';
 import assistant from '@/assets/assistant.webp';
@@ -274,7 +274,7 @@ const Dashboard = () => {
                 boxShadow: '0px 10px 15px 5px rgba(0,0,0,0.1)',
                 whiteSpace: 'nowrap',
               }}
-              value={totalIncome} // Pass the fetched total income value
+              value={formatCurrency(totalIncome)} // Pass the fetched total income value
               icon={<HiCurrencyDollar />}
             />
 
@@ -290,7 +290,7 @@ const Dashboard = () => {
                 boxShadow: '0px 10px 15px 5px rgba(0,0,0,0.1)',
                 whiteSpace: 'nowrap',
               }}
-              value={totalExpenses}
+              value={formatCurrency(totalExpenses)}
               icon={<GiReceiveMoney />}
             />
 
@@ -306,7 +306,7 @@ const Dashboard = () => {
                 boxShadow: '0px 10px 15px 5px rgba(0,0,0,0.1)',
                 whiteSpace: 'nowrap',
               }}
-              value={totalBalance}
+              value={formatCurrency(totalBalance) || 0}
               icon={<MdOutlineAccountBalanceWallet />}
             />
           </Stack>

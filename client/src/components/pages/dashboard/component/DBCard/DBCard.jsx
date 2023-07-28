@@ -37,7 +37,7 @@ const DBCard = ({ name, difference, positive = false, sx, value, icon }) => {
             <Typography color='text.secondary' variant='overline'>
               {name}
             </Typography>
-            <Typography variant='h4'>${value}</Typography>
+            <Typography variant='h4'>{value}</Typography>
           </Stack>
           {isSmallScreen ? null : (
             <Avatar
