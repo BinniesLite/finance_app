@@ -1,8 +1,11 @@
 const formatCurrency = (amount) => {
-    return amount.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD'
-      });
-} 
+  if (typeof amount !== 'number') {
+      return "$0.00";
+  }
+  return amount.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD'
+  });
+}
 
 export default formatCurrency;
