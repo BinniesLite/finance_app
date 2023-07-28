@@ -60,14 +60,21 @@ const TransactionAdd = ({ open, handleClose }) => {
   }, []);
 
   const onSubmit = async (data) => {
+    
     const { amount, type, walletId, description, createdAt } = data;
     var image = "";
-    if(imageFile!=null){
-      image = await uploadImageToFirebase(imageFile);
+    if(imageFile){
+      try {
+        image = await uploadImageToFirebase(imageFile);
+      
+      } catch (error) {
+        console.log(error);
+        
+      }
     }
    
    
-    console.log("here is the date", formatDateToDateObject(createdAt));
+    console.log("here is the date", image);
     
     handleClose();
     try {
@@ -167,7 +174,7 @@ const TransactionAdd = ({ open, handleClose }) => {
               error={errors.description}
               fullWidth
               variant="standard"
-              sx={{ py: 3, maxHeight: "7rem", overflowY: "auto" }}
+              sx={{ py: 3 }}
             >
               <TextField
                 {...register("description")}
@@ -190,17 +197,19 @@ const TransactionAdd = ({ open, handleClose }) => {
               error={errors.image}
               fullWidth
               variant="standard"
-              sx={{ py: 3, maxHeight: "7rem", overflowY: "auto" }}
+              sx={{ py: 5 }}
             >
               <Typography>Add Image</Typography>
               <input
+                style={{padding: ""}}
                 {...register("image")}
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
               />
             </FormControl>
-            <FormControl fullWidth>
+            <FormControl 
+            fullWidth>
               {/* <InputLabel>Date</InputLabel> */}
               <TextField
                 type="date"

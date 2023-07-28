@@ -60,7 +60,7 @@ const getTransactionByWalletId = async (req, res) => {
 // create transaction
 // endpoint: /api/transaction/create
 const createTransaction = async (req, res) => {
-  const { amount, description, type, walletId, createdAt } = req.body;
+  const { amount, description, type, walletId, createdAt, image } = req.body;
   console.log(createdAt);
   try {
     // check if walletId exists if it is add the wallet balance
@@ -89,6 +89,7 @@ const createTransaction = async (req, res) => {
         type: type,
         walletId: walletId,
         createdAt: createdAt || new Date(),
+        image: image,
       },
     });
     res.status(201).json(result);

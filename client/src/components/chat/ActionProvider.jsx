@@ -86,6 +86,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleNavigateWallet = () => {
     addBotMessage("Right away! Navigating to wallet");
+    setActivePage("wallets");
     navigate("/wallets");
   };
 
@@ -103,6 +104,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleNavigateDashboard = () => {
     addBotMessage("Right away! Navigating to dashboard");
+    setActivePage("dashboard");
     navigate("/dashboard");
   };
 
@@ -165,7 +167,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   }
   
   const handleFilterTransactions = async (type) => {
-    handleNavigateTransaction();
+    
     try {
       addBotMessage("Done!", {
         loading: true,
