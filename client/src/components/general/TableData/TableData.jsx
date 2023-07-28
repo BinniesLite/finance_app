@@ -32,7 +32,7 @@ const columns = [
 ];
 
 const options = {
-  filterType: 'checkbox',
+  filterType: 'dropdown',
   textLabels: {
     body: {
       noMatch: 'Loading wallets... hihi ^^',

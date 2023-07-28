@@ -84,74 +84,66 @@ const Dashboard = () => {
     {
       name: 'Jan',
       expense: 4000,
-      income: 2400,
-      amt: 2400,
+      income: 4450,
+      // amt: 2400,
     },
     {
       name: 'Feb',
       expense: 3000,
-      income: 1398,
-      amt: 2210,
+      income: 4500,
+      // amt: 2210,
     },
     {
       name: 'Mar',
-      expense: 2000,
-      income: 9800,
-      amt: 2290,
+      expense: 3500,
+      income: 4000,
     },
     {
       name: 'Apr',
       expense: 2780,
       income: 3908,
-      amt: 2000,
     },
     {
       name: 'Ma',
       expense: 1890,
       income: 4800,
-      amt: 2181,
     },
     {
       name: 'June',
       expense: 2390,
-      income: 3800,
-      amt: 2500,
+      income: 4545,
     },
     {
       name: 'July',
-      expense: 3490,
-      income: 4300,
-      amt: 2100,
+      expense: 7384,
+      income: 3932,
     },
     {
       name: 'Aug',
-      expense: 3490,
-      income: 4300,
-      amt: 2100,
+      expense: null,
+      income: null,
     },
     {
       name: 'Sep',
-      expense: 3490,
-      income: 4300,
-      amt: 2100,
+      expense: null,
+      income: null,
     },
     {
       name: 'Oct',
-      expense: 3490,
-      income: 4300,
-      amt: 2100,
+      expense: null,
+      income: null,
     },
     {
       name: 'Nov',
       expense: null,
       income: null,
-      amt: 0,
+      // amt: 0,
     },
     {
       name: 'Dec',
       expense: null,
       income: null,
-      amt: 2100,
+      // amt: 2100,
     },
   ];
 
@@ -165,7 +157,7 @@ const Dashboard = () => {
       value: 128,
     },
     {
-      name: 'Food Budget',
+      name: 'Food',
       value: 400,
     },
     {
@@ -244,14 +236,14 @@ const Dashboard = () => {
                 variant='h4'
                 sx={{ color: 'white', fontSize: '20px' }}
               >
-                Welcome back, Trang!
+                Welcome back, Hieu!
               </Typography>
             ) : (
               <Typography
                 variant='h4'
                 sx={{ color: 'white', paddingRight: '50px' }}
               >
-                Welcome back, Trang!
+                Welcome back, Hieu!
               </Typography>
             )}
 
@@ -268,12 +260,12 @@ const Dashboard = () => {
           <Stack
             direction='row'
             spacing={3}
-            sx={{ paddingBottom: '20px', justifyContent: 'center' }}
+            sx={{ paddingBottom: '10px', justifyContent: 'space-between' }}
           >
             {/* total income card */}
             <DBCard
               name='Total Income'
-              difference={10}
+              difference={100}
               positive={true}
               sx={{
                 width: '250px',
@@ -359,7 +351,7 @@ const Dashboard = () => {
                 }}
               >
                 <LineChart data={lineData} />
-                <Typography variant='h6'>Income vs Expense</Typography>
+                <Typography variant='h6'>Income vs Expenses</Typography>
               </div>
               <div
                 style={{
