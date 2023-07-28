@@ -5,6 +5,7 @@ import { navigation } from './router/navigation';
 import './App.css';
 import baseUrl from './api/baseUrl';
 function App() {
+  console.log(import.meta.env.VITE_BASE_URL)
   const demo = async () => {
     const response = await fetch(baseUrl + '/transaction');
     const data = await response.json();
