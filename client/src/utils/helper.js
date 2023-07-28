@@ -8,7 +8,7 @@ import {
 } from './http-request';
 // import AppContext from '../context/app/context';
 import { formatDate } from './formatDate';
-
+const walletName = [];
 export const generateFakeTransactionData = async (numberOfData) => {
   const fakeData = [];
   try {
@@ -102,11 +102,31 @@ export const formatTransactionList = async (data) => {
       createdAt: formatDate(transaction.createdAt),
       description: transaction.description,
       type: transaction.type,
+      image: transaction.image,
     };
     transactionData.push(formatteData);
   }
   return transactionData;
 };
+
+// // Format transaction list with image
+// export const formatTransactionListImage = async (data) => {
+//   let transactionData = [];
+//   for (let i = 0; i < data.length; i++) {
+//     const transaction = data[i];
+//     const walletName = await getWalletName(transaction.walletId);
+//     let formatteData = {
+//       walletName: walletName,
+//       amount: transaction.amount,
+//       createdAt: formatDate(transaction.createdAt),
+//       description: transaction.description,
+//       type: transaction.type,
+//       image: transaction.image,
+//     };
+//     transactionData.push(formatteData);
+//   }
+//   return transactionData;
+// };
 
 // Format the list of wallets
 export const formatWalletList = async (data) => {

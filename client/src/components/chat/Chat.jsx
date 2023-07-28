@@ -64,7 +64,7 @@ const Chat = () => {
             horizontal: 'left',
           }}
         >
-          <Box sx={{}} >
+          <Box >
             <Chatbot
              
               config={config}

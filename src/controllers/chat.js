@@ -8,6 +8,11 @@ const openai = new OpenAIApi(
   new Configuration({ apiKey: process.env.CHATGPT_SECRET_KEY })
 );
 
+let dataPassed = {
+  wallet: false,
+  transaction: false,
+}
+
 let conversationHistory = [
   {
     role: "system",
@@ -96,12 +101,17 @@ const sendChatWallet = async (req, res) => {
     // and remove all the \n and \
     // so that the ai can parse it
 
-    const walletsString = JSON.stringify(wallets)
+    let walletsString = JSON.stringify(wallets)
       .replace(/\\n/g, "")
       .replace(/\\/g, "")
       .replace(/"/g, "");
 
-    const prompt = `Based on this JSON object representing the wallets data:\n${walletsString}\n Answer the prompt ${userMessage || "brief analysis"} as naturally as possible `;
+    if (dataPassed.wallet) {
+      walletsString = "";
+    }
+
+    
+    const prompt = `Based on this data representing the wallets data:\n${walletsString || "previous wallets data"}\n Answer the prompt ${userMessage || "brief analysis"} as naturally as possible `;
 
     
     // Add the user's message to the conversation history
@@ -126,6 +136,8 @@ const sendChatWallet = async (req, res) => {
       content: response.data.choices[0].message.content,
     });
 
+    dataPassed.wallet = true;
+    
     res.status(httpStatus.OK).json({
       conversationHistory: conversationHistory,
       data: response.data.choices[0].message.content,
@@ -140,13 +152,76 @@ const sendChatWallet = async (req, res) => {
 
 const sendChatTransaction = async (req, res) => {
   try {
-    res.json({
+    // Extract user message from the request
+    const userMessage = req.body.message;
+
+    // get the first 20 wallets
+    const transactions = await prisma.transaction.findMany({
+      take: 30,
+      select: {
+        type: true,
+        amount: true,
+        createdAt: true,
+        description: true,
+        wallet: {
+          select: {
+           
+            name: true,
+            balance: true,
+          }}
+      },
+    });
+
+   
+    // turn the wallets into a string
+    // and remove all the \n and \
+    // so that the ai can parse it
+    
+    let transactionsString = JSON.stringify(transactions)
+      .replace(/\\n/g, "")
+      .replace(/\\/g, "")
+      .replace(/"/g, "");
+
+    if (dataPassed.transaction) {
+      transactionsString = "";
+    }
+
+
+    const prompt = `Based on this data representing the transaction data:\n${transactionsString || "previous transaction data"}\n Answer the prompt ${userMessage || "brief analysis"} as naturally as possible `;
+
+    
+    // Add the user's message to the conversation history
+    conversationHistory.push({ role: "user", content: prompt });
+
+    // Send the updated conversation history to OpenAI API
+    const response = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: conversationHistory,
+    });
+
+    if (response.data.error) {
+      console.error("OpenAI API Error:", response.data.error);
+      return res
+        .status(httpStatus.INTERNAL_SERVER_ERROR)
+        .json({ error: "Internal Server Error" });
+    }
+    
+    // Store the AI's response in the conversation history
+    conversationHistory.push({
       role: "assistant",
-      content:
-        "Hi My name is Buck Budget, I'm here for everything you need to know about your financial situation",
+      content: response.data.choices[0].message.content,
+    });
+
+    dataPassed.transaction = true;
+    res.status(httpStatus.OK).json({
+      conversationHistory: conversationHistory,
+      data: response.data.choices[0].message.content.replace("JSON", "").replace("object", ""),
     });
   } catch (error) {
     console.log(error);
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      message: "Something went wrong :(",
+    });
   }
 };
 

@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
-import { links } from '@/constants/links';
+import { links } from '../../../constants/links';
 import Typography from '@mui/material/Typography';
 import { Divider, IconButton } from '@mui/material';
 import { AiOutlineCaretRight, AiOutlineMenu } from 'react-icons/ai';
 
 const buckets = [
   {
-    name: 'Sign In',
+    name: 'About us',
     color: '#FDD652',
   },
 ];
 
 const Circle = ({ backgroundColor }) => {
+  
   return (
     <span
       style={{
@@ -32,7 +33,6 @@ const Sidebar = ({
   isMinimized,
   setIsMinimized,
 }) => {
-  // const [isMinimized, setIsMinimized] = useState(false);
 
   const toggleIsMinimized = () => {
     setIsMinimized(!isMinimized);
@@ -50,7 +50,6 @@ const Sidebar = ({
         color: 'gray ',
         zIndex: '10',
         backgroundColor: '#f5f6f7',
-        // backgroundColor: 'background.dark',
         boxShadow: '0 0 10px rgba(0,0,0,0.2)',
         transition: 'width 0.2s',
         minWidth: '50px',

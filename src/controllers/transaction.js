@@ -7,7 +7,18 @@ const formatDate = require("../utils/formatDate");
 // endpoint: /api/transaction
 const getTransaction = async (req, res) => {
   try {
-    const transactions = await prisma.transaction.findMany();
+    const { type } = req.query;
+    
+    // sort by amount descending and ascending
+  
+    // get all transactions
+    const transactions = await prisma.transaction.findMany({
+      where: {
+        type: type,
+      },
+    });
+
+
     res.status(200).json(transactions);
   } catch (error) {
     res.status(500).json(error);

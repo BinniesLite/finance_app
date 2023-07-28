@@ -35,5 +35,6 @@ appRoutes.forEach((route) => {
     router.use(route.path, route.route);
 });
 
+console.log("Router is running");
 
 module.exports = router;

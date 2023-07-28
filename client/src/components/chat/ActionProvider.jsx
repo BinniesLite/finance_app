@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { useNavigate } from "react-router-dom";
 // Calculation
 import {
@@ -7,13 +7,22 @@ import {
   getTotalBalance,
 } from "@/api/calculation";
 // GPT
-import { sendChat, sendChatWallet } from "@/api/chatAI";
+import { sendChat, sendChatWallet, sendChatTransaction } from "@/api/chatAI";
+
+// API request
+import AppContext  from "@/context/app/context";
 
 import formatCurrency from "@/utils/formatCurrency";
+
+// theme
+import { useTheme } from "@/context/theme-context/theme-context";
+
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { setActivePage } = useTheme();
+  const {  getTransactions } = useContext(AppContext);
 
   // Helper function to add a new message to the state
   const addBotMessage = (content, plugins) => {
@@ -42,6 +51,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleNavigateTransaction = () => {
     addBotMessage("Right away! Navigating to transactions");
+
+    setActivePage("transactions");
+
     navigate("/transactions");
   };
 
@@ -125,6 +137,25 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }
   };
 
+  const handleChatTransaction = async (message) => {
+    try {
+      setLoading(true); // Set loading state to true when request starts
+      const response = await sendChatTransaction(message);
+      addBotMessage(response.data, {
+        loading: false, // Set loading state to false when request completes
+        withAvatar: false,
+      });
+    } catch (error) { 
+      addBotMessage(
+        "Sorry we have some errors currently, please try again later"
+      );
+      console.log(error);
+    } finally {
+      setLoading(false); // Make sure to clear loading state in case of any errors too
+    }
+  }
+
+
   const handleChatAI = (message) => {
     addBotMessage("Right Away",{
       loading: true,
@@ -133,6 +164,31 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     })
   }
   
+  const handleFilterTransactions = async (type) => {
+    handleNavigateTransaction();
+    try {
+      addBotMessage("Done!", {
+        loading: true,
+        
+      })
+      
+      const response = await getTransactions(type);
+      addBotMessage(response.data, {
+        loading: true, // Set loading state to false when request completes
+        withAvatar: false,
+      });
+    } catch (error) {
+      addBotMessage(
+        "Sorry we have some errors currently, please try again later"
+      );
+
+
+      console.log(error);
+    } finally {
+      setLoading(false); // Make sure to clear loading state in case of any errors too
+    }
+  };
+
 
   // Pass the actions object with the helper functions to the MessageParser
   return (
@@ -140,6 +196,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
           actions: {
+            // Demo 
             handleHello,
             handlePeace,
             handleNavigateTransaction,
@@ -153,7 +210,10 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handleChatGPT,
             handleChatWallet,
             handleChatAI,
+            handleFilterTransactions,
+            handleChatTransaction,
           },
+
         });
       })}
     </div>
