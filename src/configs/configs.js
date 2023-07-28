@@ -1,6 +1,6 @@
 module.exports = {
     corsOptions: {
-        origin: ["https://bunnylover.netlify.app", "http://localhost", "http://locallhost:5137"], // Or use an array of domains "http://example1.com, http://example2.com"
+        origin: "*", // Or use an array of domains "http://example1.com, http://example2.com"
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 
     },
