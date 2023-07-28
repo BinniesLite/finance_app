@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Section from '../../Layout/Section/Section';
+import Section from '@/components/layout/Section/Section';
 import LineChart from './component/LineChart/LineChart';
 import PieCharts from './component/PieChart/PieCharts';
 import DBCard from './component/DBCard/DBCard';
@@ -8,17 +8,17 @@ import { Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 
 //api
 import { getTransactions, getWallets } from '../../../utils/http-request';
-import appContext from '../../../context/app/context';
+import appContext from '@/context/app/context';
 
 //image
-import char5 from '../../../assets/char5.svg';
-import assistant from '../../../assets/assistant.webp';
+import char5 from '@/assets/char5.svg';
+import assistant from '@/assets/assistant.webp';
 import { HiCurrencyDollar } from 'react-icons/hi';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 import { GiReceiveMoney } from 'react-icons/gi';
 
 //styling
-import './Dashboard.css';
+import './DashBoard.css';
 
 const Dashboard = () => {
   // const [transactionData, setTransactionData] = useState([]);
