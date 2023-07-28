@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../../Layout/Navbar/Navbar';
-import Sidebar from '../../Layout/Sidebar/SidebarDesktop';
+import Navbar from '@/components/layout/Navbar/Navbar';
+import Sidebar from '@/components/layout/Sidebar/SidebarDesktop';
 import { useNavigate } from 'react-router-dom';
 import Chat from '../../chat/Chat';
 import { useTheme } from "@/context/theme-context/theme-context";
