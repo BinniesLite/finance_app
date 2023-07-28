@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Section from '../../Layout/Section/Section';
+import Section from '@/components/layout/Section/Section';
 import LineChart from './component/LineChart/LineChart';
 import PieCharts from './component/PieChart/PieCharts';
 import DBCard from './component/DBCard/DBCard';
@@ -8,7 +8,7 @@ import { Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 
 //api
 import { getTransactions, getWallets } from '../../../utils/http-request';
-import appContext from '../../../context/app/context';
+import appContext from '@/context/app/context';
 
 //image
 import char5 from '../../../assets/char5.svg';
