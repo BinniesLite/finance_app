@@ -19,7 +19,7 @@ import 'react-chatbot-kit/build/main.css';
 
 
 const Chat = () => {
-  console.log("Here the baseURL: ", baseUrl);
+  
   const [toggleChat, setState] = React.useState(false)
   
   const handleToggleChat = () => {
@@ -52,18 +52,26 @@ const Chat = () => {
           </Paper>
         </Tooltip>
         <Popover
+          sx={{mt: 10}}
           open={toggleChat}
           onClose={handleCloseChat}
           anchorOrigin={{
-            vertical: 'top',
+            vertical: 'top', // Change 'top' to 'bottom'
             horizontal: 'right',
           }}
+          transformOrigin={{
+            vertical: 'bottom', // Change 'bottom' to 'top'
+            horizontal: 'left',
+          }}
         >
-          <Chatbot  
-            config={config}
-            actionProvider={ActionProvider}
-            messageParser={MessageParser}
-          />
+          <Box >
+            <Chatbot
+             
+              config={config}
+              actionProvider={ActionProvider}
+              messageParser={MessageParser}
+            />
+          </Box>
         </Popover>
 
         {/* {toggleChat &&  

@@ -13,6 +13,7 @@ const buckets = [
 ];
 
 const Circle = ({ backgroundColor }) => {
+  
   return (
     <span
       style={{

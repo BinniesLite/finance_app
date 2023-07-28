@@ -2,7 +2,7 @@ import React from "react";
 import Options from "./Options";
 
 const Overview = (props) => {
-  console.log(props);
+  
   const options = [
     {
       name: "Get total income",

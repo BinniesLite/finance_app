@@ -105,8 +105,7 @@ const TransactionPage = () => {
     fetchAndFormatTransactions();
   }, [transactions]);
 
-  console.log("trans", transactions);
-  console.log("trans data:", transactionData);
+ 
   // const formattedTransaction = formatTransactionList(transactions);
   // console.log(formattedTransaction);
   const tabs = [
