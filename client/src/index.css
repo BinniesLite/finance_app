@@ -84,3 +84,8 @@ button:focus-visible {
 form {
   padding: 0; 
 }
+
+.react-chatbot-kit-chat-container {
+  position: relative;
+  width: 385px !important;
+}

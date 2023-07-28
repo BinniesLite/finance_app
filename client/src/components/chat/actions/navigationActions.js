@@ -1,18 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 
-const handleNavigateTransaction = (addBotMessage) => {
+const handleNavigateTransaction = (addBotMessage, navigate) => {
   addBotMessage("Right away! Navigating to transactions");
-  const navigate = useNavigate();
+  
   navigate('/transactions');
 };
 
-const handleNavigateWallet = (addBotMessage) => {
+const handleNavigateWallet = (addBotMessage, navigate) => {
   addBotMessage("Right away! Navigating to wallet");
-  const navigate = useNavigate();
+  
   navigate('/wallets');
 };
 
-const handleNavigateDashboard = (addBotMessage) => {
+const handleNavigateDashboard = (addBotMessage, navigate) => {
   addBotMessage("Right away! Navigating to dashboard");
   const navigate = useNavigate();
   navigate('/dashboard');
