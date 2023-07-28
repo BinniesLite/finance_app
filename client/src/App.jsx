@@ -3,9 +3,14 @@ import AppState from './context/app/state';
 import ThemeProvider from './context/theme-context/theme-context';
 import { navigation } from './router/navigation';
 import './App.css';
-
+import baseUrl from './api/baseUrl';
 function App() {
-  
+  const demo = async () => {
+    const response = await fetch(baseUrl + '/transaction');
+    const data = await response.json();
+    console.log(data);
+  }
+  demo(); 
   return (
     <ThemeProvider>
       <AppState>
