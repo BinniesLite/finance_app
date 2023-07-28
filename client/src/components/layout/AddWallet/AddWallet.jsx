@@ -21,7 +21,7 @@ import Typography from '@mui/material/Typography';
 import AppContext from '../../../context/app/context';
 
 // api
-import { postWallets } from '../../../utils/http-request';
+import { postWallets } from '@/utils/http-request';
 // import getWallets from '../../../utils/http-request';
 
 const walletSchema = z.object({
@@ -40,13 +40,7 @@ const AddWallet = ({ open, handleClose }) => {
     resolver: zodResolver(walletSchema),
   });
 
-  useEffect(() => {
-    const fetchWallets = async () => {
-      const response = await getWallets();
-      setWallets(response);
-    };
-    fetchWallets();
-  }, [wallets]);
+ 
 
   // useEffect(() => {
   //   setWallets(appContext.wallets);
