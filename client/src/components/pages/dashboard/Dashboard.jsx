@@ -236,14 +236,14 @@ const Dashboard = () => {
                 variant='h4'
                 sx={{ color: 'white', fontSize: '20px' }}
               >
-                Welcome back, Trang!
+                Welcome back, Hieu!
               </Typography>
             ) : (
               <Typography
                 variant='h4'
                 sx={{ color: 'white', paddingRight: '50px' }}
               >
-                Welcome back, Trang!
+                Welcome back, Hieu!
               </Typography>
             )}
 
@@ -260,7 +260,7 @@ const Dashboard = () => {
           <Stack
             direction='row'
             spacing={3}
-            sx={{ paddingBottom: '20px', justifyContent: 'center' }}
+            sx={{ paddingBottom: '10px', justifyContent: 'space-between' }}
           >
             {/* total income card */}
             <DBCard
