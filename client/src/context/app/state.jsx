@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import AppContext from './context';
 import AppReducer from './reducer';
-
+import baseUrl from '@/api/baseUrl';
 import {
   GET_WALLETS,
   ADD_WALLET,
@@ -40,7 +40,7 @@ const AppState = (props) => {
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);
-  const baseUrl = 'http://localhost:3000/api';
+  
 
   // Get Wallets
   const getWallets = async () => {
