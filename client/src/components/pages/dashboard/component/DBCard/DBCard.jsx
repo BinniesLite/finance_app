@@ -65,7 +65,7 @@ const DBCard = ({ name, difference, positive = false, sx, value, icon }) => {
               </Typography>
             </Stack>
             <Typography color='text.secondary' variant='caption'>
-              Since last week
+              Since last 2 weeks
             </Typography>
           </Stack>
         )}

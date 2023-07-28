@@ -32,8 +32,8 @@ const RecentTable = ({ walletsData, transactionsData }) => {
         </caption>
         <TableHead>
           <TableRow>
-            <TableCell>Transaction</TableCell>
-            <TableCell align='right'>Amount</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }}>Transaction</TableCell>
+            <TableCell align='right' sx={{ fontWeight: 'bold' }}>Amount ($)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
