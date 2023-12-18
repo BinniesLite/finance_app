@@ -1,3 +1,15 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+/* @import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities"; */
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -82,7 +94,7 @@ button:focus-visible {
 }
 
 form {
-  padding: 0; 
+  padding: 0;
 }
 
 .react-chatbot-kit-chat-container {

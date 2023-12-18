@@ -5,7 +5,7 @@ import SignUpPage from "@/components/pages/auth/SignUpPage/SignUpPage";
 import Dashboard from "@/components/pages/dashboard/Dashboard";
 import LayoutWrapper from "@/components/layout/wrapper/LayoutWrapper";
 import Budget from "@/components/pages/budget/Budget";
-import Report from "@/components/pages/report/Report";
+import Calendar from "@/components/pages/calendar/Calendar";
 import HomePage from "@/components/pages/auth/HomePage/HomePage";
 
 export const navigation = [
@@ -61,10 +61,10 @@ export const navigation = [
     isPrivate: true,
   },
   {
-    path: "/reports",
+    path: "/calendar",
     component: (
       <LayoutWrapper>
-        <Report />
+        <Calendar />
       </LayoutWrapper>
     ),
     isPrivate: true,

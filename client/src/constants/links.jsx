@@ -26,8 +26,8 @@ export const links = [
         icon: <AiFillDollarCircle style={{color: "#948B93"}} />
     },
     {
-        name: 'reports',
-        path: '/reports',
+        name: 'calendar',
+        path: '/calendar',
         icon: <TbReportAnalytics style={{color: "#948B93"}} />
     },
 ]
