@@ -9,9 +9,12 @@ const {
 } = require("../controllers/wallet");
 // validation
 const validate = require("../middleware/validate");
+// const requireAuth = require("../middleware/requireAuth");
 const walletSchema = require("../validations/wallet.validation");
 
 const router = express.Router();
+
+// router.use(requireAuth);
 
 // get all wallets
 //endpoint: /api/wallet

@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const validate = require("../middleware/validate");
 
 const {
     filterByDate,
     filterByType,
     filterByAmount
 } = require("../controllers/filter");
+
+const validate = require("../middleware/validate");
+// const requireAuth = require("../middleware/requireAuth");
 
 // filter by date range
 // endpoint: /api/filter/transactions-by-date
@@ -15,7 +17,7 @@ const {
 // date format: YYYY-MM-DD
 // router.get("/transactions-by-date", validate(filterDateSchema), filterByDate);
 router.get("/transactions-by-date", filterByDate);
-
+// router.use(requireAuth);
 
 // filter by type expense/income
 // endpoint: /api/filter/transaction/:type

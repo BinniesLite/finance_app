@@ -11,8 +11,11 @@ const {
     updateTransaction
 } = require("../controllers/transaction");
 
+// const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
+
+// router.use(requireAuth);
 
 
 // get all transactions
