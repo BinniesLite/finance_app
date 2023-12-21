@@ -1,4 +1,7 @@
 const router = require('express').Router();
+const requireAuth = require("../middleware/requireAuth");
+
+router.use(requireAuth);
 const { initiateChat, sendChat, sendChatWallet, sendChatTransaction } = require('../controllers/chat');
 
 router.get('/initiate', initiateChat);
