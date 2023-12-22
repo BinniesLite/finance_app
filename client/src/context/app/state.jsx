@@ -23,6 +23,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  LOGIN,
 } from '../types';
 
 const AppState = (props) => {

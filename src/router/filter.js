@@ -1,6 +1,9 @@
 const express = require("express");
+const requireAuth = require("../middleware/requireAuth");
+
 const router = express.Router();
-const validate = require("../middleware/validate");
+
+router.use(requireAuth);const validate = require("../middleware/validate");
 
 const {
     filterByDate,

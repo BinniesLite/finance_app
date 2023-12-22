@@ -11,8 +11,11 @@ const {
 const validate = require("../middleware/validate");
 const walletSchema = require("../validations/wallet.validation");
 
+const requireAuth = require("../middleware/requireAuth");
+
 const router = express.Router();
 
+router.use(requireAuth);
 // get all wallets
 //endpoint: /api/wallet
 router.get("/", getAllWallets);
