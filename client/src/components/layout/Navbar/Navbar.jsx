@@ -13,6 +13,7 @@ import 'reactjs-popup/dist/index.css';
 import { IconButton, Tooltip, Typography } from '@mui/material';
 import { IoIosNotifications } from 'react-icons/io';
 import { CgProfile } from 'react-icons/cg';
+import { Navigate } from 'react-router-dom';
 
 // logo
 
@@ -122,7 +123,7 @@ const Navbar = () => {
           />
         </Box>
 
-        <NavButton title='Profile' icon={<CgProfile size='1.2rem' />} />
+        <NavButton title='Profile' icon={<CgProfile size='1.2rem' />} onClick={() => navigate('/profile')} />
       </Stack>
     </Stack>
   );
