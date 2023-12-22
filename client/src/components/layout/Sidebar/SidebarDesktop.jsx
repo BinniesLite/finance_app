@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Stack from '@mui/material/Stack';
-import { links } from '../../../constants/links';
 import Typography from '@mui/material/Typography';
+import { links } from '../../../constants/links';
 import { Divider, IconButton } from '@mui/material';
-import { AiOutlineCaretRight, AiOutlineMenu } from 'react-icons/ai';
+import { CgLogOut } from 'react-icons/cg';
 
 const buckets = [
   {
-    name: 'About us',
+    name: 'Log Out',
     color: '#FDD652',
   },
 ];
@@ -141,18 +141,19 @@ const Sidebar = ({
                 border: 'none',
               }}
             >
-              <Circle backgroundColor={bucket.color} />
+              <CgLogOut size='1rem' style={{ color: '#948B93' }} />
+              {/* <Circle backgroundColor={bucket.color} /> */}
               {!isMinimized && (
                 <Typography sx={{ ml: 1 }} color='subtitle.main' variant='h7'>
                   {bucket.name}
                 </Typography>
               )}
             </button>
-            {!isMinimized && (
+            {/* {!isMinimized && (
               <IconButton>
                 <AiOutlineCaretRight size='1rem' style={{ color: '#948B93' }} />
               </IconButton>
-            )}
+            )} */}
           </Stack>
         ))}
       </Stack>
