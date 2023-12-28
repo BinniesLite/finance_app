@@ -3,7 +3,11 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { links } from '../../../constants/links';
 import { Divider, IconButton } from '@mui/material';
+import { AiOutlineMenu } from 'react-icons/ai';
 import { CgLogOut } from 'react-icons/cg';
+
+//react hooks
+import { useLogout } from '../../../hooks/useLogout';
 
 const buckets = [
   {
@@ -12,30 +16,20 @@ const buckets = [
   },
 ];
 
-const Circle = ({ backgroundColor }) => {
-  
-  return (
-    <span
-      style={{
-        display: 'inline-block',
-        width: '10px',
-        height: '10px',
-        borderRadius: '50%',
-        backgroundColor: backgroundColor,
-      }}
-    />
-  );
-};
-
 const Sidebar = ({
   activePage,
   handleActivePage,
   isMinimized,
   setIsMinimized,
 }) => {
+  const { logout } = useLogout();
 
   const toggleIsMinimized = () => {
     setIsMinimized(!isMinimized);
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -131,6 +125,7 @@ const Sidebar = ({
             flexDirection='row'
             alignItems='center'
             rowGap={1}
+            onClick={handleLogout}
           >
             <button
               style={{
@@ -140,20 +135,15 @@ const Sidebar = ({
                 justifyContent: '',
                 border: 'none',
               }}
+              onClick={handleLogout}
             >
-              <CgLogOut size='1rem' style={{ color: '#948B93' }} />
-              {/* <Circle backgroundColor={bucket.color} /> */}
+              <CgLogOut size='1rem' style={{ color: '#948B93' }} onClick={handleLogout}/>
               {!isMinimized && (
-                <Typography sx={{ ml: 1 }} color='subtitle.main' variant='h7'>
+                <Typography sx={{ ml: 1 }} color='subtitle.main' variant='h7' onClick={handleLogout} >
                   {bucket.name}
                 </Typography>
               )}
             </button>
-            {/* {!isMinimized && (
-              <IconButton>
-                <AiOutlineCaretRight size='1rem' style={{ color: '#948B93' }} />
-              </IconButton>
-            )} */}
           </Stack>
         ))}
       </Stack>

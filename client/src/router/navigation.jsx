@@ -10,57 +10,44 @@ import Profile from "../components/pages/profile/Profile";
 export const navigation = [
   {
     path: "/",
-    component: <HomePage />,
+    component: HomePage,
+    noLayoutWrap: true,
     isPrivate: false,
   },
   {
     path: "/transactions",
-    component: (
-      <LayoutWrapper>
-        <TransactionPage />
-      </LayoutWrapper>
-    ),
+    component: TransactionPage,
+    noLayoutWrap: false,
     isPrivate: true,
   },
   {
     path: "/wallets",
-    component: (
-      <LayoutWrapper>
-        <WalletsPage />
-      </LayoutWrapper>
-    ),
+    component: WalletsPage,
+    noLayoutWrap: false,
     isPrivate: true,
   },
   {
     path: "/dashboard",
-    component: (
-      <LayoutWrapper>
-        <Dashboard />
-      </LayoutWrapper>
-    ),
+    component: Dashboard,
+    noLayoutWrap: false,
     isPrivate: true,
   },
   {
     path: "/virtualassistant",
-    component: (
-      <LayoutWrapper>
-        <Budget />
-      </LayoutWrapper>
-    ),
+    component: Budget,
+    noLayoutWrap: false,
     isPrivate: true,
   },
   {
     path: "/reports",
-    component: (
-      <LayoutWrapper>
-        <Report />
-      </LayoutWrapper>
-    ),
+    component: Report,
+    noLayoutWrap: false,
     isPrivate: true,
   },
   {
     path: "/profile",
-    component: (<Profile/>),
+    component: Profile,
+    noLayoutWrap: true,
     isPrivate: true,
   }
 ];

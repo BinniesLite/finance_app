@@ -43,41 +43,41 @@ export const pushTransactions = async (transactionList) => {
     console.log(error);
   }
 };
-export const generateFakeWalletData = (numberOfData) => {
-  const fakeData = [];
-  const type = ['credit card', 'cash'];
-  for (let i = 1; i <= numberOfData; i++) {
-    fakeData.push({
-      id: i,
-      name: `Wallet ${i}`,
-      amount: Math.floor(Math.random() * 1000) + 1,
-      date: '02/06/23',
-      type: 'hello',
-    });
-  }
-};
+// export const generateFakeWalletData = (numberOfData) => {
+//   const fakeData = [];
+//   const type = ['credit card', 'cash'];
+//   for (let i = 1; i <= numberOfData; i++) {
+//     fakeData.push({
+//       id: i,
+//       name: `Wallet ${i}`,
+//       amount: Math.floor(Math.random() * 1000) + 1,
+//       date: '02/06/23',
+//       type: 'hello',
+//     });
+//   }
+// };
 
-export const generateFakeWallets = (numberOfWallets) => {
-  var fakeWallets = [];
-  for (let i = 0; i < numberOfWallets; i++) {
-    var wallet = {
-      name: faker.finance.accountName(),
-      description: faker.lorem.text(),
-    };
-    fakeWallets.push(wallet);
-  }
-  return fakeWallets;
-};
+// export const generateFakeWallets = (numberOfWallets) => {
+//   var fakeWallets = [];
+//   for (let i = 0; i < numberOfWallets; i++) {
+//     var wallet = {
+//       name: faker.finance.accountName(),
+//       description: faker.lorem.text(),
+//     };
+//     fakeWallets.push(wallet);
+//   }
+//   return fakeWallets;
+// };
 
-export const pushWallets = async (wallets) => {
-  try {
-    for (let i = 0; i < wallets.length; i++) {
-      await postWallets(wallets[i]);
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const pushWallets = async (wallets) => {
+//   try {
+//     for (let i = 0; i < wallets.length; i++) {
+//       await postWallets(wallets[i]);
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 // Get the wallet name based on the id
 const getWalletName = async (id) => {

@@ -4,7 +4,15 @@ const prisma = require('../db/prisma');
 //endpoint: /api/wallet
 const getAllWallets = async (req, res) => {
   try {
-    const wallets = await prisma.wallet.findMany();
+    const userId = req.user.id;
+    console.log(req.user);
+    console.log("userId in getAllWallets: ", userId);
+    if (!userId) throw new Error('userId is undefined');
+    const wallets = await prisma.wallet.findMany({
+      where: {
+        userId: userId,
+      },
+    });
     res.status(200).json(wallets);
   } catch (error) {
     res.status(500).json(error);
@@ -31,12 +39,19 @@ const getWalletById = async (req, res) => {
 // endpoint: /api/wallet/create
 const createWallet = async (req, res) => {
   const { name, description, createdAt } = req.body;
+  
   try {
+    const userId = req.user.id;
+    console.log(req.user);
+    console.log("create wallet: ", req.body);
+    if (!userId) throw new Error('userId is undefined');
+
     const result = await prisma.wallet.create({
       data: {
         name: name,
         description: description,
-        createdAt: createdAt,
+        createdAt: createdAt || new Date(),
+        userId: userId || null,
       },
     });
     res.status(201).json(result);
