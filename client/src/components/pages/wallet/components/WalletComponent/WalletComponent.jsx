@@ -1,17 +1,34 @@
+import * as React from "react";
 import {
   Typography,
   Button,
 } from "@mui/material";
 import { Row, Col } from "reactstrap";
 import WalletIcon from "@mui/icons-material/Wallet";
-import * as React from "react";
-import "./WalletComponent.css";
 import HistoryCard from "@/components/layout/HistoryCard/HistoryCard";
 import { Link } from "react-router-dom";
 import { generateFakeTransactionData } from "@/utils/helper";
+import AppContext from "../../../../../context/app/context";
+import "./WalletComponent.css";
+import { useAuthContext } from "../../../../../hooks/useAuthContext";
 
 const WalletComponent = () => {
-  const wallets = generateFakeTransactionData(10);
+  // const wallets = generateFakeTransactionData(10);
+  const [wallets, setWallets] = React.useState([]);
+  const { getWallets } = React.useContext(AppContext);
+  const { user } = useAuthContext();
+
+  useEffect(() => {
+    const fetchWallets = async () => {
+      const response = await getWallets();
+      setWallets(response);
+    };
+
+    if (user) {
+      fetchWallets();
+    }
+  }, [user]);
+
   console.log(wallets);
   return (
     <div className="input-field">

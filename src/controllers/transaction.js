@@ -1,5 +1,5 @@
-const prisma = require("../db/prisma");
-const formatDate = require("../utils/formatDate");
+const prisma = require('../db/prisma');
+const formatDate = require('../utils/formatDate');
 /*
     GET /api/transaction
 */
@@ -8,16 +8,14 @@ const formatDate = require("../utils/formatDate");
 const getTransaction = async (req, res) => {
   try {
     const { type } = req.query;
-    
     // sort by amount descending and ascending
-  
+
     // get all transactions
     const transactions = await prisma.transaction.findMany({
       where: {
         type: type,
       },
     });
-
 
     res.status(200).json(transactions);
   } catch (error) {

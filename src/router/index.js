@@ -4,6 +4,7 @@ const walletRouter = require("./wallet");
 const filterRouter = require("./filter");
 const calculationRouter = require("./calculation");
 const chatRouter = require("./chat");
+const userRouter = require("./auth");
 
 
 const router = express.Router();
@@ -29,6 +30,10 @@ const appRoutes = [
         path: "/chat",
         route: chatRouter,
     },
+    {
+        path: "/user",
+        route: userRouter,
+    },
 ]
 
 appRoutes.forEach((route) => {
@@ -37,4 +42,4 @@ appRoutes.forEach((route) => {
 
 console.log("Router is running");
 
-module.exports = router;
+module.exports = router; 

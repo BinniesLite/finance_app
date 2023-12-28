@@ -19,10 +19,7 @@ import Typography from '@mui/material/Typography';
 
 //context
 import AppContext from '@/context/app/context';
-
-// api
-import { postWallets } from '@/utils/http-request';
-// import getWallets from '../../../utils/http-request';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 const walletSchema = z.object({
   name: z.string(),
@@ -31,7 +28,9 @@ const walletSchema = z.object({
 
 const AddWallet = ({ open, handleClose }) => {
   const [wallets, setWallets] = useState([]);
-  // const appContext = useContext(AppContext);
+  const appContext = useContext(AppContext);
+  const { user } = useAuthContext();
+  const { addWallet } = appContext;
   const {
     register,
     handleSubmit,
@@ -40,21 +39,35 @@ const AddWallet = ({ open, handleClose }) => {
     resolver: zodResolver(walletSchema),
   });
 
- 
+  // const onSubmit = async (data) => {
+  //   const { name, description } = data;
+  //   console.log('user in addwallte', user);
+  //   handleClose();
 
-  // useEffect(() => {
-  //   setWallets(appContext.wallets);
-  // }, [appContext.wallets]);
+  //   try {
+  //     const response = await addWallet(data);
+
+  //     setWallets([...wallets, response]);
+  //     prisma.wallets.push(response);
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const onSubmit = async (data) => {
     const { name, description } = data;
     handleClose();
 
     try {
-      const response = await postWallets({
+      const userId = user ? user.id : '';
+      const response = await addWallet({
         name,
         description,
+        userId: userId,
       });
+
+      setWallets([...wallets, response]);
       console.log(response);
     } catch (error) {
       console.log(error);

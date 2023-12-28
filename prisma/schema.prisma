@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -14,6 +15,8 @@ model User {
   id        String      @id @default(uuid())
   email     String   @unique 
   name String
+  password String
+  wallets Wallet[]
 }
 
 model Wallet {
@@ -23,6 +26,8 @@ model Wallet {
   createdAt DateTime @default(now()) 
   transactions Transaction[]
   description String?
+  userId String?
+  user User? @relation(fields: [userId], references: [id])
 }
 
 enum TransactionType {

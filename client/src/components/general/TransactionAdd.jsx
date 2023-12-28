@@ -21,6 +21,7 @@ import { formatTransactionList } from "../../utils/helper";
 import AppContext from "@/context/app/context";
 import { uploadImageToFirebase } from "../../utils/uploadImage";
 import { formatDateToDateObject } from "../../utils/formatDate";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 
 const transactionSchema = z.object({
@@ -33,8 +34,9 @@ const transactionSchema = z.object({
 });
 
 const TransactionAdd = ({ open, handleClose }) => {
-  const appContext = useContext(AppContext);
-  const [wallets, setWallets] = React.useState([]);
+  const { getWallets, addTransaction, wallets } = useContext(AppContext);
+  const { user } = useAuthContext();
+  const [walletData, setWallets] = React.useState([]);
   const [transaction, setTransaction] = React.useState([]);
   const [imageFile, setImageFile] = React.useState(null);
   const [selectedDate, setSelectedDate] = React.useState(null);
@@ -50,13 +52,18 @@ const TransactionAdd = ({ open, handleClose }) => {
     resolver: zodResolver(transactionSchema),
   });
 
-  //fetch wallets
+  //fetch walletData
   useEffect(() => {
     const fetchWallets = async () => {
-      const response = await getWallets();
-      setWallets(response);
+      await getWallets();
+      console.log("walletData", walletData);
+      console.log("wallets", wallets);
+      setWallets(wallets);
     };
-    fetchWallets();
+  
+    if (user) {
+      fetchWallets();
+    }
   }, []);
 
   const onSubmit = async (data) => {
@@ -79,7 +86,7 @@ const TransactionAdd = ({ open, handleClose }) => {
     handleClose();
     try {
       if (createdAt != null) {
-        await appContext.addTransaction({
+        await addTransaction({
           amount: parseFloat(amount),
           type,
           walletId,
@@ -89,7 +96,7 @@ const TransactionAdd = ({ open, handleClose }) => {
         });
       }
       else {
-        await appContext.addTransaction({
+        await addTransaction({
         amount: parseFloat(amount),
         type,
         walletId,
@@ -162,7 +169,7 @@ const TransactionAdd = ({ open, handleClose }) => {
             >
               <InputLabel id="">Select Wallet</InputLabel>
               <Select {...register("walletId")} label="Select Wallet">
-                {Object.values(wallets).map((wallet) => (
+                {Object.values(walletData).map((wallet) => (
                   <MenuItem key={wallet.id} value={wallet.id}>
                     {wallet.name}
                   </MenuItem>
